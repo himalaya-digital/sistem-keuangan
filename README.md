@@ -53,12 +53,6 @@ $ composer dump-autoload
 $ php artisan migrate:fresh --seed
 $ php artisan storage:link
 ```
-- For use Passport
-```sh
-$ composer require laravel/passport
-$ php artisan migrate
-$ php artisan passport:install
-```
 
 
 ### Following are the steps that must be taken in the contribution process
