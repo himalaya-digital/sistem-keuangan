@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="{{ asset('stisla/modules/fontawesome/css/all.min.css')}}">
 
     <!-- CSS Libraries -->
+    <link rel="stylesheet" href="{{asset('stisla/modules/datatables/datatables.min.css')}}">
+    <link rel="stylesheet"
+        href="{{asset('stisla/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('stisla/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css')}}">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('stisla/css/style.css')}}">
@@ -82,7 +86,8 @@
                                 <span>Master Data</span>
                             </a>
                             <ul class="dropdown-menu" style="display: block;">
-                                <li><a class="nav-link" href="#">Data Akun</a></li>
+                                <li class="{{ Request::route()->getName() == 'data-akun.index' ? ' active' : '' }}"><a
+                                        class="nav-link" href="{{ route('data-akun.index') }}">Data Akun</a></li>
                                 <li><a class="nav-link" href="#">Data Customer</a></li>
                                 <li><a class="nav-link" href="#">Data Kategori</a></li>
                             </ul>
@@ -176,9 +181,12 @@
     <script src="{{ asset('stisla/js/stisla.js')}}"></script>
 
     <!-- JS Libraies -->
-
+    <script src="{{asset('stisla/modules/datatables/datatables.min.js')}}"></script>
+    <script src="{{asset('stisla/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('stisla/modules/datatables/Select-1.2.4/js/dataTables.select.min.js')}}"></script>
+    <script src="{{asset('stisla/modules/jquery-ui/jquery-ui.min.js')}}"></script>
     <!-- Page Specific JS File -->
-
+    <script src="{{asset('stisla/js/page/modules-datatables.js')}}"></script>
     <!-- Template JS File -->
     <script src="{{ asset('stisla/js/scripts.js')}}"></script>
     <script src="{{ asset('stisla/js/custom.js')}}"></script>

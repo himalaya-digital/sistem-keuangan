@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MasterData\DataAkunController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Data Master
+Route::prefix('master-data')->group(function () {
+    Route::resource('/data-akun', DataAkunController::class);
+});
