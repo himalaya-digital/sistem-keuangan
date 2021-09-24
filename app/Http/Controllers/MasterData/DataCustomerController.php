@@ -45,7 +45,7 @@ class DataCustomerController extends Controller
     {
         Validator::make($request->all(), [
             'id_customer' => 'required|unique:data_customers',
-            'nama_customer' => 'required|alpha',
+            'nama_customer' => 'required|regex:/^[\pL\s\-]+$/u',
             'no_telpon' => 'required|numeric',
             'alamat' => 'required',
         ])->validate();
