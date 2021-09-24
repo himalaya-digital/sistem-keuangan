@@ -12,7 +12,8 @@
       <div class="card-body">
         <div class="form-group">
           <label>ID Customer</label>
-          <input type="text" class="form-control @error('id_customer') is-invalid @enderror" name="id_customer" value="{{old('id_customer')}}" required>
+          <input type="text" class="form-control @error('id_customer') is-invalid @enderror" name="id_customer"
+            value="{{old('id_customer')}}" required>
           @error('id_customer')
           <span class="invalid-feedback" role="alert">
             <strong>{{$message}}</strong>
@@ -21,7 +22,8 @@
         </div>
         <div class="form-group">
           <label>Nama Customer</label>
-          <input type="text" class="form-control @error('nama_customer') is-invalid @enderror" name="nama_customer" value="{{ old('nama_customer') }}" required>
+          <input type="text" class="form-control @error('nama_customer') is-invalid @enderror" name="nama_customer"
+            value="{{ old('nama_customer') }}" required>
           @error('nama_customer')
           <span class="invalid-feedback" role="alert">
             <strong>{{$message}}</strong>
@@ -30,7 +32,8 @@
         </div>
         <div class="form-group">
           <label>No. Telpon</label>
-          <input type="text" class="form-control @error('no_telpon') is-invalid @enderror" name="no_telpon" value="{{ old('no_telpon') }}" required>
+          <input type="tel" class="form-control @error('no_telpon') is-invalid @enderror" name="no_telpon"
+            value="{{ old('no_telpon') }}" required>
           @error('no_telpon')
           <span class="invalid-feedback" role="alert">
             <strong>{{$message}}</strong>

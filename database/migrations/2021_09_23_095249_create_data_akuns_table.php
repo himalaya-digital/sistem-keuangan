@@ -17,9 +17,9 @@ class CreateDataAkunsTable extends Migration
             $table->id();
             $table->bigInteger('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-            $table->string('nama_akun');
+            $table->string('nama_akun', 20);
             $table->string('kode_akun')->unique();
-            $table->string('tipe_akun');
+            $table->string('tipe_akun', 20);
             $table->timestamps();
         });
     }

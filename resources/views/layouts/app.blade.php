@@ -13,7 +13,8 @@
 
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{asset('stisla/modules/datatables/datatables.min.css')}}">
-    <link rel="stylesheet" href="{{asset('stisla/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet"
+        href="{{asset('stisla/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('stisla/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css')}}">
 
     <!-- Template CSS -->
@@ -35,16 +36,21 @@
             <nav class="navbar navbar-expand-lg main-navbar">
                 <form class="form-inline mr-auto">
                     <ul class="navbar-nav mr-3">
-                        <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+                        <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i
+                                    class="fas fa-bars"></i></a></li>
                     </ul>
                 </form>
                 <ul class="navbar-nav navbar-right">
-                    <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img alt="image" src="{{ asset('stisla/img/avatar/avatar-1.png')}}" class="rounded-circle mr-1">
+                    <li class="dropdown"><a href="#" data-toggle="dropdown"
+                            class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                            <img alt="image" src="{{ asset('stisla/img/avatar/avatar-1.png')}}"
+                                class="rounded-circle mr-1">
                             <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user()->name }}</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item has-icon text-danger">
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                class="dropdown-item has-icon text-danger">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </a>
                             <form action="{{ route('logout') }}" method="POST" id="logout-form" style="display:none;">
@@ -80,11 +86,14 @@
                                 <span>Master Data</span>
                             </a>
                             <ul class="dropdown-menu" style="display: block;">
-                                <li class="{{ Request::route()->getName() == 'data-akun.index' ? ' active' : '' }}"><a class="nav-link" href="{{ route('data-akun.index') }}">Data Akun</a></li>
+                                <li class="{{ Request::route()->getName() == 'data-akun.index' ? ' active' : '' }}"><a
+                                        class="nav-link" href="{{ route('data-akun.index') }}">Data Akun</a></li>
                                 <li class="{{ Request::route()->getName() == 'data-customer.index' ? ' active' : '' }}">
                                     <a class="nav-link" href="{{ route('data-customer.index') }}">Data Customer</a>
                                 </li>
-                                <li><a class="nav-link" href="#">Data Kategori</a></li>
+                                <li class="{{ Request::route()->getName() == 'data-kategori.index' ? ' active' : '' }}">
+                                    <a class="nav-link" href="{{ route('data-kategori.index') }}">Data Kategori</a>
+                                </li>
                             </ul>
                         </li>
 

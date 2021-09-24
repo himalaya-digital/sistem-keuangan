@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\MasterData;
 
 use App\Http\Controllers\Controller;
-use App\Models\DataAkun;
+use App\Models\DataKategori;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class DataAkunController extends Controller
+class DataKategoriController extends Controller
 {
     public function __construct()
     {
@@ -22,8 +21,8 @@ class DataAkunController extends Controller
      */
     public function index()
     {
-        $datas = DataAkun::all();
-        return view('interface.master-data.data-akun', compact('datas'));
+        $datas = DataKategori::all();
+        return view('interface.master-data.data-kategori', compact('datas'));
     }
 
     /**
@@ -33,7 +32,7 @@ class DataAkunController extends Controller
      */
     public function create()
     {
-        return view('interface.master-data.add-data-akun');
+        return view('interface.master-data.add-data-kategori');
     }
 
     /**
@@ -45,20 +44,17 @@ class DataAkunController extends Controller
     public function store(Request $request)
     {
         Validator::make($request->all(), [
-            'kode_akun' => 'required|unique:data_akuns',
-            'nama_akun' => 'required|max:20',
-            'tipe_akun' => 'required|max:20'
+            'id_kategori'   => 'required|unique:data_kategoris',
+            'nama_kategori' => 'required|max:15',
         ])->validate();
 
         $fields = [
-            'id_user'   => Auth::user()->id,
-            'nama_akun' => strtolower($request->nama_akun),
-            'kode_akun' => strtolower($request->kode_akun),
-            'tipe_akun' => strtolower($request->tipe_akun)
+            'id_kategori'   => strtolower($request->id_kategori),
+            'nama_kategori' => strtolower($request->nama_kategori)
         ];
 
-        DataAkun::create($fields);
-        return redirect()->route('data-akun.index')->with('success', 'Data akun berhasil ditambahkan');
+        DataKategori::create($fields);
+        return redirect()->route('data-kategori.index')->with('success', 'Data kategori berhasil ditambahkan');
     }
 
     /**
@@ -80,8 +76,8 @@ class DataAkunController extends Controller
      */
     public function edit($id)
     {
-        $datas = DataAkun::find($id);
-        return view('interface.master-data.edit-data-akun', compact('datas'));
+        $datas = DataKategori::find($id);
+        return view('interface.master-data.edit-data-kategori', compact('datas'));
     }
 
     /**
@@ -93,22 +89,19 @@ class DataAkunController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datas = DataAkun::find($id);
+        $datas = DataKategori::find($id);
 
         Validator::make($request->all(), [
-            'nama_akun' => 'required|max:20',
-            'tipe_akun' => 'required|max:20'
+            'nama_kategori' => 'required|max:15',
         ])->validate();
 
         $fields = [
-            'id_user'   => Auth::user()->id,
-            'nama_akun' => strtolower($request->nama_akun),
-            'kode_akun' => $datas->kode_akun,
-            'tipe_akun' => strtolower($request->tipe_akun)
+            'id_kategori'   => $datas->id_kategori,
+            'nama_kategori' => strtolower($request->nama_kategori)
         ];
 
         $datas->update($fields);
-        return redirect()->route('data-akun.index')->with('success', 'Data akun berhasil diubah');
+        return redirect()->route('data-kategori.index')->with('success', 'Data kategori berhasil diubah');
     }
 
     /**
@@ -119,8 +112,6 @@ class DataAkunController extends Controller
      */
     public function destroy($id)
     {
-        $datas = DataAkun::find($id);
-        $datas->delete();
-        return redirect()->route('data-akun.index')->with('success', 'Data akun berhasil dihapus');
+        //
     }
 }
