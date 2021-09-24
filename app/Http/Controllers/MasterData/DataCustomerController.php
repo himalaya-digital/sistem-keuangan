@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\MasterData;
 
 use App\Http\Controllers\Controller;
+use App\Models\DataCustomer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class DataCustomerController extends Controller
 {
@@ -19,7 +21,8 @@ class DataCustomerController extends Controller
      */
     public function index()
     {
-        return view('interface.master-data.data-customer');
+        $datas = DataCustomer::all();
+        return view('interface.master-data.data-customer', compact('datas'));
     }
 
     /**
@@ -29,7 +32,7 @@ class DataCustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('interface.master-data.add-data-customer');
     }
 
     /**
@@ -40,7 +43,22 @@ class DataCustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Validator::make($request->all(), [
+            'id_customer' => 'required|unique:data_customers',
+            'nama_customer' => 'required|alpha',
+            'no_telpon' => 'required|numeric',
+            'alamat' => 'required',
+        ])->validate();
+
+        $fields = [
+            'id_customer' => $request->id_customer,
+            'nama_customer' => $request->nama_customer,
+            'no_telpon' => $request->no_telpon,
+            'alamat' => $request->alamat,
+        ];
+
+        DataCustomer::create($fields);
+        return redirect()->route('data-customer.index')->with('success', 'Data customer berhasil ditambahkan');
     }
 
     /**
