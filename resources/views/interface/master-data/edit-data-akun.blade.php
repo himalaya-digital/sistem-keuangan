@@ -13,8 +13,7 @@
       <div class="card-body">
         <div class="form-group">
           <label>Kode Akun</label>
-          <input type="text" value="{{ $datas->kode_akun }}"
-            class="form-control @error('kode_akun') is-invalid @enderror" name="kode_akun" required>
+          <input type="text" value="{{ $datas->kode_akun }}" class="form-control @error('kode_akun') is-invalid @enderror" name="kode_akun" required>
           @error('kode_akun')
           <span class="invalid-feedback" role="alert">
             <strong>kode akun sudah ada</strong>

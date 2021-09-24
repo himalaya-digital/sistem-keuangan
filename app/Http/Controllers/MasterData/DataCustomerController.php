@@ -80,7 +80,8 @@ class DataCustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = DataCustomer::find($id);
+        return view('interface.master-data.edit-data-customer', compact('data'));
     }
 
     /**
@@ -92,7 +93,23 @@ class DataCustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = DataCustomer::find($id);
+
+        Validator::make($request->all(), [
+            'nama_customer' => 'required|regex:/^[\pL\s\-]+$/u',
+            'no_telpon' => 'required|numeric|digits_between:11,13',
+            'alamat' => 'required',
+        ])->validate();
+
+        $fields = [
+            'id_customer' => $data->id_customer,
+            'nama_customer' => $request->nama_customer,
+            'no_telpon' => $request->no_telpon,
+            'alamat' => $request->alamat,
+        ];
+
+        $data->update($fields);
+        return redirect()->route('data-customer.index')->with('success', 'Data customer berhasil diubah');
     }
 
     /**

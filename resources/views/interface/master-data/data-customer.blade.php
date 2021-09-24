@@ -42,7 +42,7 @@
                   <td>{{$data->no_telpon}}</td>
                   <td>{{$data->alamat}}</td>
                   <td>
-                    <a href="#" class="btn btn-warning" title="edit"><i class="far fa-edit"></i></a>
+                    <a href="{{route('data-customer.edit', $data->id)}}" class="btn btn-warning" title="edit"><i class="far fa-edit"></i></a>
                   </td>
                 </tr>
                 @endforeach
