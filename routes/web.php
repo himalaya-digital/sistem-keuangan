@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MasterData\DataAkunController;
+use App\Http\Controllers\MasterData\DataCustomerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +26,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Data Master
 Route::prefix('master-data')->group(function () {
     Route::resource('/data-akun', DataAkunController::class);
+    Route::resource('/data-customer', DataCustomerController::class);
 });

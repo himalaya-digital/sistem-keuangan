@@ -88,7 +88,9 @@
                             <ul class="dropdown-menu" style="display: block;">
                                 <li class="{{ Request::route()->getName() == 'data-akun.index' ? ' active' : '' }}"><a
                                         class="nav-link" href="{{ route('data-akun.index') }}">Data Akun</a></li>
-                                <li><a class="nav-link" href="#">Data Customer</a></li>
+                                <li class="{{ Request::route()->getName() == 'data-customer.index' ? ' active' : '' }}">
+                                    <a class="nav-link" href="{{ route('data-customer.index') }}">Data Customer</a>
+                                </li>
                                 <li><a class="nav-link" href="#">Data Kategori</a></li>
                             </ul>
                         </li>
