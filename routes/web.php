@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\DataProyekController;
 use App\Http\Controllers\MasterData\DataAkunController;
 use App\Http\Controllers\MasterData\DataCustomerController;
 use App\Http\Controllers\MasterData\DataKategoriController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,3 +32,4 @@ Route::prefix('master-data')->group(function () {
     Route::resource('/data-customer', DataCustomerController::class);
     Route::resource('/data-kategori', DataKategoriController::class);
 });
+Route::resource('/data-proyek', DataProyekController::class);
