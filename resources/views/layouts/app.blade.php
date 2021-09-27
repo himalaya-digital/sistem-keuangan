@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{asset('stisla/modules/datatables/datatables.min.css')}}">
     <link rel="stylesheet" href="{{asset('stisla/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('stisla/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css')}}">
+    @yield('css-libraries')
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('stisla/css/style.css')}}">
@@ -182,8 +183,11 @@
     <script src="{{asset('stisla/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('stisla/modules/datatables/Select-1.2.4/js/dataTables.select.min.js')}}"></script>
     <script src="{{asset('stisla/modules/jquery-ui/jquery-ui.min.js')}}"></script>
+    @yield('js-libraries')
+
     <!-- Page Specific JS File -->
     <script src="{{asset('stisla/js/page/modules-datatables.js')}}"></script>
+
     <!-- Template JS File -->
     <script src="{{ asset('stisla/js/scripts.js')}}"></script>
     <script src="{{ asset('stisla/js/custom.js')}}"></script>
