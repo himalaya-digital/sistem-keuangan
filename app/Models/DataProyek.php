@@ -28,6 +28,6 @@ class DataProyek extends Model
 
     public function customer()
     {
-        return $this->belongsTo(DataCustomer::class);
+        return $this->belongsTo(DataCustomer::class, 'id_customer');
     }
 }

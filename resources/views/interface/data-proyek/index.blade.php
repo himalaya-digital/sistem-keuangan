@@ -37,21 +37,23 @@
                 </tr>
               </thead>
               <tbody>
+                @foreach ($projects as $project)
                 <tr>
-                  <td>1</td>
-                  <td>PRO-001</td>
-                  <td>aji pandean</td>
-                  <td>pemasangan ipal rsup sanglah</td>
-                  <td>65.000.000</td>
-                  <td>65.000.000</td>
-                  <td>0</td>
-                  <td>lunas</td>
+                  <td>{{$loop->iteration}}</td>
+                  <td>{{$project->id_proyek}}</td>
+                  <td>{{$project->customer?->nama_customer}}</td>
+                  <td>{{$project->nama_proyek}}</td>
+                  <td>{{$project->total_bayar}}</td>
+                  <td>{{$project->bayar}}</td>
+                  <td>{{$project->sisa_bayar}}</td>
+                  <td>{{$project->status}}</td>
                   <td>
                     <a href="#" class="btn btn-link btn-sm" title="edit"><i class="far fa-edit"></i></a>
                     <a href="#" class="btn btn-link btn-sm" title="edit"><i class="far fa-eye"></i></a>
                     <a href="#" class="btn btn-link btn-sm" title="edit"><i class="far fa-money-bill-alt"></i></a>
                   </td>
                 </tr>
+                @endforeach
               </tbody>
             </table>
           </div>

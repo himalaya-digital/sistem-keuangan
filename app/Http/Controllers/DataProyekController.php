@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataCustomer;
+use App\Models\DataKategori;
+use App\Models\DataProyek;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class DataProyekController extends Controller
 {
@@ -13,7 +17,8 @@ class DataProyekController extends Controller
      */
     public function index()
     {
-        return view('interface.data-proyek.index');
+        $projects = DataProyek::with(['customer'])->get();
+        return view('interface.data-proyek.index', compact('projects'));
     }
 
     /**
@@ -23,7 +28,9 @@ class DataProyekController extends Controller
      */
     public function create()
     {
-        return view('interface.data-proyek.add');
+        $customers = DataCustomer::all();
+        $categories = DataKategori::all();
+        return view('interface.data-proyek.add', compact('customers', 'categories'));
     }
 
     /**
@@ -34,7 +41,41 @@ class DataProyekController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Validator::make($request->all(), [
+            'id_proyek' => 'required',
+            'id_customer' => 'required',
+            'nama_proyek' => 'required',
+            'total_bayar' => 'required',
+            'bayar' => 'required',
+            'sisa_bayar' => 'required',
+            'tanggal_mulai' => 'required',
+            'tanggal_selesai' => 'required',
+            'tanggal_bayar' => 'required',
+            'keterangan_bayar' => 'required',
+            'harga_total_bahan' => 'required',
+            'harga_jasa' => 'required',
+        ])->validate();
+
+        $bayar = $request->bayar;
+        $total_bayar = $request->total_bayar;
+        $fields = [
+            'id_proyek' => $request->id_proyek,
+            'id_customer' => (int) $request->id_customer,
+            'nama_proyek' => $request->nama_proyek,
+            'total_bayar' => (int) $request->total_bayar,
+            'bayar' => (int) $request->bayar,
+            'sisa_bayar' => (int) $request->sisa_bayar,
+            'tanggal_mulai' => $request->tanggal_mulai,
+            'tanggal_selesai' => $request->tanggal_selesai,
+            'tanggal_bayar' => $request->tanggal_bayar,
+            'status' => $bayar < $total_bayar ? 'belum lunas' : 'lunas',
+            'keterangan_bayar' => $request->keterangan_bayar,
+            'harga_total_bahan' => (int) $request->harga_total_bahan,
+            'harga_jasa' => (int) $request->harga_jasa,
+        ];
+
+        DataProyek::create($fields);
+        return redirect()->route('data-proyek.index')->with('success', 'Data proyek berhasil ditambahkan');
     }
 
     /**
