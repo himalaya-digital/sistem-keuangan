@@ -74,7 +74,7 @@ class DataProyekController extends Controller
             'harga_jasa' => (int) $request->harga_jasa,
         ];
 
-        DataProyek::create($fields);
+        $data = DataProyek::create($fields);
         return redirect()->route('data-proyek.index')->with('success', 'Data proyek berhasil ditambahkan');
     }
 
