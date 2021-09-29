@@ -113,6 +113,7 @@ $(window).on("load", function () {
             method: "POST",
             data: data,
             success: function () {
+                // $("html").html(response);
                 $(location).attr("href", "http://localhost:8000/data-proyek");
             },
             error: function (error) {

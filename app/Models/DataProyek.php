@@ -30,4 +30,9 @@ class DataProyek extends Model
     {
         return $this->belongsTo(DataCustomer::class, 'id_customer');
     }
+
+    public function bahans()
+    {
+        return $this->hasMany(DataBahan::class, 'id_proyek');
+    }
 }

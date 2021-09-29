@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataBahan;
 use App\Models\DataCustomer;
 use App\Models\DataKategori;
 use App\Models\DataProyek;
@@ -75,6 +76,17 @@ class DataProyekController extends Controller
         ];
 
         $data = DataProyek::create($fields);
+
+        foreach ($request->kategori as $kategori) {
+            $bahan_fields = [
+                'id_proyek' => $data->id,
+                'jumlah' => $kategori['jumlah'],
+                'harga_satuan' => $kategori['harga_satuan'],
+                'total' => $kategori['total'],
+            ];
+            DataBahan::create($bahan_fields);
+        }
+
         return redirect()->route('data-proyek.index')->with('success', 'Data proyek berhasil ditambahkan');
     }
 
