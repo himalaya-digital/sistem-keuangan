@@ -16,6 +16,7 @@ class CreateDataBahansTable extends Migration
         Schema::create('data_bahans', function (Blueprint $table) {
             $table->id();
             $table->string('id_proyek')->references('id')->on('data_proyeks')->onDelete('cascade');
+            $table->string('id_kategori')->references('id')->on('data_proyeks')->onDelete('cascade');
             $table->integer('jumlah');
             $table->integer('harga_satuan');
             $table->integer('total');
