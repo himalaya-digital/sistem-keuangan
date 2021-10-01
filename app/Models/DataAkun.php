@@ -22,4 +22,14 @@ class DataAkun extends Model
     {
         return $this->belongsTo(User::class, 'id_user');
     }
+
+    public function pemasukankas()
+    {
+        return $this->hasMany(PemasukanKas::class);
+    }
+
+    public function pengeluarankas()
+    {
+        return $this->hasMany(PengeluaranKas::class);
+    }
 }

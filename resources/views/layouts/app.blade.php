@@ -104,15 +104,15 @@
                             </a>
                         </li>
 
-                        <li>
-                            <a class="nav-link" href="#">
+                        <li class="{{ Request::route()->getName() == 'pemasukan-kas.index' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('pemasukan-kas.index') }}">
                                 <i class="fas fa-plus"></i>
                                 <span>Pemasukan Kas</span>
                             </a>
                         </li>
 
-                        <li>
-                            <a class="nav-link" href="#">
+                        <li class="{{ Request::route()->getName() == 'pengeluaran-kas.index' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('pengeluaran-kas.index') }}">
                                 <i class="fas fa-minus"></i>
                                 <span>Pengeluaran Kas</span>
                             </a>

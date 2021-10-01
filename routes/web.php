@@ -3,6 +3,8 @@
 use App\Http\Controllers\MasterData\DataAkunController;
 use App\Http\Controllers\MasterData\DataCustomerController;
 use App\Http\Controllers\MasterData\DataKategoriController;
+use App\Http\Controllers\OutIn\PemasukanKasController;
+use App\Http\Controllers\Outin\PengeluaranKasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,3 +32,9 @@ Route::prefix('master-data')->group(function () {
     Route::resource('/data-customer', DataCustomerController::class);
     Route::resource('/data-kategori', DataKategoriController::class);
 });
+
+
+
+// Pemasukan dan Pengeluaran
+Route::resource('pemasukan-kas', PemasukanKasController::class);
+Route::resource('pengeluaran-kas', PengeluaranKasController::class);

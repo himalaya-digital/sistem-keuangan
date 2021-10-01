@@ -14,4 +14,9 @@ class DataKategori extends Model
         'id_kategori',
         'nama_kategori',
     ];
+
+    public function dataproyek()
+    {
+        return $this->hasMany(DataProyek::class);
+    }
 }
