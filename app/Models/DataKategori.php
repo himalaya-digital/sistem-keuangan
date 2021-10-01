@@ -13,5 +13,6 @@ class DataKategori extends Model
     protected $fillable = [
         'id_kategori',
         'nama_kategori',
+        'harga_satuan',
     ];
 }
