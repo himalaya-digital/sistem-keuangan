@@ -80,6 +80,7 @@ class DataProyekController extends Controller
         foreach ($request->kategori as $kategori) {
             $bahan_fields = [
                 'id_proyek' => $data->id,
+                'id_kategori' => $kategori['id_kategori'],
                 'jumlah' => $kategori['jumlah'],
                 'harga_satuan' => $kategori['harga_satuan'],
                 'total' => $kategori['total'],

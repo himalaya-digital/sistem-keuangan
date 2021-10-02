@@ -111,7 +111,7 @@
             <div class="col-12 col-sm-2">
               <div class="form-group">
                 <label for="harga-satuan">Harga Satuan</label>
-                <input type="number" class="form-control" id="harga-satuan" min="1" name="harga_satuan">
+                <input type="number" class="form-control" id="harga-satuan" min="1" name="harga_satuan" disabled value="0" data-kategori="{{$categories}}">
               </div>
             </div>
 
