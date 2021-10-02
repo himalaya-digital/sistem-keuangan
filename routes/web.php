@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DataBahanController;
 use App\Http\Controllers\DataProyekController;
 use App\Http\Controllers\MasterData\DataAkunController;
 use App\Http\Controllers\MasterData\DataCustomerController;
@@ -33,3 +34,5 @@ Route::prefix('master-data')->group(function () {
     Route::resource('/data-kategori', DataKategoriController::class);
 });
 Route::resource('/data-proyek', DataProyekController::class);
+Route::post('/data-bahan/{id_proyek}', [DataBahanController::class, 'store'])->name('data-bahan.store');
+Route::delete('/data-bahan/{id_bahan}/{id_proyek}', [DataBahanController::class, 'destroy'])->name('data-bahan.destroy');

@@ -99,10 +99,7 @@ class DataProyekController extends Controller
      */
     public function show($id)
     {
-        $project = DataProyek::with(['customer', 'bahans', 'bahans.kategori'])->find($id);
-        $customers = DataCustomer::all();
-        $categories = DataKategori::all();
-        return view('interface.data-proyek.edit', compact('project', 'customers', 'categories'));
+        //
     }
 
     /**
@@ -113,7 +110,10 @@ class DataProyekController extends Controller
      */
     public function edit($id)
     {
-        //
+        $project = DataProyek::with(['customer', 'bahans', 'bahans.kategori'])->find($id);
+        $customers = DataCustomer::all();
+        $categories = DataKategori::all();
+        return view('interface.data-proyek.edit', compact('project', 'customers', 'categories'));
     }
 
     /**

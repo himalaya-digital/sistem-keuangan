@@ -92,47 +92,50 @@
           </div>
 
           <!-- kategori -->
-          <div class="row">
-            <div class="col-12 col-sm-2">
-              <div class="form-group">
-                <label for="nama-kategori">Nama Kategori</label>
-                <select class="form-control selectric" id="nama-kategori" name="nama_kategori">
-                  <option value="0,0">-- Pilih kategori --</option>
-                  @foreach ($categories as $category)
-                  <option value="{{$category->id}},{{$category->nama_kategori}}">{{$category->nama_kategori}}</option>
-                  @endforeach
-                </select>
+          <form action="{{route('data-bahan.store', ['id_proyek' => $project->id])}}" method="POST">
+            @csrf
+            <div class="row">
+              <div class="col-12 col-sm-2">
+                <div class="form-group">
+                  <label for="nama-kategori">Nama Kategori</label>
+                  <select class="form-control selectric" id="nama-kategori" name="nama_kategori">
+                    <option value="0,0">-- Pilih kategori --</option>
+                    @foreach ($categories as $category)
+                    <option value="{{$category->id}},{{$category->nama_kategori}}">{{$category->nama_kategori}}</option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-2">
+                <div class="form-group">
+                  <label for="jumlah">Jumlah</label>
+                  <input type="number" class="form-control" id="jumlah" min="1" name="jumlah">
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-2">
+                <div class="form-group">
+                  <label for="harga-satuan">Harga Satuan</label>
+                  <input type="number" class="form-control" id="harga-satuan" min="1" name="harga_satuan" readonly value="0" data-kategori="{{$categories}}">
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-2">
+                <div class="form-group">
+                  <label for="total">Total</label>
+                  <input type="number" class="form-control" readonly id="total" value="0" min="1" name="total">
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-2 align-self-center">
+                <button type="submit" class="btn btn-icon icon-left btn-primary" id="tambah-data-btn">
+                  <i class="fa fa-plus-square"></i>
+                  Tambah Data
+                </button>
               </div>
             </div>
-
-            <div class="col-12 col-sm-2">
-              <div class="form-group">
-                <label for="jumlah">Jumlah</label>
-                <input type="number" class="form-control" id="jumlah" min="1" name="jumlah">
-              </div>
-            </div>
-
-            <div class="col-12 col-sm-2">
-              <div class="form-group">
-                <label for="harga-satuan">Harga Satuan</label>
-                <input type="number" class="form-control" id="harga-satuan" min="1" name="harga_satuan" disabled value="0" data-kategori="{{$categories}}">
-              </div>
-            </div>
-
-            <div class="col-12 col-sm-2">
-              <div class="form-group">
-                <label for="total">Total</label>
-                <input type="number" class="form-control" disabled id="total" value="0" min="1" name="total">
-              </div>
-            </div>
-
-            <div class="col-12 col-sm-2 align-self-center">
-              <a href="#" class="btn btn-icon icon-left btn-primary" id="tambah-data-btn">
-                <i class="fa fa-plus-square"></i>
-                Tambah Data
-              </a>
-            </div>
-          </div>
+          </form>
 
           <div class="row">
             <div class="col-12">
@@ -157,7 +160,11 @@
                       <td>{{$bahan->harga_satuan}}</td>
                       <td>{{$bahan->total}}</td>
                       <td>
-                        <button type="button" class="btn btn-link btn-sm" title="edit"><i class="fa fa-times"></i></button>
+                        <form action="{{route('data-bahan.destroy', ['id_bahan' => $bahan->id, 'id_proyek' => $project->id])}}" method="post">
+                          @method('DELETE')
+                          @csrf
+                          <button type="submit" class="btn btn-link btn-sm" title="edit"><i class="fa fa-times"></i></button>
+                        </form>
                       </td>
                     </tr>
                     @endforeach
