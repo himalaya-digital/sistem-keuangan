@@ -21,17 +21,30 @@ let simpanBtn = $("#simpan-btn");
 let kategoriData = [];
 
 $(window).on("load", function () {
+    let categories = JSON.parse(hargaSatuan.attr("data-kategori"));
+    namaKategori.on("change", function () {
+        let kategoriId = namaKategori.val().split(",")[0];
+        categories.forEach((category) => {
+            if (kategoriId == 0) {
+                hargaSatuan.val("0");
+            }
+            if (kategoriId == category.id) {
+                hargaSatuan.val(category.harga_satuan);
+            }
+        });
+    });
+
     jumlah.on("keyup change", function () {
         let intHargaSatuan = parseInt(hargaSatuan.val());
         let intThis = parseInt($(this).val());
         total.val(intHargaSatuan * intThis);
     });
 
-    hargaSatuan.on("keyup change", function () {
-        let intJumlah = parseInt(jumlah.val());
-        let intThis = parseInt($(this).val());
-        total.val(intJumlah * intThis);
-    });
+    // hargaSatuan.on("keyup change", function () {
+    //     let intJumlah = parseInt(jumlah.val());
+    //     let intThis = parseInt($(this).val());
+    //     total.val(intJumlah * intThis);
+    // });
 
     hargaJasa.on("keyup change", function () {
         let intTotalHargaBahan = parseInt(totalHargaBahan.val());
@@ -49,8 +62,10 @@ $(window).on("load", function () {
         tBodyKategori.empty();
         totalHargaBahan.val("0");
 
+        let [id, nama] = namaKategori.val().split(",");
         let data = {
-            [namaKategori.attr("name")]: namaKategori.val(),
+            id_kategori: id,
+            [namaKategori.attr("name")]: nama,
             [jumlah.attr("name")]: jumlah.val(),
             [hargaSatuan.attr("name")]: hargaSatuan.val(),
             [total.attr("name")]: total.val(),
@@ -58,8 +73,6 @@ $(window).on("load", function () {
         kategoriData.push(data);
 
         let children = kategoriData.map(function (value, index) {
-            let parsedNamaKategori = value.nama_kategori.split(",")[1];
-
             let intTotalHargaBahan = parseInt(totalHargaBahan.val());
             let intTotal = parseInt(value.total);
             totalHargaBahan.val(intTotalHargaBahan + intTotal);
@@ -67,7 +80,7 @@ $(window).on("load", function () {
             return `
               <tr>
                 <td>${index + 1}</td>
-                <td>${parsedNamaKategori}</td>
+                <td>${nama}</td>
                 <td>${value.jumlah}</td>
                 <td>${value.harga_satuan}</td>
                 <td>${value.total}</td>

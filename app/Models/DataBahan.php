@@ -12,6 +12,7 @@ class DataBahan extends Model
     protected $table = 'data_bahans';
     protected $fillable = [
         'id_proyek',
+        'id_kategori',
         'jumlah',
         'harga_satuan',
         'total',
@@ -20,5 +21,10 @@ class DataBahan extends Model
     public function proyek()
     {
         return $this->belongsTo(DataProyek::class, 'id_proyek');
+    }
+
+    public function kategori()
+    {
+        return $this->belongsTo(DataKategori::class, 'id_kategori');
     }
 }

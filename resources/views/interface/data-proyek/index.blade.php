@@ -42,14 +42,15 @@
                 <tr>
                   <td>{{$loop->iteration}}</td>
                   <td>{{$project->id_proyek}}</td>
-                  <td>{{$project->customer->nama_customer}}</td>
+                  <td>{{$project->customer == null ? '' : $project->customer->nama_customer}}</td>
                   <td>{{$project->nama_proyek}}</td>
                   <td>{{$project->total_bayar}}</td>
                   <td>{{$project->bayar}}</td>
                   <td>{{$project->sisa_bayar}}</td>
                   <td>{{$project->status}}</td>
                   <td>
-                    <a href="#" class="btn btn-link btn-sm" title="edit"><i class="far fa-edit"></i></a>
+                    <a href="{{route('data-proyek.show', $project->id)}}" class="btn btn-link btn-sm" title="edit"><i
+                        class="far fa-edit"></i></a>
                     <a href="#" class="btn btn-link btn-sm" title="edit"><i class="far fa-eye"></i></a>
                     <a href="#" class="btn btn-link btn-sm" title="edit"><i class="far fa-money-bill-alt"></i></a>
                   </td>
