@@ -5,19 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DataKategori extends Model
+class DataBahan extends Model
 {
     use HasFactory;
 
-    protected $table = 'data_kategoris';
+    protected $table = 'data_bahans';
     protected $fillable = [
-        'id_kategori',
-        'nama_kategori',
+        'id_proyek',
+        'jumlah',
         'harga_satuan',
+        'total',
     ];
 
-    public function dataproyek()
+    public function proyek()
     {
-        return $this->hasMany(DataProyek::class);
+        return $this->belongsTo(DataProyek::class, 'id_proyek');
     }
 }

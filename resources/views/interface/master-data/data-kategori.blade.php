@@ -20,8 +20,7 @@
       @endif
       <div class="card">
         <div class="card-body">
-          <a href="{{ route('data-kategori.create') }}" type="button" class="btn btn-primary float-right mb-3"
-            title="edit">Tambah Data</a>
+          <a href="{{ route('data-kategori.create') }}" type="button" class="btn btn-primary float-right mb-3" title="edit">Tambah Data</a>
           <div class="table-responsive">
             <table class="table table-striped" id="table-1">
               <thead>
@@ -29,6 +28,7 @@
                   <th class="text-center">No</th>
                   <th>Id Kategori</th>
                   <th>Nama Kategori</th>
+                  <th>Harga Satuan</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -38,9 +38,9 @@
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $data->id_kategori }}</td>
                   <td>{{ $data->nama_kategori }}</td>
+                  <td>{{$data->harga_satuan}}</td>
                   <td>
-                    <a href="{{ route('data-kategori.edit', $data->id) }}" class="btn btn-warning" title="edit"><i
-                        class="far fa-edit"></i></a>
+                    <a href="{{ route('data-kategori.edit', $data->id) }}" class="btn btn-warning" title="edit"><i class="far fa-edit"></i></a>
                   </td>
                 </tr>
                 @endforeach
