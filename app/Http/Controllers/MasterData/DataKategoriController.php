@@ -46,13 +46,15 @@ class DataKategoriController extends Controller
         Validator::make($request->all(), [
             'id_kategori'   => 'required|unique:data_kategoris',
             'nama_kategori' => 'required|max:15',
-            'harga_satuan' => 'required',
+            'harga_satuan'  => 'required',
+            'harga_beli'    => 'required',
         ])->validate();
 
         $fields = [
             'id_kategori'   => strtolower($request->id_kategori),
             'nama_kategori' => strtolower($request->nama_kategori),
-            'harga_satuan' => (int) $request->harga_satuan,
+            'harga_satuan'  => (int) $request->harga_satuan,
+            'harga_beli'    => $request->harga_beli,
         ];
 
         DataKategori::create($fields);
@@ -101,7 +103,8 @@ class DataKategoriController extends Controller
         $fields = [
             'id_kategori'   => $datas->id_kategori,
             'nama_kategori' => strtolower($request->nama_kategori),
-            'harga_satuan' => $request->harga_satuan,
+            'harga_satuan'  => $request->harga_satuan,
+            'harga_beli'    => $request->harga_beli,
         ];
 
         $datas->update($fields);

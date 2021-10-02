@@ -14,6 +14,7 @@ class DataKategori extends Model
         'id_kategori',
         'nama_kategori',
         'harga_satuan',
+        'harga_beli',
     ];
 
     public function dataproyek()

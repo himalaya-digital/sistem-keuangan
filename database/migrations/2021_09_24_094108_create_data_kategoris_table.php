@@ -18,6 +18,7 @@ class CreateDataKategorisTable extends Migration
             $table->string('id_kategori', 10)->unique();
             $table->string('nama_kategori', 15);
             $table->integer('harga_satuan');
+            $table->integer('harga_beli');
             $table->timestamps();
         });
     }
