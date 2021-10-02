@@ -24,7 +24,7 @@ class PemasukanKasController extends Controller
      */
     public function index()
     {
-        $pemasukans = PemasukanKas::with('dataakun', 'dataproyek.datacustomer')->get();
+        $pemasukans = PemasukanKas::with('dataakun', 'dataproyek.customer')->get();
 
         return view('interface.out-in.pemasukan-kas', compact('pemasukans'));
     }
@@ -37,7 +37,7 @@ class PemasukanKasController extends Controller
     public function create()
     {
         $akuns   = DataAkun::all();
-        $proyeks = DataProyek::with('datacustomer')->get();
+        $proyeks = DataProyek::with('customer')->get();
 
         return view('interface.out-in.add-pemasukan-kas', compact('akuns', 'proyeks'));
     }
@@ -93,7 +93,7 @@ class PemasukanKasController extends Controller
     {
         $datas   = PemasukanKas::find($id);
         $akuns   = DataAkun::all();
-        $proyeks = DataProyek::with('datacustomer')->get();
+        $proyeks = DataProyek::with('customer')->get();
 
         return view('interface.out-in.edit-data-pemasukan', compact('datas', 'akuns', 'proyeks'));
     }

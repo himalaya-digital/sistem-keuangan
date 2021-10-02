@@ -42,7 +42,7 @@
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $pemasukan->id_pemasukan_kas }}</td>
                   <td>{{ $pemasukan->dataakun->nama_akun }}</td>
-                  <td>{{ $pemasukan->dataproyek->datacustomer->nama_customer }}</td>
+                  <td>{{ $pemasukan->dataproyek->customer->nama_customer }}</td>
                   <td> {{ date( 'd/m/Y', strtotime($pemasukan->tanggal_pemasukan)) }}</td>
                   <td>{{ $pemasukan->keterangan_pemasukan }}</td>
                   <td>{{ number_format($pemasukan->total_pemasukan, 0, ',', '.') }}</td>

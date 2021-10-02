@@ -35,8 +35,8 @@
           <select name="id_proyek" id="id_proyek" class="custom-select">
             <option value="none" disabled selected>- Nama Customer -</option>
             @foreach($proyeks as $proyek)
-            <option value="{{ $proyek->id_customer }}" @if($proyek->datacustomer->nama_customer) selected
-              @endif>{{$proyek->datacustomer->nama_customer}}</option>
+            <option value="{{ $proyek->id_customer }}" @if($proyek->customer->nama_customer) selected
+              @endif>{{$proyek->customer->nama_customer}}</option>
             @endforeach
           </select>
         </div>
