@@ -30,7 +30,6 @@
                   <th>Id Kategori</th>
                   <th>Nama Kategori</th>
                   <th>Harga Satuan</th>
-                  <th>Harga Beli</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -41,7 +40,6 @@
                   <td>{{ $data->id_kategori }}</td>
                   <td>{{ $data->nama_kategori }}</td>
                   <td>{{ number_format($data->harga_satuan, 0, ',', '.') }}</td>
-                  <td>{{ number_format($data->harga_beli, 0, ',', '.') }}</td>
                   <td>
                     <a href="{{ route('data-kategori.edit', $data->id) }}" class="btn btn-warning" title="edit"><i
                         class="far fa-edit"></i></a>
