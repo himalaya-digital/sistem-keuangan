@@ -125,7 +125,41 @@ class DataProyekController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = DataProyek::find($id);
+
+        Validator::make($request->all(), [
+            'id_customer' => 'required',
+            'nama_proyek' => 'required',
+            'total_bayar' => 'required',
+            'bayar' => 'required',
+            'sisa_bayar' => 'required',
+            'tanggal_mulai' => 'required',
+            'tanggal_selesai' => 'required',
+            'tanggal_bayar' => 'required',
+            'keterangan_bayar' => 'required',
+            'harga_total_bahan' => 'required',
+            'harga_jasa' => 'required',
+        ])->validate();
+
+        $bayar = $request->bayar;
+        $total_bayar = $request->total_bayar;
+        $fields = [
+            'id_customer' => (int) $request->id_customer,
+            'nama_proyek' => $request->nama_proyek,
+            'total_bayar' => (int) $request->total_bayar,
+            'bayar' => (int) $request->bayar,
+            'sisa_bayar' => (int) $request->sisa_bayar,
+            'tanggal_mulai' => $request->tanggal_mulai,
+            'tanggal_selesai' => $request->tanggal_selesai,
+            'tanggal_bayar' => $request->tanggal_bayar,
+            'status' => $bayar < $total_bayar ? 'belum lunas' : 'lunas',
+            'keterangan_bayar' => $request->keterangan_bayar,
+            'harga_total_bahan' => (int) $request->harga_total_bahan,
+            'harga_jasa' => (int) $request->harga_jasa,
+        ];
+
+        $data->update($fields);
+        return redirect()->route('data-proyek.index')->with('success', 'Data proyek berhasil diubah');
     }
 
     /**

@@ -219,7 +219,7 @@
             </div>
 
             <div class="col-12 col-sm-2 align-self-center">
-              <button class="btn btn-primary" id="simpan-btn" data-store-route="{{route('data-proyek.store')}}">
+              <button class="btn btn-primary" id="simpan-btn" data-update-route="{{route('data-proyek.update', $project->id)}}">
                 Simpan
               </button>
               <a href="{{route('data-proyek.index')}}" class="btn btn-light">
