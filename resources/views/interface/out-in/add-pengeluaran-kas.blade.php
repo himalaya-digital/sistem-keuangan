@@ -31,22 +31,35 @@
         </div>
         <div class="form-group">
           <label>Kategori</label>
-          <select name="id_proyek" id="id_proyek" class="custom-select">
+          <select name="id_kategori" id="id_kategori" class="custom-select">
             <option value="none" disabled selected>- Kategori -</option>
-            @foreach($proyeks as $proyek)
-            <option value="{{ $proyek->id_kategori }}">{{$proyek->kategori->nama_kategori}}</option>
+            @foreach($kategories as $kategori)
+            <option value="{{ $kategori->id }}">{{$kategori->nama_kategori}}</option>
             @endforeach
           </select>
         </div>
         <div class="form-group">
-          <label>Tanggal</label>
-          <input type="date" class="form-control" name="tanggal_pemasukan" required>
+          <label>Nama Proyek</label>
+          <select name="id_proyek" id="id_proyek" class="custom-select">
+            <option value="none" disabled selected>- Nama Proyek -</option>
+            @foreach($proyeks as $proyek)
+            <option value="{{ $proyek->id }}">{{ $proyek->nama_proyek }}</option>
+            @endforeach
+          </select>
         </div>
         <div class="form-group">
-          <label>Keterangan Pemasukan</label>
-          <textarea class="form-control @error('keterangan_pemasukan') is-invalid @enderror" name="keterangan_pemasukan"
-            required>{{old('keterangan_pemasukan')}}</textarea>
-          @error('keterangan_pemasukan')
+          <label>Jumlah</label>
+          <input type="number" class="form-control" name="jumlah">
+        </div>
+        <div class="form-group">
+          <label>Tanggal</label>
+          <input type="date" class="form-control" name="tanggal_pengeluaran" required>
+        </div>
+        <div class="form-group">
+          <label>Keterangan Pengeluaran</label>
+          <textarea class="form-control @error('keterangan_pengeluaran') is-invalid @enderror"
+            name="keterangan_pengeluaran" required>{{old('keterangan_pengeluaran')}}</textarea>
+          @error('keterangan_pengeluaran')
           <span class="invalid-feedback" role="alert">
             <strong>{{$message}}</strong>
           </span>

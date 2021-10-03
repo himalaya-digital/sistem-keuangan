@@ -40,4 +40,9 @@ class DataProyek extends Model
     {
         return $this->hasMany(PemasukanKas::class);
     }
+
+    public function pengeluarankas()
+    {
+        return $this->hasMany(PengeluaranKas::class);
+    }
 }

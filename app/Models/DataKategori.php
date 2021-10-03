@@ -21,4 +21,9 @@ class DataKategori extends Model
     {
         return $this->hasMany(DataProyek::class);
     }
+
+    public function pengeluarankas()
+    {
+        return $this->hasMany(PengeluaranKas::class);
+    }
 }

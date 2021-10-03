@@ -18,8 +18,10 @@ class CreatePengeluaranKasTable extends Migration
             $table->string('id_pengeluaran_kas', 10)->unique();
             $table->bigInteger('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedInteger('id_proyek');
+            $table->unsignedInteger('id_proyek')->nullable();
+            $table->unsignedInteger('id_kategori')->nullable();
             $table->unsignedInteger('id_akun');
+            $table->integer('jumlah')->nullable();
             $table->string('keterangan_pengeluaran', 30);
             $table->date('tanggal_pengeluaran');
             $table->integer('total_pengeluaran')->nullable()->default(null);

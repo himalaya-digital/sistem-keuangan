@@ -58,13 +58,14 @@ class PemasukanKasController extends Controller
         $fields = [
             'id_pemasukan_kas'     => strtolower($request->id_pemasukan_kas),
             'id_user'              => Auth::user()->id,
-            'id_proyek'            => $request->id_proyek,
             'id_akun'              => $request->id_akun,
             'keterangan_pemasukan' => $request->keterangan_pemasukan,
             'tanggal_pemasukan'    => $request->tanggal_pemasukan,
         ];
 
-        $getTotalBayar             = DataProyek::find($request->id_proyek)->first();
+
+        $getTotalBayar             = DataProyek::where('id_customer', $request->id_proyek)->first();
+        $fields['id_proyek']       = $getTotalBayar->id;
         $fields['total_pemasukan'] = $getTotalBayar->total_bayar;
 
         PemasukanKas::create($fields);
@@ -116,13 +117,13 @@ class PemasukanKasController extends Controller
         $fields = [
             'id_pemasukan_kas'     => $datas->id_pemasukan_kas,
             'id_user'              => Auth::user()->id,
-            'id_proyek'            => $request->id_proyek,
             'id_akun'              => $request->id_akun,
             'keterangan_pemasukan' => $request->keterangan_pemasukan,
             'tanggal_pemasukan'    => $request->tanggal_pemasukan,
         ];
 
-        $getTotalBayar             = DataProyek::find($request->id_proyek)->first();
+        $getTotalBayar             = DataProyek::where('id_customer', $request->id_proyek)->first();
+        $fields['id_proyek']       = $getTotalBayar->id;
         $fields['total_pemasukan'] = $getTotalBayar->total_bayar;
 
         $datas->update($fields);

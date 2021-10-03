@@ -32,7 +32,7 @@
                   <th>Nama Customer</th>
                   <th>Tanggal</th>
                   <th>Keterangan</th>
-                  <th>Total Bayar</th>
+                  <th>Total Pemasukan</th>
                   <th>Aksi</th>
                 </tr>
               </thead>

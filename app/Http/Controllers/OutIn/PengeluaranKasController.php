@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Outin;
 
 use App\Http\Controllers\Controller;
 use App\Models\DataAkun;
+use App\Models\DataKategori;
 use App\Models\DataProyek;
+use App\Models\PengeluaranKas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PengeluaranKasController extends Controller
 {
@@ -16,7 +19,9 @@ class PengeluaranKasController extends Controller
      */
     public function index()
     {
-        return view('interface.out-in.pengeluaran-kas');
+        $pengeluarans = PengeluaranKas::with('dataakun', 'proyek', 'kategori')->get();
+
+        return view('interface.out-in.pengeluaran-kas', compact('pengeluarans'));
     }
 
     /**
@@ -26,10 +31,11 @@ class PengeluaranKasController extends Controller
      */
     public function create()
     {
-        $akuns   = DataAkun::all();
-        $proyeks = DataProyek::with('kategori')->get();
+        $akuns      = DataAkun::all();
+        $kategories = DataKategori::all();
+        $proyeks    = DataProyek::all();
 
-        return view('interface.out-in.add-pengeluaran-kas', compact('akuns', 'proyeks'));
+        return view('interface.out-in.add-pengeluaran-kas', compact('akuns', 'kategories', 'proyeks'));
     }
 
     /**
@@ -40,7 +46,25 @@ class PengeluaranKasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fields = [
+            'id_user'                => Auth::user()->id,
+            'id_pengeluaran_kas'     => $request->id_pengeluaran_kas,
+            'id_akun'                => $request->id_akun,
+            'id_proyek'              => $request->id_proyek,
+            'id_kategori'            => $request->id_kategori,
+            'keterangan_pengeluaran' => $request->keterangan_pengeluaran,
+            'tanggal_pengeluaran'    => $request->tanggal_pengeluaran
+        ];
+
+        if (!$request->id_proyek) {
+            $fields['jumlah'] = $request->jumlah;
+        } else {
+            $fields['jumlah'] = 0;
+        }
+
+        PengeluaranKas::create($fields);
+
+        return redirect()->route('pengeluaran-kas.index')->with('success', 'Data Pengeluaran ditambahkan');
     }
 
     /**

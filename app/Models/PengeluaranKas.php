@@ -14,7 +14,9 @@ class PengeluaranKas extends Model
         'id_pengeluaran_kas',
         'id_user',
         'id_proyek',
+        'id_kategori',
         'id_akun',
+        'jumlah',
         'keterangan_pengeluaran',
         'tanggal_pengeluaran',
         'total_pengeluaran'
@@ -26,13 +28,18 @@ class PengeluaranKas extends Model
         return $this->belongsTo(User::class, 'id_user');
     }
 
+    public function proyek()
+    {
+        return $this->belongsTo(DataProyek::class, 'id_proyek');
+    }
+
+    public function kategori()
+    {
+        return $this->belongsTo(DataKategori::class, 'id_kategori');
+    }
+
     public function dataakun()
     {
         return $this->belongsTo(DataAkun::class, 'id_akun');
-    }
-
-    public function dataproyek()
-    {
-        return $this->belongsTo(DataProyek::class, 'id_proyek');
     }
 }
