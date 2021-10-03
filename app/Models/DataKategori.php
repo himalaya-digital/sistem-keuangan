@@ -15,4 +15,14 @@ class DataKategori extends Model
         'nama_kategori',
         'harga_satuan',
     ];
+
+    public function dataproyek()
+    {
+        return $this->hasMany(DataProyek::class);
+    }
+
+    public function pengeluarankas()
+    {
+        return $this->hasMany(PengeluaranKas::class);
+    }
 }

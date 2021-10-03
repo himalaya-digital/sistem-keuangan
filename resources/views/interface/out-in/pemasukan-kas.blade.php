@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="section-header">
-  <h1>Data Kategori</h1>
+  <h1>Data Pemasukan Kas</h1>
 </div>
 
 <div class="section-body">
@@ -20,29 +20,35 @@
       @endif
       <div class="card">
         <div class="card-body">
-          <a href="{{ route('data-kategori.create') }}" type="button" class="btn btn-primary float-right mb-3"
-            title="edit">Tambah Data</a>
+          <a href="{{ route('pemasukan-kas.create') }}" type="button" class="btn btn-primary float-right mb-3">Tambah
+            Data</a>
           <div class="table-responsive">
             <table class="table table-striped" id="table-1">
               <thead>
                 <tr>
                   <th class="text-center">No</th>
-                  <th>Id Kategori</th>
-                  <th>Nama Kategori</th>
-                  <th>Harga Satuan</th>
+                  <th>Id Pemasukan</th>
+                  <th>Nama Akun</th>
+                  <th>Nama Customer</th>
+                  <th>Tanggal</th>
+                  <th>Keterangan</th>
+                  <th>Total Pemasukan</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach ($datas as $data)
+                @foreach ($pemasukans as $pemasukan)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
-                  <td>{{ $data->id_kategori }}</td>
-                  <td>{{ $data->nama_kategori }}</td>
-                  <td>{{ number_format($data->harga_satuan, 0, ',', '.') }}</td>
+                  <td>{{ $pemasukan->id_pemasukan_kas }}</td>
+                  <td>{{ $pemasukan->dataakun->nama_akun }}</td>
+                  <td>{{ $pemasukan->dataproyek->customer->nama_customer }}</td>
+                  <td> {{ date( 'd/m/Y', strtotime($pemasukan->tanggal_pemasukan)) }}</td>
+                  <td>{{ $pemasukan->keterangan_pemasukan }}</td>
+                  <td>{{ number_format($pemasukan->total_pemasukan, 0, ',', '.') }}</td>
                   <td>
-                    <a href="{{ route('data-kategori.edit', $data->id) }}" class="btn btn-warning" title="edit"><i
-                        class="far fa-edit"></i></a>
+                    <a href="{{ route('pemasukan-kas.edit', $pemasukan->id) }}" class="btn btn-sm btn-warning"
+                      title="edit"><i class="far fa-edit"></i></a>
                   </td>
                 </tr>
                 @endforeach

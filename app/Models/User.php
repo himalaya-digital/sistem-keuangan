@@ -48,4 +48,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(DataAkun::class);
     }
+
+    public function pemasukankas()
+    {
+        return $this->hasMany(PemasukanKas::class);
+    }
+
+    public function pengeluarankas()
+    {
+        return $this->hasMany(PengeluaranKas::class);
+    }
 }

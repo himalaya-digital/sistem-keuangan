@@ -35,4 +35,14 @@ class DataProyek extends Model
     {
         return $this->hasMany(DataBahan::class, 'id_proyek');
     }
+
+    public function pemasukankas()
+    {
+        return $this->hasMany(PemasukanKas::class);
+    }
+
+    public function pengeluarankas()
+    {
+        return $this->hasMany(PengeluaranKas::class);
+    }
 }
