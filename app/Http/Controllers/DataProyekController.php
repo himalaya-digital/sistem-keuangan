@@ -99,7 +99,8 @@ class DataProyekController extends Controller
      */
     public function show($id)
     {
-        //
+        $project = DataProyek::with(['customer', 'bahans', 'bahans.kategori'])->find($id);
+        return view('interface.data-proyek.detail', compact('project'));
     }
 
     /**
