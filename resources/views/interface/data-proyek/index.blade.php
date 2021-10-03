@@ -48,8 +48,8 @@
                   <td>{{$project->sisa_bayar}}</td>
                   <td>{{$project->status}}</td>
                   <td>
-                    <a href="{{route('data-proyek.show', $project->id)}}" class="btn btn-link btn-sm" title="edit"><i class="far fa-edit"></i></a>
-                    <a href="#" class="btn btn-link btn-sm" title="edit"><i class="far fa-eye"></i></a>
+                    <a href="{{route('data-proyek.edit', $project->id)}}" class="btn btn-link btn-sm" title="edit"><i class="far fa-edit"></i></a>
+                    <a href="{{route('data-proyek.show', $project->id)}}" class="btn btn-link btn-sm" title="edit"><i class="far fa-eye"></i></a>
                     <a href="#" class="btn btn-link btn-sm" title="edit"><i class="far fa-money-bill-alt"></i></a>
                   </td>
                 </tr>
