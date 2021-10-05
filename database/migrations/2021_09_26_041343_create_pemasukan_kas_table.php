@@ -15,7 +15,6 @@ class CreatePemasukanKasTable extends Migration
     {
         Schema::create('pemasukan_kas', function (Blueprint $table) {
             $table->id();
-            $table->string('id_pemasukan_kas', 10)->unique();
             $table->bigInteger('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedInteger('id_proyek');

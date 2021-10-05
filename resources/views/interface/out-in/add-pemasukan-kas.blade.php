@@ -11,16 +11,6 @@
       @csrf
       <div class="card-body">
         <div class="form-group">
-          <label>ID Pemasukan Kas</label>
-          <input type="text" class="form-control @error('id_pemasukan_kas') is-invalid @enderror"
-            name="id_pemasukan_kas" value="{{old('id_pemasukan_kas')}}" required>
-          @error('id_pemasukan_kas')
-          <span class="invalid-feedback" role="alert">
-            <strong>{{$message}}</strong>
-          </span>
-          @enderror
-        </div>
-        <div class="form-group">
           <label>Nama Akun</label>
           <select name="id_akun" id="id_akun" class="custom-select">
             <option value="none" disabled selected>- Nama Akun -</option>

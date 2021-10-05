@@ -40,7 +40,7 @@
                 @foreach ($pemasukans as $pemasukan)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
-                  <td>{{ $pemasukan->id_pemasukan_kas }}</td>
+                  <td>{{ $pemasukan->id }}</td>
                   <td>{{ $pemasukan->dataakun->nama_akun }}</td>
                   <td>{{ $pemasukan->dataproyek->customer->nama_customer }}</td>
                   <td> {{ date( 'd/m/Y', strtotime($pemasukan->tanggal_pemasukan)) }}</td>

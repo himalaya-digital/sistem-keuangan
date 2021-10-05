@@ -11,7 +11,6 @@ class PengeluaranKas extends Model
 
     protected $table = 'pengeluaran_kas';
     protected $fillable = [
-        'id_pengeluaran_kas',
         'id_user',
         'id_proyek',
         'id_kategori',
@@ -19,7 +18,8 @@ class PengeluaranKas extends Model
         'jumlah',
         'keterangan_pengeluaran',
         'tanggal_pengeluaran',
-        'total_pengeluaran'
+        'total_pengeluaran',
+        'jenis_pengeluaran'
     ];
 
     // relasi

@@ -13,13 +13,7 @@
       <div class="card-body">
         <div class="form-group">
           <label>ID Pemasukan Kas</label>
-          <input disabled type="text" class="form-control @error('id_pemasukan_kas') is-invalid @enderror"
-            name="id_pemasukan_kas" value="{{ $datas->id_pemasukan_kas }}" required>
-          @error('id_pemasukan_kas')
-          <span class="invalid-feedback" role="alert">
-            <strong>{{$message}}</strong>
-          </span>
-          @enderror
+          <input disabled type="text" class="form-control" name="id" value="{{ $datas->id }}" required>
         </div>
         <div class="form-group">
           <label>Nama Akun</label>

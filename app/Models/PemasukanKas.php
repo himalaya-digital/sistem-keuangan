@@ -11,7 +11,6 @@ class PemasukanKas extends Model
 
     protected $table = 'pemasukan_kas';
     protected $fillable = [
-        'id_pemasukan_kas',
         'id_user',
         'id_proyek',
         'id_akun',
