@@ -19,7 +19,7 @@ class PengeluaranKasController extends Controller
      */
     public function index()
     {
-        $pengeluarans = PengeluaranKas::with('dataakun', 'proyek', 'kategori')->get();
+        $pengeluarans = PengeluaranKas::with('dataakun', 'proyek', 'kategori')->latest()->get();
 
         return view('interface.out-in.pengeluaran-kas', compact('pengeluarans'));
     }
@@ -48,18 +48,25 @@ class PengeluaranKasController extends Controller
     {
         $fields = [
             'id_user'                => Auth::user()->id,
-            'id_pengeluaran_kas'     => $request->id_pengeluaran_kas,
             'id_akun'                => $request->id_akun,
             'id_proyek'              => $request->id_proyek,
             'id_kategori'            => $request->id_kategori,
             'keterangan_pengeluaran' => $request->keterangan_pengeluaran,
-            'tanggal_pengeluaran'    => $request->tanggal_pengeluaran
+            'tanggal_pengeluaran'    => $request->tanggal_pengeluaran,
+            'jenis_pengeluaran'      => $request->jenis_pengeluaran
         ];
 
         if (!$request->id_proyek) {
             $fields['jumlah'] = $request->jumlah;
+            $getHargaSatuan = DataKategori::find($request->id_kategori);
+
+            $getJumlah = $request->jumlah;
+            $totalPengeluaran = $getHargaSatuan->harga_satuan * $getJumlah;
+            $fields['total_pengeluaran'] = $totalPengeluaran;
         } else {
             $fields['jumlah'] = 0;
+            $getHargaBahan = DataProyek::find($request->id_proyek);
+            $fields['total_pengeluaran'] = $getHargaBahan->harga_total_bahan;
         }
 
         PengeluaranKas::create($fields);
@@ -86,7 +93,12 @@ class PengeluaranKasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pengeluarans = PengeluaranKas::find($id);
+        $akuns        = DataAkun::all();
+        $kategories   = DataKategori::all();
+        $proyeks      = DataProyek::all();
+
+        return view('interface.out-in.edit-pengeluaran-kas', compact('pengeluarans', 'akuns', 'kategories', 'proyeks'));
     }
 
     /**
@@ -98,7 +110,33 @@ class PengeluaranKasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $pengeluarans = PengeluaranKas::find($id);
+
+        $fields = [
+            'id_user'                => Auth::user()->id,
+            'id_akun'                => $request->id_akun,
+            'id_proyek'              => $request->id_proyek,
+            'id_kategori'            => $request->id_kategori,
+            'keterangan_pengeluaran' => $request->keterangan_pengeluaran,
+            'tanggal_pengeluaran'    => $request->tanggal_pengeluaran,
+            'jenis_pengeluaran'      => $request->jenis_pengeluaran,
+            'jumlah'                 => $request->jumlah,
+        ];
+
+        if (!$request->id_proyek) {
+            $fields['jumlah'] = $request->jumlah;
+            $getHargaSatuan = DataKategori::find($request->id_kategori);
+            $getJumlah = $request->jumlah;
+            $totalPengeluaran = $getHargaSatuan->harga_satuan * $getJumlah;
+            $fields['total_pengeluaran'] = $totalPengeluaran;
+        } else {
+            $fields['jumlah'] = 0;
+            $getHargaBahan = DataProyek::find($request->id_proyek);
+            $fields['total_pengeluaran'] = $getHargaBahan->harga_total_bahan;
+        }
+
+        $pengeluarans->update($fields);
+        return redirect()->route('pengeluaran-kas.index')->with('success', 'Data Pengeluaran berhasil diubah');
     }
 
     /**

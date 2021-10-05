@@ -51,12 +51,10 @@ class PemasukanKasController extends Controller
     public function store(Request $request)
     {
         Validator::make($request->all(), [
-            'id_pemasukan_kas'     => 'required|unique:pemasukan_kas',
             'keterangan_pemasukan' => 'required|max:30'
         ])->validate();
 
         $fields = [
-            'id_pemasukan_kas'     => strtolower($request->id_pemasukan_kas),
             'id_user'              => Auth::user()->id,
             'id_akun'              => $request->id_akun,
             'keterangan_pemasukan' => $request->keterangan_pemasukan,
@@ -115,7 +113,6 @@ class PemasukanKasController extends Controller
         ])->validate();
 
         $fields = [
-            'id_pemasukan_kas'     => $datas->id_pemasukan_kas,
             'id_user'              => Auth::user()->id,
             'id_akun'              => $request->id_akun,
             'keterangan_pemasukan' => $request->keterangan_pemasukan,

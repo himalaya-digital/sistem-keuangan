@@ -41,18 +41,21 @@
                 @foreach ($pengeluarans as $pengeluaran)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
-                  <td>{{ $pengeluaran->id_pengeluaran_kas }}</td>
+                  <td>{{ $pengeluaran->id }}</td>
                   <td>{{ $pengeluaran->dataakun->nama_akun }}</td>
-                  <td>{{ $pengeluaran->proyek->nama_proyek }}</td>
+                  <td>{{ $pengeluaran->id_proyek == null ? '-' : $pengeluaran->proyek->nama_proyek }}</td>
                   <td>{{ $pengeluaran->id_kategori == null ? 'paket proyek' : $pengeluaran->kategori->nama_kategori}}
                   </td>
                   <td>{{ $pengeluaran->id_kategori == null ? '1 paket' : $pengeluaran->jumlah}}</td>
                   <td>
                     {{ $pengeluaran->id_kategori == null ? '-' : number_format($pengeluaran->kategori->harga_satuan, 0, ',', '.') }}
                   </td>
-                  <td>{{ number_format($pengeluaran->proyek->harga_total_bahan, 0, ',', '.') }}</td>
                   <td>
-                    <a href="#" class="btn btn-sm btn-warning" title="edit"><i class="far fa-edit"></i></a>
+                    {{ number_format($pengeluaran->total_pengeluaran, 0, ',', '.') }}
+                  </td>
+                  <td>
+                    <a href="{{ route('pengeluaran-kas.edit', $pengeluaran->id) }}" class="btn btn-sm btn-warning"
+                      title="edit"><i class="far fa-edit"></i></a>
                   </td>
                 </tr>
                 @endforeach

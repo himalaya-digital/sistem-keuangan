@@ -15,7 +15,6 @@ class CreatePengeluaranKasTable extends Migration
     {
         Schema::create('pengeluaran_kas', function (Blueprint $table) {
             $table->id();
-            $table->string('id_pengeluaran_kas', 10)->unique();
             $table->bigInteger('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedInteger('id_proyek')->nullable();
@@ -25,6 +24,7 @@ class CreatePengeluaranKasTable extends Migration
             $table->string('keterangan_pengeluaran', 30);
             $table->date('tanggal_pengeluaran');
             $table->integer('total_pengeluaran')->nullable()->default(null);
+            $table->string('jenis_pengeluaran');
             $table->timestamps();
         });
     }
