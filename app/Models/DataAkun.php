@@ -32,4 +32,9 @@ class DataAkun extends Model
     {
         return $this->hasMany(PengeluaranKas::class);
     }
+
+    public function asetaktif()
+    {
+        return $this->hasMany(AsetAktif::class);
+    }
 }

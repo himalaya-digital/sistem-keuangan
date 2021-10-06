@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Aset\AsetController;
 use App\Http\Controllers\DataBahanController;
 use App\Http\Controllers\DataProyekController;
 use App\Http\Controllers\MasterData\DataAkunController;
@@ -40,3 +41,5 @@ Route::post('/data-bahan/{id_proyek}', [DataBahanController::class, 'store'])->n
 Route::delete('/data-bahan/{id_bahan}/{id_proyek}', [DataBahanController::class, 'destroy'])->name('data-bahan.destroy');
 Route::resource('pemasukan-kas', PemasukanKasController::class);
 Route::resource('pengeluaran-kas', PengeluaranKasController::class);
+
+Route::resource('aset-aktif', AsetController::class);
