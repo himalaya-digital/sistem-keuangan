@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class AsetController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -43,8 +48,15 @@ class AsetController extends Controller
             'nama_aset'        => strtolower($request->nama_aset),
             'id_akun'          => $request->id_akun,
             'biaya_akuisisi'   => $request->biaya_akuisisi,
+            'nilai_residu'     => $request->nilai_residu,
+            'masa_manfaat'     => $request->masa_manfaat,
             'tanggal_akuisisi' => $request->tanggal_akuisisi
         ];
+
+        $rumusPenyusutan = $request->biaya_akuisisi - $request->nilai_residu;
+        $getPenyusutan = $rumusPenyusutan / $request->masa_manfaat;
+
+        $fields['penyusutan'] = $getPenyusutan;
 
         AsetAktif::create($fields);
         return redirect()->route('aset-aktif.index')->with('success', 'Data Aset ditambahkan');
@@ -69,7 +81,10 @@ class AsetController extends Controller
      */
     public function edit($id)
     {
-        //
+        $asets = AsetAktif::find($id);
+        $akuns = DataAkun::all();
+
+        return view('interface.aset.edit-aset-aktif', compact('asets', 'akuns'));
     }
 
     /**
@@ -81,7 +96,24 @@ class AsetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $asets = AsetAktif::find($id);
+
+        $fields = [
+            'nama_aset'        => strtolower($request->nama_aset),
+            'id_akun'          => $request->id_akun,
+            'biaya_akuisisi'   => $request->biaya_akuisisi,
+            'nilai_residu'     => $request->nilai_residu,
+            'masa_manfaat'     => $request->masa_manfaat,
+            'tanggal_akuisisi' => $request->tanggal_akuisisi
+        ];
+
+        $rumusPenyusutan = $request->biaya_akuisisi - $request->nilai_residu;
+        $getPenyusutan = $rumusPenyusutan / $request->masa_manfaat;
+
+        $fields['penyusutan'] = $getPenyusutan;
+
+        $asets->update($fields);
+        return redirect()->route('aset-aktif.index')->with('success', 'Data Aset berhasil diubah');
     }
 
     /**

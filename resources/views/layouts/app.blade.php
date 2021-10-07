@@ -128,7 +128,8 @@
                             <ul class="dropdown-menu" style="display: block;">
                                 <li class="{{ Request::route()->getName() == 'aset-aktif.index' ? ' active' : '' }}"><a
                                         class="nav-link" href="{{ route('aset-aktif.index') }}">Aset Aktif</a></li>
-                                <li><a class="nav-link" href="#">Penyusutan</a></li>
+                                <li class="{{ Request::route()->getName() == 'penyusutan.index' ? ' active' : '' }}"><a
+                                        class="nav-link" href="{{ route('penyusutan.index') }}">Penyusutan</a></li>
                             </ul>
                         </li>
 

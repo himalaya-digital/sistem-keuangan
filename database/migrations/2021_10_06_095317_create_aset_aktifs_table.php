@@ -18,6 +18,9 @@ class CreateAsetAktifsTable extends Migration
             $table->string('nama_aset');
             $table->unsignedInteger('id_akun');
             $table->integer('biaya_akuisisi');
+            $table->integer('nilai_residu');
+            $table->integer('masa_manfaat');
+            $table->integer('penyusutan');
             $table->date('tanggal_akuisisi');
             $table->timestamps();
         });

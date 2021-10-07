@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Aset\AsetController;
+use App\Http\Controllers\Aset\PenyusutanController;
 use App\Http\Controllers\DataBahanController;
 use App\Http\Controllers\DataProyekController;
 use App\Http\Controllers\MasterData\DataAkunController;
@@ -28,6 +29,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/login', function () {
+    return redirect()->to('/');
+})->name('login');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Data Master
@@ -43,3 +48,4 @@ Route::resource('pemasukan-kas', PemasukanKasController::class);
 Route::resource('pengeluaran-kas', PengeluaranKasController::class);
 
 Route::resource('aset-aktif', AsetController::class);
+Route::get('penyusutan', [PenyusutanController::class, 'index'])->name('penyusutan.index');

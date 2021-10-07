@@ -14,6 +14,9 @@ class AsetAktif extends Model
         'nama_aset',
         'id_akun',
         'biaya_akuisisi',
+        'nilai_residu',
+        'masa_manfaat',
+        'penyusutan',
         'tanggal_akuisisi',
     ];
 
