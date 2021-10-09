@@ -50,6 +50,7 @@ class AsetController extends Controller
             'biaya_akuisisi'   => $request->biaya_akuisisi,
             'nilai_residu'     => $request->nilai_residu,
             'masa_manfaat'     => $request->masa_manfaat,
+            'deskripsi'        => $request->deskripsi,
             'tanggal_akuisisi' => $request->tanggal_akuisisi
         ];
 
@@ -104,6 +105,7 @@ class AsetController extends Controller
             'biaya_akuisisi'   => $request->biaya_akuisisi,
             'nilai_residu'     => $request->nilai_residu,
             'masa_manfaat'     => $request->masa_manfaat,
+            'deskripsi'        => $request->deskripsi,
             'tanggal_akuisisi' => $request->tanggal_akuisisi
         ];
 

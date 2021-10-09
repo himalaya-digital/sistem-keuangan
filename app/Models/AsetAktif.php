@@ -17,6 +17,7 @@ class AsetAktif extends Model
         'nilai_residu',
         'masa_manfaat',
         'penyusutan',
+        'deskripsi',
         'tanggal_akuisisi',
     ];
 
