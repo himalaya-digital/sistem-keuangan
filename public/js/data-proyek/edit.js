@@ -77,7 +77,12 @@ $(window).on("load", function () {
             data: data,
             success: function () {
                 // $("html").html(response);
-                $(location).attr("href", "http://localhost:8000/data-proyek");
+                let hostname = window.location.hostname;
+                let port = window.location.port;
+                $(location).attr(
+                    "href",
+                    `http://${hostname}:${port}/data-proyek`
+                );
             },
             error: function (error) {
                 alert(error.responseJSON.message);

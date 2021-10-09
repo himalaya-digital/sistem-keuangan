@@ -60,7 +60,6 @@ $(window).on("load", function () {
 
     tambahDataBtn.on("click", function () {
         tBodyKategori.empty();
-        totalHargaBahan.val("0");
 
         let [id, nama] = namaKategori.val().split(",");
         let data = {
@@ -93,7 +92,6 @@ $(window).on("load", function () {
         tBodyKategori.append(children);
 
         jumlah.val("");
-        hargaSatuan.val("");
         total.val("0");
     });
 
@@ -127,7 +125,12 @@ $(window).on("load", function () {
             data: data,
             success: function () {
                 // $("html").html(response);
-                $(location).attr("href", "http://localhost:8000/data-proyek");
+                let hostname = window.location.hostname;
+                let port = window.location.port;
+                $(location).attr(
+                    "href",
+                    `http://${hostname}:${port}/data-proyek`
+                );
             },
             error: function (error) {
                 alert(error.responseJSON.message);
