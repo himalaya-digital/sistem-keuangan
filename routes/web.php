@@ -3,6 +3,7 @@
 use App\Http\Controllers\Aset\AsetController;
 use App\Http\Controllers\Aset\PenyusutanController;
 use App\Http\Controllers\DataBahanController;
+use App\Http\Controllers\DataJurnalController;
 use App\Http\Controllers\DataProyekController;
 use App\Http\Controllers\MasterData\DataAkunController;
 use App\Http\Controllers\MasterData\DataCustomerController;
@@ -49,3 +50,5 @@ Route::resource('pengeluaran-kas', PengeluaranKasController::class);
 
 Route::resource('aset-aktif', AsetController::class);
 Route::get('penyusutan', [PenyusutanController::class, 'index'])->name('penyusutan.index');
+Route::get('data-jurnal', [DataJurnalController::class, 'index'])->name('data-jurnal.index');
+Route::get('jurnal-result', [DataJurnalController::class, 'cari'])->name('jurnal.result');

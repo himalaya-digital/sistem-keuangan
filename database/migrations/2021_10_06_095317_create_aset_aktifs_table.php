@@ -21,6 +21,7 @@ class CreateAsetAktifsTable extends Migration
             $table->integer('nilai_residu');
             $table->integer('masa_manfaat');
             $table->integer('penyusutan');
+            $table->string('deskripsi');
             $table->date('tanggal_akuisisi');
             $table->timestamps();
         });

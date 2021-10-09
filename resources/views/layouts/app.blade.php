@@ -133,8 +133,8 @@
                             </ul>
                         </li>
 
-                        <li>
-                            <a class="nav-link" href="#">
+                        <li class="{{ Request::route()->getName() == 'data-jurnal.index' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('data-jurnal.index') }}">
                                 <i class="fas fa-paste"></i>
                                 <span>Data Jurnal Umum</span>
                             </a>
