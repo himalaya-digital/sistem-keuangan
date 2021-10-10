@@ -9,7 +9,7 @@ class PelunasanProyek extends Model
 {
     use HasFactory;
 
-    protected $table = 'data_pelunasan_proyeks';
+    protected $table = 'pelunasan_proyeks';
     protected $fillable = [
         'id_pelunasan_proyek',
         'id_proyek',

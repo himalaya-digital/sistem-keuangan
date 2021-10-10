@@ -10,6 +10,7 @@ use App\Http\Controllers\MasterData\DataCustomerController;
 use App\Http\Controllers\MasterData\DataKategoriController;
 use App\Http\Controllers\OutIn\PemasukanKasController;
 use App\Http\Controllers\OutIn\PengeluaranKasController;
+use App\Http\Controllers\PelunasanProyekController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,11 @@ Route::prefix('master-data')->group(function () {
 Route::resource('/data-proyek', DataProyekController::class);
 Route::post('/data-bahan/{id_proyek}', [DataBahanController::class, 'store'])->name('data-bahan.store');
 Route::delete('/data-bahan/{id_bahan}/{id_proyek}', [DataBahanController::class, 'destroy'])->name('data-bahan.destroy');
+
+// Route::resource('/pelunasan-proyek', PelunasanProyekController::class);
+Route::get('pelunasan-proyek/{id_proyek}/create', [PelunasanProyekController::class, 'create'])->name('pelunasan-proyek.create');
+Route::post('pelunasan-proyek/{id_proyek}/store', [PelunasanProyekController::class, 'store'])->name('pelunasan-proyek.store');
+
 Route::resource('pemasukan-kas', PemasukanKasController::class);
 Route::resource('pengeluaran-kas', PengeluaranKasController::class);
 
