@@ -60,9 +60,11 @@ $(window).on("load", function () {
 
     tambahDataBtn.on("click", function () {
         tBodyKategori.empty();
+        totalHargaBahan.val("0");
 
         let [id, nama] = namaKategori.val().split(",");
         let data = {
+            id: Date.now(),
             id_kategori: id,
             [namaKategori.attr("name")]: nama,
             [jumlah.attr("name")]: jumlah.val(),
@@ -77,14 +79,16 @@ $(window).on("load", function () {
             totalHargaBahan.val(intTotalHargaBahan + intTotal);
 
             return `
-              <tr>
+              <tr id="bahan-${index}">
                 <td>${index + 1}</td>
-                <td>${nama}</td>
+                <td>${value.nama_kategori}</td>
                 <td>${value.jumlah}</td>
                 <td>${value.harga_satuan}</td>
                 <td>${value.total}</td>
                 <td>
-                  <button type="button" class="btn btn-link btn-sm" title="edit"><i class="fa fa-times"></i></button>
+                  <button type="button" class="btn btn-link btn-sm" title="edit" data-index-bahan="${index}">
+                    <i class="fa fa-times" title="edit" data-index-bahan="${index}"></i>
+                  </button>
                 </td>
               </tr>
             `;
@@ -93,6 +97,44 @@ $(window).on("load", function () {
 
         jumlah.val("");
         total.val("0");
+    });
+
+    tBodyKategori.on("click", function (event) {
+        if ($(event.target).attr("title") === "edit") {
+            let index = $(event.target).attr("data-index-bahan");
+            let bahan = kategoriData[index];
+            let intTotalHargaBahan = parseInt(totalHargaBahan.val());
+            totalHargaBahan.val(intTotalHargaBahan - bahan.total);
+
+            kategoriData = kategoriData.filter(function (obj) {
+                return obj.id != bahan.id;
+            });
+
+            tBodyKategori.empty();
+            totalHargaBahan.val("0");
+
+            let children = kategoriData.map(function (value, index) {
+                let intTotalHargaBahan = parseInt(totalHargaBahan.val());
+                let intTotal = parseInt(value.total);
+                totalHargaBahan.val(intTotalHargaBahan + intTotal);
+
+                return `
+                  <tr id="bahan-${index}">
+                    <td>${index + 1}</td>
+                    <td>${value.nama_kategori}</td>
+                    <td>${value.jumlah}</td>
+                    <td>${value.harga_satuan}</td>
+                    <td>${value.total}</td>
+                    <td>
+                      <button type="button" class="btn btn-link btn-sm" title="edit" data-index-bahan="${index}">
+                        <i class="fa fa-times" title="edit" data-index-bahan="${index}"></i>
+                      </button>
+                    </td>
+                  </tr>
+                `;
+            });
+            tBodyKategori.append(children);
+        }
     });
 
     simpanBtn.on("click", function () {
