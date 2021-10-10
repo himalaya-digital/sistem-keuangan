@@ -82,9 +82,10 @@ class PelunasanProyekController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id_proyek)
     {
-        //
+        $project = DataProyek::find($id_proyek);
+        return view('interface.data-proyek.index-pelunasan-proyek', compact('project'));
     }
 
     /**
