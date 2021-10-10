@@ -8,6 +8,26 @@
 <div class="section-body">
   <div class="row">
     <div class="col-12">
+      @if(session('success'))
+      <div class="alert alert-success alert-dismissible show fade">
+        <div class="alert-body">
+          <button class="close" data-dismiss="alert">
+            <span>×</span>
+          </button>
+          {{session('success')}}
+        </div>
+      </div>
+      @endif
+      @if(session('failed'))
+      <div class="alert alert-danger alert-dismissible show fade">
+        <div class="alert-body">
+          <button class="close" data-dismiss="alert">
+            <span>×</span>
+          </button>
+          {{session('failed')}}
+        </div>
+      </div>
+      @endif
       <form action="{{route('pelunasan-proyek.store', ['id_proyek' => $project->id])}}" method="POST">
         @csrf
         <div class="card">

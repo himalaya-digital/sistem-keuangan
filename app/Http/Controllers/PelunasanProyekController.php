@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\DataProyek;
 use App\Models\PelunasanProyek;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class PelunasanProyekController extends Controller
 {
@@ -38,7 +41,39 @@ class PelunasanProyekController extends Controller
      */
     public function store(Request $request, $id_proyek)
     {
-        dd($request->all());
+        DB::beginTransaction();
+        try {
+            Validator::make($request->all(), [
+                'id_pelunasan_proyek' => 'required',
+                'id_proyek' => 'required',
+                'tanggal_pembayaran' => 'required',
+                'jumlah_bayar_piutang' => 'required',
+            ])->validate();
+
+            $project = DataProyek::find($request->id_proyek);
+            $sisa_piutang = (int) $project->sisa_bayar - (int) $request->jumlah_bayar_piutang;
+            $update_fields = [
+                'sisa_bayar' => $project->sisa_bayar < 0 ? 0 : $sisa_piutang,
+                'bayar' => (int) $project->bayar + (int) $request->jumlah_bayar_piutang,
+                'status' => $sisa_piutang > 0 ? 'belum lunas' : 'lunas',
+            ];
+            $project->update($update_fields);
+
+            $fields = [
+                'id_pelunasan_proyek' => $request->id_pelunasan_proyek,
+                'id_proyek' => $request->id_proyek,
+                'tanggal_pembayaran' => $request->tanggal_pembayaran,
+                'jumlah_bayar' => (int) $request->jumlah_bayar_piutang,
+                'sisa_piutang' => $sisa_piutang
+            ];
+            PelunasanProyek::create($fields);
+
+            DB::commit();
+            return redirect()->route('pelunasan-proyek.create', ['id_proyek' => $id_proyek])->with('success', 'Data pelunasan proyek berhasil ditambahkan');
+        } catch (Exception $error) {
+            DB::rollBack();
+            return redirect()->route('pelunasan-proyek.create', ['id_proyek' => $id_proyek])->with('failed', $error->getMessage());
+        }
     }
 
     /**
