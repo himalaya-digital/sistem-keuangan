@@ -9,7 +9,7 @@ use App\Http\Controllers\MasterData\DataAkunController;
 use App\Http\Controllers\MasterData\DataCustomerController;
 use App\Http\Controllers\MasterData\DataKategoriController;
 use App\Http\Controllers\OutIn\PemasukanKasController;
-use App\Http\Controllers\Outin\PengeluaranKasController;
+use App\Http\Controllers\OutIn\PengeluaranKasController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
