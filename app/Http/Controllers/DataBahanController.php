@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataBahan;
+use App\Models\DataProyek;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class DataBahanController extends Controller
@@ -102,8 +105,25 @@ class DataBahanController extends Controller
      */
     public function destroy($id_bahan, $id_proyek)
     {
-        $bahan = DataBahan::find($id_bahan);
-        $bahan->delete();
-        return redirect()->route('data-proyek.edit', $id_proyek)->with('success', 'Data bahan berhasil dihapus');
+        DB::beginTransaction();
+        try {
+            $bahan = DataBahan::find($id_bahan);
+            $proyek = DataProyek::find($id_proyek);
+            $harga_total_bahan = $proyek->harga_total_bahan - $bahan->total;
+            $total_bayar = $harga_total_bahan + $proyek->harga_jasa;
+            $sisa_bayar = $total_bayar - $proyek->bayar;
+            $update_proyek_fields = [
+                'harga_total_bahan' => $harga_total_bahan,
+                'total_bayar' => $total_bayar,
+                'sisa_bayar' => $sisa_bayar,
+            ];
+            $proyek->update($update_proyek_fields);
+            $bahan->delete();
+            DB::commit();
+            return redirect()->route('data-proyek.edit', $id_proyek)->with('success', 'Data bahan berhasil dihapus');
+        } catch (Exception $error) {
+            DB::rollBack();
+            return redirect()->route('data-proyek.edit', $id_proyek)->with('failed', 'Data bahan gagal dihapus');
+        }
     }
 }
