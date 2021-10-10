@@ -42,6 +42,10 @@
           <input type="number" class="form-control" name="masa_manfaat" value="{{ old('masa_manfaat') }}" required>
         </div>
         <div class="form-group">
+          <label>Deskripsi</label>
+          <input type="text" class="form-control" name="deskripsi" value="{{ old('deskripsi') }}" required>
+        </div>
+        <div class="form-group">
           <label>Tanggal Akuisisi</label>
           <input type="date" class="form-control" name="tanggal_akuisisi" value="{{ old('tanggal_akuisisi') }}"
             required>
