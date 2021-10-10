@@ -1,4 +1,3 @@
-let idProyek = $("#id-proyek");
 let idCustomer = $("#id-customer");
 let tanggalMulai = $("#tanggal-mulai");
 let namaProyek = $("#nama-proyek");
@@ -29,6 +28,14 @@ $(window).on("load", function () {
             }
         });
     });
+
+    let bahans = JSON.parse(totalHargaBahan.attr("data-bahan"));
+    if (bahans.length < 2) {
+        totalHargaBahan.val(bahans[0].total);
+    } else {
+        let bahanTotals = bahans.reduce((a, b) => a.total + b.total);
+        totalHargaBahan.val(bahanTotals);
+    }
 
     jumlah.on("keyup change", function () {
         let intHargaSatuan = parseInt(hargaSatuan.val());

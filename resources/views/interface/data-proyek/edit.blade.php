@@ -179,7 +179,7 @@
               <div class="form-group row">
                 <label for="total-harga-bahan" class="col-sm-3 col-form-label">Total Harga Bahan</label>
                 <div class="col-sm-9">
-                  <input type="number" disabled class="form-control" id="total-harga-bahan" name="harga_total_bahan" value="{{$project->harga_total_bahan}}">
+                  <input type="number" disabled class="form-control" id="total-harga-bahan" name="harga_total_bahan" value="{{$project->harga_total_bahan}}" data-bahan="{{$project->bahans}}">
                 </div>
               </div>
             </div>
