@@ -12,6 +12,7 @@ use App\Http\Controllers\OutIn\PemasukanKasController;
 use App\Http\Controllers\OutIn\PengeluaranKasController;
 use App\Http\Controllers\PelunasanProyekController;
 use App\Models\PelunasanProyek;
+use App\Http\Controllers\TutupBukuController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -60,3 +61,6 @@ Route::resource('aset-aktif', AsetController::class);
 Route::get('penyusutan', [PenyusutanController::class, 'index'])->name('penyusutan.index');
 Route::get('data-jurnal', [DataJurnalController::class, 'index'])->name('data-jurnal.index');
 Route::get('jurnal-result', [DataJurnalController::class, 'cari'])->name('jurnal.result');
+
+Route::get('tutup-buku', [TutupBukuController::class, 'index'])->name('tutup-buku.index');
+Route::get('tutup-buku-result', [TutupBukuController::class, 'results'])->name('tutup-buku.results');

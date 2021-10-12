@@ -18,7 +18,6 @@ class PengeluaranKas extends Model
         'jumlah',
         'keterangan_pengeluaran',
         'tanggal_pengeluaran',
-        'total_pengeluaran',
         'jenis_pengeluaran'
     ];
 
