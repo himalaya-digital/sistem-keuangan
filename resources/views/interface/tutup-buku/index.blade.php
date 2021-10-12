@@ -19,7 +19,7 @@
       </div>
       @endif
       <div class="card">
-        <form action="{{ route('jurnal.result') }}" method="GET">
+        <form action="{{ route('tutup-buku.results') }}" method="GET">
           @csrf
           <div class="card-body">
             <div class="row">
@@ -39,53 +39,75 @@
         </form>
       </div>
 
-      {{-- @if (isset($results))
-      <div class="card">
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-striped" id="table-1">
-              <thead>
-                <tr>
-                  <th>Tanggal</th>
-                  <th>ID Jurnal</th>
-                  <th>Deskripsi</th>
-                  <th>ID Akun</th>
-                  <th>Nama Akun</th>
-                  <th>Ref</th>
-                  <th>Debit</th>
-                  <th>Kredit</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($results as $result)
-                <tr>
-                  <td>{{ date( 'd/m/Y', strtotime($result->tanggal_akuisisi)) }}</td>
-      <td>{{ $result->id }}</td>
-      <td>{{ $result->deskripsi }}</td>
-      <td>{{ $result->id_akun }}</td>
-      <td>
-        <p>{{ $result->dataakun->nama_akun }}</p>
-        <p>Kas</p>
-      </td>
-      <td>-</td>
-      <td>
-        <p>{{ number_format($result->penyusutan, 0, ',', '.') }}</p>
-        <p>-</p>
-      </td>
-      <td>
-        <p>-</p>
-        <p>{{ number_format($result->penyusutan, 0, ',', '.') }}</p>
-      </td>
-      </tr>
-      @endforeach
-      </tbody>
-      </table>
+      @if (isset($debits))
+      <div class="row">
+        <div class="col-6">
+          <div class="card">
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-striped table-md">
+                  <thead>
+                    <tr>
+                      <th>Tanggal</th>
+                      <th>ID Akun</th>
+                      <th>Nama Akun</th>
+                      <th>Debit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($debits as $debit)
+                    <tr>
+                      <td>{{ date( 'd/m/Y', strtotime($debit->tanggal_pemasukan)) }}</td>
+                      <td>{{ $debit->id_akun }}</td>
+                      <td>{{ $debit->dataakun->nama_akun }}</td>
+                      <td>
+                        {{ number_format($debit->dataproyek->total_bayar, 0, ',', '.') }}
+                      </td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="card">
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-striped table-md">
+                  <thead>
+                    <tr>
+                      <th>Tanggal</th>
+                      <th>ID Akun</th>
+                      <th>Nama Akun</th>
+                      <th>Kredit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($kredits as $kredit)
+                    <tr>
+                      <td>{{ date( 'd/m/Y', strtotime($kredit->tanggal_pengeluaran)) }}</td>
+                      <td>{{ $kredit->id_akun }}</td>
+                      <td>{{ $kredit->dataakun->nama_akun }}</td>
+                      <td>
+                        {{ $kredit->id_kategori == null ? number_format($kredit->proyek->harga_total_bahan, 0, ',', '.') : number_format($kredit->kategori->harga_satuan * $kredit->jumlah, 0, ',', '.')}}
+                      </td>
+                      <td>
+                      </td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      @endif
+
     </div>
   </div>
-</div>
-@endif --}}
-
-</div>
-</div>
 </div>
 @endsection

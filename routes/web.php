@@ -55,3 +55,4 @@ Route::get('data-jurnal', [DataJurnalController::class, 'index'])->name('data-ju
 Route::get('jurnal-result', [DataJurnalController::class, 'cari'])->name('jurnal.result');
 
 Route::get('tutup-buku', [TutupBukuController::class, 'index'])->name('tutup-buku.index');
+Route::get('tutup-buku-result', [TutupBukuController::class, 'results'])->name('tutup-buku.results');
