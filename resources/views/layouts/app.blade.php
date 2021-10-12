@@ -148,12 +148,18 @@
                         </li>
                         @endif
 
-                        {{-- <li>
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-file-contract"></i>
-                                <span>List Peminjaman</span>
+                        <li class="{{ Request::route()->getName() == 'data-user.index' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('data-user.index') }}">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Data User</span>
                             </a>
-                        </li> --}}
+                        </li>
+                        <li>
+                            <a class="nav-link" href="#">
+                                <i class="far fa-file-alt"></i>
+                                <span>Laporan</span>
+                            </a>
+                        </li>
                     </ul>
                 </aside>
             </div>
