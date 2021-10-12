@@ -63,15 +63,8 @@ class PengeluaranKasController extends Controller
 
         if (!$request->id_proyek) {
             $fields['jumlah'] = $request->jumlah;
-            $getHargaSatuan = DataKategori::find($request->id_kategori);
-
-            $getJumlah = $request->jumlah;
-            $totalPengeluaran = $getHargaSatuan->harga_satuan * $getJumlah;
-            $fields['total_pengeluaran'] = $totalPengeluaran;
         } else {
             $fields['jumlah'] = 0;
-            $getHargaBahan = DataProyek::find($request->id_proyek);
-            $fields['total_pengeluaran'] = $getHargaBahan->harga_total_bahan;
         }
 
         PengeluaranKas::create($fields);
@@ -130,14 +123,8 @@ class PengeluaranKasController extends Controller
 
         if (!$request->id_proyek) {
             $fields['jumlah'] = $request->jumlah;
-            $getHargaSatuan = DataKategori::find($request->id_kategori);
-            $getJumlah = $request->jumlah;
-            $totalPengeluaran = $getHargaSatuan->harga_satuan * $getJumlah;
-            $fields['total_pengeluaran'] = $totalPengeluaran;
         } else {
             $fields['jumlah'] = 0;
-            $getHargaBahan = DataProyek::find($request->id_proyek);
-            $fields['total_pengeluaran'] = $getHargaBahan->harga_total_bahan;
         }
 
         $pengeluarans->update($fields);

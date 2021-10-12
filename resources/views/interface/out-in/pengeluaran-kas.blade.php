@@ -51,7 +51,7 @@
                     {{ $pengeluaran->id_kategori == null ? '-' : number_format($pengeluaran->kategori->harga_satuan, 0, ',', '.') }}
                   </td>
                   <td>
-                    {{ number_format($pengeluaran->total_pengeluaran, 0, ',', '.') }}
+                    {{ $pengeluaran->id_kategori == null ? number_format($pengeluaran->proyek->harga_total_bahan, 0, ',', '.') : number_format($pengeluaran->kategori->harga_satuan * $pengeluaran->jumlah, 0, ',', '.')}}
                   </td>
                   <td>
                     <a href="{{ route('pengeluaran-kas.edit', $pengeluaran->id) }}" class="btn btn-sm btn-warning"

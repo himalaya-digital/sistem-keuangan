@@ -15,8 +15,7 @@ class PemasukanKas extends Model
         'id_proyek',
         'id_akun',
         'keterangan_pemasukan',
-        'tanggal_pemasukan',
-        'total_pemasukan'
+        'tanggal_pemasukan'
     ];
 
     // relasi
