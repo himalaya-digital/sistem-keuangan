@@ -44,23 +44,43 @@ class DataBahanController extends Controller
      */
     public function store($id_proyek, Request $request)
     {
-        Validator::make($request->all(), [
-            'nama_kategori' => 'required',
-            'jumlah' => 'required',
-            'harga_satuan' => 'required',
-            'total' => 'required',
-        ])->validate();
+        DB::beginTransaction();
+        try {
+            $proyek = DataProyek::find($id_proyek);
 
-        $id_kategori = explode(',', $request->nama_kategori)[0];
-        $fields = [
-            'id_proyek' => (int) $id_proyek,
-            'id_kategori' => (int) $id_kategori,
-            'jumlah' => (int) $request->jumlah,
-            'harga_satuan' => (int) $request->harga_satuan,
-            'total' => (int) $request->total,
-        ];
-        DataBahan::create($fields);
-        return redirect()->route('data-proyek.edit', $id_proyek)->with('success', 'Data bahan berhasil ditambahkan');
+            Validator::make($request->all(), [
+                'nama_kategori' => 'required',
+                'jumlah' => 'required',
+                'harga_satuan' => 'required',
+                'total' => 'required',
+            ])->validate();
+
+            $id_kategori = explode(',', $request->nama_kategori)[0];
+            $fields = [
+                'id_proyek' => (int) $id_proyek,
+                'id_kategori' => (int) $id_kategori,
+                'jumlah' => (int) $request->jumlah,
+                'harga_satuan' => (int) $request->harga_satuan,
+                'total' => (int) $request->total,
+            ];
+            DataBahan::create($fields);
+
+            $harga_total_bahan = $proyek->harga_total_bahan + $request->total;
+            $total_bayar = $harga_total_bahan + $proyek->harga_jasa;
+            $sisa_bayar = $total_bayar - $proyek->bayar;
+            $update_proyek_fields = [
+                'harga_total_bahan' => $harga_total_bahan,
+                'total_bayar' => $total_bayar,
+                'sisa_bayar' => $sisa_bayar,
+            ];
+            $proyek->update($update_proyek_fields);
+
+            DB::commit();
+            return redirect()->route('data-proyek.edit', $id_proyek)->with('success', 'Data bahan berhasil ditambahkan');
+        } catch (Exception $error) {
+            DB::rollBack();
+            return redirect()->route('data-proyek.edit', $id_proyek)->with('failed', $error->getMessage());
+        }
     }
 
     /**

@@ -29,13 +29,14 @@ $(window).on("load", function () {
         });
     });
 
-    let bahans = JSON.parse(totalHargaBahan.attr("data-bahan"));
-    if (bahans.length < 2) {
-        totalHargaBahan.val(bahans[0].total);
-    } else {
-        let bahanTotals = bahans.reduce((a, b) => a.total + b.total);
-        totalHargaBahan.val(bahanTotals);
-    }
+    // let bahans = JSON.parse(totalHargaBahan.attr("data-bahan"));
+    // if (bahans.length < 2) {
+    //     totalHargaBahan.val(bahans[0].total);
+    // } else {
+    //     let bahanTotals = bahans.reduce((a, b) => a.total + b.total);
+    //     totalHargaBahan.val(bahanTotals);
+    // }
+    // console.log(bahans);
 
     jumlah.on("keyup change", function () {
         let intHargaSatuan = parseInt(hargaSatuan.val());
