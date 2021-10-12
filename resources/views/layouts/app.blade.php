@@ -140,8 +140,8 @@
                             </a>
                         </li>
 
-                        <li>
-                            <a class="nav-link" href="#">
+                        <li class="{{ Request::route()->getName() == 'tutup-buku.index' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route(('tutup-buku.index')) }}">
                                 <i class="fas fa-book"></i>
                                 <span>Tutup Buku</span>
                             </a>

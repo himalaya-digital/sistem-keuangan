@@ -64,7 +64,6 @@ class PemasukanKasController extends Controller
 
         $getTotalBayar             = DataProyek::where('id_customer', $request->id_proyek)->first();
         $fields['id_proyek']       = $getTotalBayar->id;
-        $fields['total_pemasukan'] = $getTotalBayar->total_bayar;
 
         PemasukanKas::create($fields);
 
@@ -121,7 +120,6 @@ class PemasukanKasController extends Controller
 
         $getTotalBayar             = DataProyek::where('id_customer', $request->id_proyek)->first();
         $fields['id_proyek']       = $getTotalBayar->id;
-        $fields['total_pemasukan'] = $getTotalBayar->total_bayar;
 
         $datas->update($fields);
         return redirect()->route('pemasukan-kas.index')->with('success', 'Data Pemasukan berhasil diubah');

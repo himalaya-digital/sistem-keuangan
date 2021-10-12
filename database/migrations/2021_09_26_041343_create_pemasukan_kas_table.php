@@ -21,7 +21,6 @@ class CreatePemasukanKasTable extends Migration
             $table->unsignedInteger('id_akun');
             $table->string('keterangan_pemasukan', 30);
             $table->date('tanggal_pemasukan');
-            $table->integer('total_pemasukan')->nullable()->default(null);
             $table->timestamps();
         });
     }

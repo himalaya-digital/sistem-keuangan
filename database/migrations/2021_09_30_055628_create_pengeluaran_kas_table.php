@@ -23,7 +23,6 @@ class CreatePengeluaranKasTable extends Migration
             $table->integer('jumlah')->nullable();
             $table->string('keterangan_pengeluaran', 30);
             $table->date('tanggal_pengeluaran');
-            $table->integer('total_pengeluaran')->nullable()->default(null);
             $table->string('jenis_pengeluaran');
             $table->timestamps();
         });

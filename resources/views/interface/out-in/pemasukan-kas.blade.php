@@ -45,7 +45,7 @@
                   <td>{{ $pemasukan->dataproyek->customer->nama_customer }}</td>
                   <td>{{ date( 'd/m/Y', strtotime($pemasukan->tanggal_pemasukan)) }}</td>
                   <td>{{ $pemasukan->keterangan_pemasukan }}</td>
-                  <td>{{ number_format($pemasukan->total_pemasukan, 0, ',', '.') }}</td>
+                  <td>{{ number_format($pemasukan->dataproyek->total_bayar, 0, ',', '.') }}</td>
                   <td>
                     <a href="{{ route('pemasukan-kas.edit', $pemasukan->id) }}" class="btn btn-sm btn-warning"
                       title="edit"><i class="far fa-edit"></i></a>
