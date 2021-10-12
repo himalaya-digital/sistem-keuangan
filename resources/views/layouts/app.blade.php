@@ -154,8 +154,8 @@
                                 <span>Data User</span>
                             </a>
                         </li>
-                        <li>
-                            <a class="nav-link" href="#">
+                        <li class="{{ Request::route()->getName() == 'laporan.index' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('laporan.index') }}">
                                 <i class="far fa-file-alt"></i>
                                 <span>Laporan</span>
                             </a>
