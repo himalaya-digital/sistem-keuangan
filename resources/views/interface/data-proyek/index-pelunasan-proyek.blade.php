@@ -36,7 +36,7 @@
                   <td>{{$project->bayar}}</td>
                   <td>{{$project->sisa_bayar}}</td>
                   <td>
-                    <a href="#" class="btn btn-link btn-sm" title="print"><i class="fas fa-print"></i></a>
+                    <a href="{{route('pelunasan-proyek.print', ['id_proyek'=>$project->id])}}" class="btn btn-link btn-sm" title="print"><i class="fas fa-print"></i></a>
                   </td>
                 </tr>
               </tbody>

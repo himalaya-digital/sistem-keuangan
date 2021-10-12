@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
+|PDF
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
@@ -53,6 +53,7 @@ Route::delete('/data-bahan/{id_bahan}/{id_proyek}', [DataBahanController::class,
 Route::get('pelunasan-proyek/{id_proyek}/create', [PelunasanProyekController::class, 'create'])->name('pelunasan-proyek.create');
 Route::post('pelunasan-proyek/{id_proyek}/store', [PelunasanProyekController::class, 'store'])->name('pelunasan-proyek.store');
 Route::get('pelunasan-proyek/{id_proyek}/detail', [PelunasanProyekController::class, 'show'])->name('pelunasan-proyek.show');
+Route::get('pelunasan-proyek/{id_proyek}/print', [PelunasanProyekController::class, 'print'])->name('pelunasan-proyek.print');
 
 Route::resource('pemasukan-kas', PemasukanKasController::class);
 Route::resource('pengeluaran-kas', PengeluaranKasController::class);

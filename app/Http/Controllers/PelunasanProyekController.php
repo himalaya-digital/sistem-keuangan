@@ -4,13 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\DataProyek;
 use App\Models\PelunasanProyek;
+use Barryvdh\DomPDF\PDF;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class PelunasanProyekController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -120,5 +127,13 @@ class PelunasanProyekController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function print($id_proyek)
+    {
+        $project = DataProyek::find($id_proyek);
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('interface.data-proyek.print', compact('project'));
+        return $pdf->stream();
     }
 }
