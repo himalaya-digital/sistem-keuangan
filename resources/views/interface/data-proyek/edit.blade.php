@@ -8,6 +8,26 @@
 <div class="section-body">
   <div class="row">
     <div class="col-12">
+      @if(session('success'))
+      <div class="alert alert-success alert-dismissible show fade">
+        <div class="alert-body">
+          <button class="close" data-dismiss="alert">
+            <span>×</span>
+          </button>
+          {{session('success')}}
+        </div>
+      </div>
+      @endif
+      @if(session('failed'))
+      <div class="alert alert-danger alert-dismissible show fade">
+        <div class="alert-body">
+          <button class="close" data-dismiss="alert">
+            <span>×</span>
+          </button>
+          {{session('failed')}}
+        </div>
+      </div>
+      @endif
       <div class="card">
         <div class="card-body">
           <div class="row">
@@ -179,7 +199,7 @@
               <div class="form-group row">
                 <label for="total-harga-bahan" class="col-sm-3 col-form-label">Total Harga Bahan</label>
                 <div class="col-sm-9">
-                  <input type="number" disabled class="form-control" id="total-harga-bahan" name="harga_total_bahan" value="{{$project->harga_total_bahan}}">
+                  <input type="number" disabled class="form-control" id="total-harga-bahan" name="harga_total_bahan" value="{{$project->harga_total_bahan}}" data-bahan="{{$project->bahans}}">
                 </div>
               </div>
             </div>
