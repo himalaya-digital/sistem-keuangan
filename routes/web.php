@@ -5,6 +5,7 @@ use App\Http\Controllers\Aset\PenyusutanController;
 use App\Http\Controllers\DataBahanController;
 use App\Http\Controllers\DataJurnalController;
 use App\Http\Controllers\DataProyekController;
+use App\Http\Controllers\DataUser\UserController;
 use App\Http\Controllers\MasterData\DataAkunController;
 use App\Http\Controllers\MasterData\DataCustomerController;
 use App\Http\Controllers\MasterData\DataKategoriController;
@@ -65,3 +66,6 @@ Route::get('jurnal-result', [DataJurnalController::class, 'cari'])->name('jurnal
 
 Route::get('tutup-buku', [TutupBukuController::class, 'index'])->name('tutup-buku.index');
 Route::get('tutup-buku-result', [TutupBukuController::class, 'results'])->name('tutup-buku.results');
+
+// Owner
+Route::resource('data-user', UserController::class);
