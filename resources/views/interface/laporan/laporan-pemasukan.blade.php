@@ -1,5 +1,17 @@
 @extends('layouts.app')
 
+@section('additional-css')
+<style>
+  .header-menus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 32%;
+    padding-right: 2%;
+  }
+</style>
+@endsection
+
 @section('content')
 <div class="section-header">
   <h1>Laporan Pemasukan Kas</h1>
@@ -32,11 +44,14 @@
 
       @if (isset($pemasukans))
       <div class="card">
-        <div class="card-header">
-          <h4>PT. SAPUTRA TIRTHA AMERTHA</h4>
-          <div class="card-header-form">
-            <button class="btn btn-icon btn-warning p-1"><i class="fas fa-file-download"
-                style="font-size: 16px"></i></button>
+        <div class="row py-3">
+          <div class="col-12 text-center">
+            <div class="header-menus">
+              <h4>PT. SAPUTRA TIRTHA AMERTHA</h4>
+              <button class="btn btn-icon btn-warning"><i class="fas fa-file-download"
+                  style="font-size: 18px"></i></button>
+            </div>
+            <h5>Jalan Kecumbung No. 38</h5>
           </div>
         </div>
         <div class="card-body p-0">
