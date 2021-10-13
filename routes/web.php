@@ -7,6 +7,7 @@ use App\Http\Controllers\DataJurnalController;
 use App\Http\Controllers\DataProyekController;
 use App\Http\Controllers\DataUser\UserController;
 use App\Http\Controllers\Laporan\IndexController;
+use App\Http\Controllers\Laporan\LaporanDataProyekController;
 use App\Http\Controllers\MasterData\DataAkunController;
 use App\Http\Controllers\MasterData\DataCustomerController;
 use App\Http\Controllers\MasterData\DataKategoriController;
@@ -71,3 +72,7 @@ Route::get('tutup-buku-result', [TutupBukuController::class, 'results'])->name('
 // Owner
 Route::resource('data-user', UserController::class);
 Route::get('laporan', [IndexController::class, 'index'])->name('laporan.index');
+
+Route::prefix('laporan')->group(function () {
+    Route::get('data-proyek', [LaporanDataProyekController::class, 'index'])->name('laporan-data-proyek.index');
+});
