@@ -75,6 +75,7 @@ Route::resource('data-user', UserController::class);
 Route::get('laporan', [IndexController::class, 'index'])->name('laporan.index');
 Route::get('laporan-pemasukan', [PemasukanController::class, 'index'])->name('laporan-pemasukan.index');
 Route::get('laporan-pemasukan-results', [PemasukanController::class, 'result'])->name('laporan-pemasukan.result');
+Route::post('laporan-pemasukan-export', [PemasukanController::class, 'pdf'])->name('pemasukan.pdf');
 
 Route::prefix('laporan')->group(function () {
     Route::get('data-proyek', [LaporanDataProyekController::class, 'index'])->name('laporan-data-proyek.index');

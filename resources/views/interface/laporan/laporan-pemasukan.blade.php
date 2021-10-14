@@ -48,8 +48,14 @@
           <div class="col-12 text-center">
             <div class="header-menus">
               <h4>PT. SAPUTRA TIRTHA AMERTHA</h4>
-              <button class="btn btn-icon btn-warning"><i class="fas fa-file-download"
-                  style="font-size: 18px"></i></button>
+              <form action="{{ route('pemasukan.pdf') }}" method="POST">
+                @csrf
+                <input hidden type="date" name="dari" value="{{$dari}}">
+                <input hidden type="date" name="sampai" value="{{$sampai}}">
+
+                <button type="submit" class="btn btn-icon btn-warning"><i class="fas fa-file-download"
+                    style="font-size: 18px"></i></button>
+              </form>
             </div>
             <h5>Jalan Kecumbung No. 38</h5>
           </div>
