@@ -26,16 +26,6 @@
         </div>
 
         <div class="form-group">
-          <label>Jenis Pengeluaran</label>
-          <select name="jenis_pengeluaran" id="seeAnotherField" class="custom-select">
-            <option value="none" disabled selected>- Jenis Pengeluaran -</option>
-            <option value="proyek" @if($pengeluarans->jenis_pengeluaran == 'proyek') selected @endif>Proyek</option>
-            <option value="nonproyek" @if($pengeluarans->jenis_pengeluaran == 'nonproyek') selected @endif>Non Proyek
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group kategoriFieldDiv">
           <label>Kategori</label>
           <select name="id_kategori" id="id_kategori" class="custom-select">
             <option value="none" disabled selected>- Kategori -</option>
@@ -45,19 +35,8 @@
             @endforeach
           </select>
         </div>
-        <div class="form-group" id="otherFieldDiv">
-          <label>Nama Proyek</label>
-          <select name="id_proyek" id="id_proyek" class="custom-select">
-            <option value="none" disabled selected>- Nama Proyek -</option>
-            @foreach($proyeks as $proyek)
-            <option value="{{ $proyek->id }}" @if($pengeluarans->id_proyek == null) @else selected
-              @endif>{{ $proyek->nama_proyek }}
-            </option>
-            @endforeach
-          </select>
-        </div>
 
-        <div class="form-group kategoriFieldDiv">
+        <div class="form-group">
           <label>Jumlah</label>
           <input type="number" value="{{$pengeluarans->jumlah}}" class="form-control" name="jumlah">
         </div>
@@ -85,23 +64,4 @@
     </form>
   </div>
 </div>
-@endsection
-
-@section('custom-js')
-<script>
-  $("#seeAnotherField").change(function() {
-    if ($(this).val() == "proyek") {
-      $('#otherFieldDiv').show();
-    } else {
-      $('#otherFieldDiv').hide();
-    }
-
-    if ($(this).val() == "nonproyek") {
-      $('.kategoriFieldDiv').show();
-    } else {
-      $('.kategoriFieldDiv').hide();
-    }
-  });
-  $("#seeAnotherField").trigger("change");
-</script>
 @endsection

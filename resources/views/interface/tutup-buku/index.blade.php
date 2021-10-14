@@ -92,9 +92,7 @@
                       <td>{{ $kredit->id_akun }}</td>
                       <td>{{ $kredit->dataakun->nama_akun }}</td>
                       <td>
-                        {{ $kredit->id_kategori == null ? number_format($kredit->proyek->harga_total_bahan, 0, ',', '.') : number_format($kredit->kategori->harga_satuan * $kredit->jumlah, 0, ',', '.')}}
-                      </td>
-                      <td>
+                        {{ number_format($kredit->total_pengeluaran, 0, ',', '.')}}
                       </td>
                     </tr>
                     @endforeach

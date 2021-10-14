@@ -28,7 +28,7 @@
       </a>
     </div>
     <div class="col-12 col-md-6 col-lg-3 sip">
-      <a href="#" class="kartu">
+      <a href="{{ route('laporan-pengeluaran.index') }}" class="kartu">
         <div class="card align-center">
           <div class="card-header justify-content-center">
             <i class="fas fa-minus-square" style="font-size: 48px"></i>

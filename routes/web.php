@@ -9,6 +9,7 @@ use App\Http\Controllers\DataUser\UserController;
 use App\Http\Controllers\Laporan\IndexController;
 use App\Http\Controllers\Laporan\PemasukanController;
 use App\Http\Controllers\Laporan\LaporanDataProyekController;
+use App\Http\Controllers\Laporan\PengeluaranController;
 use App\Http\Controllers\MasterData\DataAkunController;
 use App\Http\Controllers\MasterData\DataCustomerController;
 use App\Http\Controllers\MasterData\DataKategoriController;
@@ -76,6 +77,8 @@ Route::get('laporan', [IndexController::class, 'index'])->name('laporan.index');
 Route::get('laporan-pemasukan', [PemasukanController::class, 'index'])->name('laporan-pemasukan.index');
 Route::get('laporan-pemasukan-results', [PemasukanController::class, 'result'])->name('laporan-pemasukan.result');
 Route::post('laporan-pemasukan-export', [PemasukanController::class, 'pdf'])->name('pemasukan.pdf');
+
+Route::get('laporan-pengeluaran', [PengeluaranController::class, 'index'])->name('laporan-pengeluaran.index');
 
 Route::prefix('laporan')->group(function () {
     Route::get('data-proyek', [LaporanDataProyekController::class, 'index'])->name('laporan-data-proyek.index');
