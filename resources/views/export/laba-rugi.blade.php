@@ -27,7 +27,7 @@
   <div class="content">
     <div class="content-header">
       <div class="content-header-child">
-        <h4>Laporan Pengeluaran Kas</h4>
+        <h4>Laporan Laba Rugi</h4>
         <h4>{{ date( 'd/m/Y', strtotime($dari)) }} - {{ date( 'd/m/Y', strtotime($sampai)) }}</h4>
       </div>
     </div>
@@ -36,27 +36,36 @@
       <table border="1" style="width: 100%; border-collapse: collapse;">
         <thead>
           <tr>
-            <th>Tanggal</th>
-            <th>Kategori</th>
-            <th>Jumlah</th>
-            <th>Harga Satuan</th>
-            <th>Total</th>
+            <th colspan="2" style="text-align: left;">Pendapatan</th>
           </tr>
         </thead>
 
         <tbody>
+          <tr>
+            <td>Pendapatan Usaha</td>
+            <td>{{ number_format($totalpemasukan, 0, ',', '.') }}</td>
+          </tr>
+        </tbody>
+
+        <thead>
+          <tr>
+            <th colspan="2" style="text-align: left;">Beban</th>
+          </tr>
+        </thead>
+        <tbody>
           @foreach ($pengeluarans as $pengeluaran)
           <tr>
-            <th>{{ date( 'd/m/Y', strtotime($pengeluaran->tanggal_pengeluaran)) }}</th>
-            <td>{{ $pengeluaran->kategori->nama_kategori }}</td>
-            <td>{{ $pengeluaran->jumlah }}</td>
-            <td>{{ number_format($pengeluaran->kategori->harga_satuan, 0, ',', '.') }}</td>
+            <td>{{ $pengeluaran->dataakun->nama_akun }}</td>
             <td>{{ number_format($pengeluaran->total_pengeluaran, 0, ',', '.') }}</td>
           </tr>
           @endforeach
           <tr>
-            <th colspan="4">Total</th>
+            <th style="text-align: left;">Total</th>
             <td>{{ number_format($total, 0, ',', '.') }}</td>
+          </tr>
+          <tr>
+            <th style="text-align: left;">Laba</th>
+            <td>{{ number_format($totalpemasukan - $total, 0, ',', '.') }}</td>
           </tr>
         </tbody>
       </table>

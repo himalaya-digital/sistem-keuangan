@@ -41,7 +41,7 @@ class PemasukanController extends Controller
 
         $total = DataProyek::whereBetween('tanggal_bayar', [$dari, $sampai])->sum('total_bayar');
 
-        $pdf = PDF::loadView('export.pemasukan', compact('pemasukans', 'total'))->setPaper('a4', 'potrait')->setWarnings(false);
+        $pdf = PDF::loadView('export.pemasukan', compact('pemasukans', 'total', 'dari', 'sampai'))->setPaper('a4', 'potrait')->setWarnings(false);
         return $pdf->stream('Laporan-Pemasukan-Kas' . '.pdf');
     }
 }

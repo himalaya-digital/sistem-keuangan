@@ -28,6 +28,7 @@
     <div class="content-header">
       <div class="content-header-child">
         <h4>Laporan Pemasukan Kas</h4>
+        <h4>{{ date( 'd/m/Y', strtotime($dari)) }} - {{ date( 'd/m/Y', strtotime($sampai)) }}</h4>
       </div>
     </div>
 

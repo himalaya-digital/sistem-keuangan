@@ -38,7 +38,7 @@ class PengeluaranController extends Controller
         $pengeluarans = PengeluaranKas::whereBetween('tanggal_pengeluaran', [$dari, $sampai])->get();
         $total = PengeluaranKas::whereBetween('tanggal_pengeluaran', [$dari, $sampai])->sum('total_pengeluaran');
 
-        $pdf = PDF::loadView('export.pengeluaran', compact('pengeluarans', 'total'))->setPaper('a4', 'potrait')->setWarnings(false);
+        $pdf = PDF::loadView('export.pengeluaran', compact('pengeluarans', 'total', 'dari', 'sampai'))->setPaper('a4', 'potrait')->setWarnings(false);
         return $pdf->stream('Laporan-Pengeluaran-Kas' . '.pdf');
     }
 }
