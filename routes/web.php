@@ -79,6 +79,8 @@ Route::get('laporan-pemasukan-results', [PemasukanController::class, 'result'])-
 Route::post('laporan-pemasukan-export', [PemasukanController::class, 'pdf'])->name('pemasukan.pdf');
 
 Route::get('laporan-pengeluaran', [PengeluaranController::class, 'index'])->name('laporan-pengeluaran.index');
+Route::get('laporan-pengeluaran-results', [PengeluaranController::class, 'result'])->name('laporan-pengeluaran.result');
+Route::post('laporan-pengeluaran-export', [PengeluaranController::class, 'pdf'])->name('pengeluaran.pdf');
 
 Route::prefix('laporan')->group(function () {
     Route::get('data-proyek', [LaporanDataProyekController::class, 'index'])->name('laporan-data-proyek.index');

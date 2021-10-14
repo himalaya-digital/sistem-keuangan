@@ -21,7 +21,7 @@
   <div class="row">
     <div class="col-12">
       <div class="card">
-        <form action="#" method="GET">
+        <form action="{{ route('laporan-pengeluaran.result') }}" method="GET">
           @csrf
           <div class="card-body">
             <div class="row">
@@ -42,16 +42,16 @@
         </form>
       </div>
 
-      {{-- @if (isset($pemasukans)) --}}
+      @if (isset($pengeluarans))
       <div class="card">
         <div class="row py-3">
           <div class="col-12 text-center">
             <div class="header-menus">
               <h4>PT. SAPUTRA TIRTHA AMERTHA</h4>
-              <form action="{{ route('pemasukan.pdf') }}" method="POST">
+              <form action="{{ route('pengeluaran.pdf') }}" method="POST">
                 @csrf
-                {{-- <input hidden type="date" name="dari" value="{{$dari}}">
-                <input hidden type="date" name="sampai" value="{{$sampai}}"> --}}
+                <input hidden type="date" name="dari" value="{{$dari}}">
+                <input hidden type="date" name="sampai" value="{{$sampai}}">
 
                 <button type="submit" class="btn btn-icon btn-warning"><i class="fas fa-file-download"
                     style="font-size: 18px"></i></button>
@@ -61,35 +61,37 @@
           </div>
         </div>
 
-        {{-- <div class="card-body p-0">
+        <div class="card-body p-0">
           <table class="table">
             <thead>
               <tr>
                 <th scope="col">Tanggal</th>
-                <th scope="col">Nama Customer</th>
-                <th scope="col">Keterangan</th>
+                <th scope="col">Kategori</th>
+                <th scope="col">Jumlah</th>
+                <th scope="col">Harga Satuan</th>
                 <th scope="col">Total</th>
               </tr>
             </thead>
             <tbody>
-              @foreach ($pemasukans as $pemasukan)
+              @foreach ($pengeluarans as $pengeluaran)
               <tr>
-                <th scope="row">{{ date( 'd/m/Y', strtotime($pemasukan->tanggal_pemasukan)) }}</th>
-                <td>{{ $pemasukan->dataproyek->customer->nama_customer }}</td>
-                <td>{{ $pemasukan->keterangan_pemasukan }}</td>
-                <td>{{ number_format($pemasukan->dataproyek->total_bayar, 0, ',', '.') }}</td>
+                <th scope="row">{{ date( 'd/m/Y', strtotime($pengeluaran->tanggal_pengeluaran)) }}</th>
+                <td>{{ $pengeluaran->kategori->nama_kategori }}</td>
+                <td>{{ $pengeluaran->jumlah }}</td>
+                <td>{{ number_format($pengeluaran->kategori->harga_satuan, 0, ',', '.') }}</td>
+                <td>{{ number_format($pengeluaran->total_pengeluaran, 0, ',', '.') }}</td>
               </tr>
               @endforeach
               <tr>
-                <th colspan="3">Total</th>
+                <th colspan="4">Total</th>
                 <td>{{ number_format($total, 0, ',', '.') }}</td>
               </tr>
             </tbody>
           </table>
-        </div> --}}
+        </div>
 
       </div>
-      {{-- @endif --}}
+      @endif
 
     </div>
   </div>
