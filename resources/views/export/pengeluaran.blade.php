@@ -27,7 +27,7 @@
   <div class="content">
     <div class="content-header">
       <div class="content-header-child">
-        <h4>Laporan Pemasukan Kas</h4>
+        <h4>Laporan Pengeluaran Kas</h4>
         <h4>{{ date( 'd/m/Y', strtotime($dari)) }} - {{ date( 'd/m/Y', strtotime($sampai)) }}</h4>
       </div>
     </div>
@@ -37,23 +37,25 @@
         <thead>
           <tr>
             <th>Tanggal</th>
-            <th>Nama Customer</th>
-            <th>Keterangan</th>
+            <th>Kategori</th>
+            <th>Jumlah</th>
+            <th>Harga Satuan</th>
             <th>Total</th>
           </tr>
         </thead>
 
         <tbody>
-          @foreach ($pemasukans as $pemasukan)
+          @foreach ($pengeluarans as $pengeluaran)
           <tr>
-            <td>{{ date( 'd/m/Y', strtotime($pemasukan->tanggal_pemasukan)) }}</td>
-            <td>{{ $pemasukan->dataproyek->customer->nama_customer }}</td>
-            <td>{{ $pemasukan->keterangan_pemasukan }}</td>
-            <td>{{ number_format($pemasukan->dataproyek->total_bayar, 0, ',', '.') }}</td>
+            <th>{{ date( 'd/m/Y', strtotime($pengeluaran->tanggal_pengeluaran)) }}</th>
+            <td>{{ $pengeluaran->kategori->nama_kategori }}</td>
+            <td>{{ $pengeluaran->jumlah }}</td>
+            <td>{{ number_format($pengeluaran->kategori->harga_satuan, 0, ',', '.') }}</td>
+            <td>{{ number_format($pengeluaran->total_pengeluaran, 0, ',', '.') }}</td>
           </tr>
           @endforeach
           <tr>
-            <th colspan="3">Total</th>
+            <th colspan="4">Total</th>
             <td>{{ number_format($total, 0, ',', '.') }}</td>
           </tr>
         </tbody>

@@ -12,24 +12,18 @@ class PengeluaranKas extends Model
     protected $table = 'pengeluaran_kas';
     protected $fillable = [
         'id_user',
-        'id_proyek',
         'id_kategori',
         'id_akun',
         'jumlah',
         'keterangan_pengeluaran',
         'tanggal_pengeluaran',
-        'jenis_pengeluaran'
+        'total_pengeluaran'
     ];
 
     // relasi
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
-    }
-
-    public function proyek()
-    {
-        return $this->belongsTo(DataProyek::class, 'id_proyek');
     }
 
     public function kategori()

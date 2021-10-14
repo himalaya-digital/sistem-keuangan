@@ -29,7 +29,6 @@
                   <th class="text-center">No</th>
                   <th>Id Pengeluaran</th>
                   <th>Nama Akun</th>
-                  <th>Nama Proyek</th>
                   <th>Kategori</th>
                   <th>Jumlah</th>
                   <th>Harga Satuan</th>
@@ -43,15 +42,14 @@
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $pengeluaran->id }}</td>
                   <td>{{ $pengeluaran->dataakun->nama_akun }}</td>
-                  <td>{{ $pengeluaran->id_proyek == null ? '-' : $pengeluaran->proyek->nama_proyek }}</td>
-                  <td>{{ $pengeluaran->id_kategori == null ? 'paket proyek' : $pengeluaran->kategori->nama_kategori}}
+                  <td>{{ $pengeluaran->kategori->nama_kategori}}
                   </td>
-                  <td>{{ $pengeluaran->id_kategori == null ? '1 paket' : $pengeluaran->jumlah}}</td>
+                  <td>{{ $pengeluaran->jumlah}}</td>
                   <td>
-                    {{ $pengeluaran->id_kategori == null ? '-' : number_format($pengeluaran->kategori->harga_satuan, 0, ',', '.') }}
+                    {{ number_format($pengeluaran->kategori->harga_satuan, 0, ',', '.') }}
                   </td>
                   <td>
-                    {{ $pengeluaran->id_kategori == null ? number_format($pengeluaran->proyek->harga_total_bahan, 0, ',', '.') : number_format($pengeluaran->kategori->harga_satuan * $pengeluaran->jumlah, 0, ',', '.')}}
+                    {{ number_format($pengeluaran->total_pengeluaran, 0, ',','.')}}
                   </td>
                   <td>
                     <a href="{{ route('pengeluaran-kas.edit', $pengeluaran->id) }}" class="btn btn-sm btn-warning"

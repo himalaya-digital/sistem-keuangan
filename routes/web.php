@@ -7,8 +7,10 @@ use App\Http\Controllers\DataJurnalController;
 use App\Http\Controllers\DataProyekController;
 use App\Http\Controllers\DataUser\UserController;
 use App\Http\Controllers\Laporan\IndexController;
+use App\Http\Controllers\Laporan\LabaRugiController;
 use App\Http\Controllers\Laporan\PemasukanController;
 use App\Http\Controllers\Laporan\LaporanDataProyekController;
+use App\Http\Controllers\Laporan\PengeluaranController;
 use App\Http\Controllers\MasterData\DataAkunController;
 use App\Http\Controllers\MasterData\DataCustomerController;
 use App\Http\Controllers\MasterData\DataKategoriController;
@@ -76,6 +78,14 @@ Route::get('laporan', [IndexController::class, 'index'])->name('laporan.index');
 Route::get('laporan-pemasukan', [PemasukanController::class, 'index'])->name('laporan-pemasukan.index');
 Route::get('laporan-pemasukan-results', [PemasukanController::class, 'result'])->name('laporan-pemasukan.result');
 Route::post('laporan-pemasukan-export', [PemasukanController::class, 'pdf'])->name('pemasukan.pdf');
+
+Route::get('laporan-pengeluaran', [PengeluaranController::class, 'index'])->name('laporan-pengeluaran.index');
+Route::get('laporan-pengeluaran-results', [PengeluaranController::class, 'result'])->name('laporan-pengeluaran.result');
+Route::post('laporan-pengeluaran-export', [PengeluaranController::class, 'pdf'])->name('pengeluaran.pdf');
+
+Route::get('laporan-laba-rugi', [LabaRugiController::class, 'index'])->name('laba-rugi.index');
+Route::get('laporan-laba-rugi-results', [LabaRugiController::class, 'result'])->name('laba-rugi.result');
+Route::post('laporan-laba-rugi-export', [LabaRugiController::class, 'pdf'])->name('laba-rugi.pdf');
 
 Route::prefix('laporan')->group(function () {
     Route::get('data-proyek', [LaporanDataProyekController::class, 'index'])->name('laporan-data-proyek.index');
