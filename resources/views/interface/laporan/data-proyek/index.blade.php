@@ -53,13 +53,16 @@
       <p>Data kosong</p>
       @else
       <div class="card">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-12 text-center">
-              <h4>PT. SAPUTRA TIRTHA AMERTHA</h4>
-              <h5>Jalan Kecumbung No. 38</h5>
-            </div>
+        <div class="card-header align-items-center justify-content-center">
+          <div class="text-center" style="flex: 1">
+            <h3>PT. SAPUTRA TIRTHA AMERTHA</h3>
+            <h4>Jalan Kecumbung No. 38</h4>
           </div>
+          <div class="card-header-action">
+            <a href="{{route('laporan-data-proyek.print', ['nama_proyek' => $selected->id, 'nama_customer' => $selected->customer->id])}}" class="btn btn-icon btn-warning"><i class="fas fa-file-download" style="font-size: 18px"></i></a>
+          </div>
+        </div>
+        <div class="card-body">
           <div class="row">
             <div class="col-12 col-sm-6">
               <table class="table">
