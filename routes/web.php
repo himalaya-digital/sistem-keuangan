@@ -79,4 +79,5 @@ Route::post('laporan-pemasukan-export', [PemasukanController::class, 'pdf'])->na
 
 Route::prefix('laporan')->group(function () {
     Route::get('data-proyek', [LaporanDataProyekController::class, 'index'])->name('laporan-data-proyek.index');
+    Route::get('data-proyek/print', [LaporanDataProyekController::class, 'print'])->name('laporan-data-proyek.print');
 });

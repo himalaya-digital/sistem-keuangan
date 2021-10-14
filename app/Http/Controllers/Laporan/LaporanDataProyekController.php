@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Laporan;
 use App\Http\Controllers\Controller;
 use App\Models\DataCustomer;
 use App\Models\DataProyek;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class LaporanDataProyekController extends Controller
 {
@@ -91,5 +93,13 @@ class LaporanDataProyekController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function print(Request $request)
+    {
+        $project = DataProyek::where('id', (int) $request->nama_proyek)->whereRelation('customer', 'id', (int) $request->nama_customer)->first();
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('interface.data-proyek.print', compact('project'))->setPaper('a4', 'potrait')->setWarnings(false);
+        return $pdf->stream('Laporan-Data-Proyek', '.pdf');
     }
 }
