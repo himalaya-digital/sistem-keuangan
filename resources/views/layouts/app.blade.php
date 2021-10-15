@@ -65,11 +65,13 @@
             <div class="main-sidebar sidebar-style-2">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="/">Saputra</a>
+                        <a href="/">
+                            <img src="{{ asset('img/logo.png') }}" alt="logo" width="140">
+                        </a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
                         <a href="/">
-                            <img src="{{ asset('img/icon.png') }}" alt="primakara-logo" title="sibook">
+                            <img src="{{ asset('img/logo.png') }}" alt="primakara-logo" title="sibook" width="40">
                         </a>
                     </div>
                     <ul class="sidebar-menu">
@@ -81,6 +83,24 @@
                         </li>
 
                         @if (auth()->user()->jabatan == 'admin')
+
+                        <li class="dropdown">
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                                <i class="fas fa-wallet"></i>
+                                <span>Modal</span>
+                            </a>
+                            <ul class="dropdown-menu" style="display: block;">
+                                <li class="">
+                                    <a class="nav-link" href="#">Modal Awal</a>
+                                </li>
+                                <li class="{{ Request::route()->getName() == 'tambah-modal.index' ? ' active' : '' }}">
+                                    <a class=" nav-link" href="{{ route('tambah-modal.index') }}">Penambahan Modal</a>
+                                </li>
+                                <li class="{{ Request::route()->getName() == 'prive.index' ? ' active' : '' }}">
+                                    <a class="nav-link" href="{{ route('prive.index') }}">Prive</a>
+                                </li>
+                            </ul>
+                        </li>
 
                         <li class="dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">

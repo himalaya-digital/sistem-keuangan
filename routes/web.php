@@ -6,6 +6,7 @@ use App\Http\Controllers\DataBahanController;
 use App\Http\Controllers\DataJurnalController;
 use App\Http\Controllers\DataProyekController;
 use App\Http\Controllers\DataUser\UserController;
+use App\Http\Controllers\Laporan\ArusKasController;
 use App\Http\Controllers\Laporan\IndexController;
 use App\Http\Controllers\Laporan\LabaRugiController;
 use App\Http\Controllers\Laporan\PemasukanController;
@@ -14,6 +15,8 @@ use App\Http\Controllers\Laporan\PengeluaranController;
 use App\Http\Controllers\MasterData\DataAkunController;
 use App\Http\Controllers\MasterData\DataCustomerController;
 use App\Http\Controllers\MasterData\DataKategoriController;
+use App\Http\Controllers\Modal\PriveController;
+use App\Http\Controllers\Modal\TambahModalController;
 use App\Http\Controllers\OutIn\PemasukanKasController;
 use App\Http\Controllers\OutIn\PengeluaranKasController;
 use App\Http\Controllers\PelunasanProyekController;
@@ -51,6 +54,10 @@ Route::prefix('master-data')->group(function () {
     Route::resource('/data-customer', DataCustomerController::class);
     Route::resource('/data-kategori', DataKategoriController::class);
 });
+
+Route::resource('/tambah-modal', TambahModalController::class);
+Route::resource('/prive', PriveController::class);
+
 Route::resource('/data-proyek', DataProyekController::class);
 Route::post('/data-bahan/{id_proyek}', [DataBahanController::class, 'store'])->name('data-bahan.store');
 Route::delete('/data-bahan/{id_bahan}/{id_proyek}', [DataBahanController::class, 'destroy'])->name('data-bahan.destroy');
@@ -86,6 +93,10 @@ Route::post('laporan-pengeluaran-export', [PengeluaranController::class, 'pdf'])
 Route::get('laporan-laba-rugi', [LabaRugiController::class, 'index'])->name('laba-rugi.index');
 Route::get('laporan-laba-rugi-results', [LabaRugiController::class, 'result'])->name('laba-rugi.result');
 Route::post('laporan-laba-rugi-export', [LabaRugiController::class, 'pdf'])->name('laba-rugi.pdf');
+
+Route::get('laporan-arus-kas', [ArusKasController::class, 'index'])->name('laporan-arus-kas.index');
+Route::get('laporan-arus-kas-results', [ArusKasController::class, 'result'])->name('laporan-arus-kas.result');
+Route::post('laporan-arus-kas-export', [ArusKasController::class, 'pdf'])->name('lapran-arus-kas.pdf');
 
 Route::prefix('laporan')->group(function () {
     Route::get('data-proyek', [LaporanDataProyekController::class, 'index'])->name('laporan-data-proyek.index');
