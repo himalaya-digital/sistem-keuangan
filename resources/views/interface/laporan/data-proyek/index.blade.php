@@ -59,7 +59,8 @@
             <h4>Jalan Kecumbung No. 38</h4>
           </div>
           <div class="card-header-action">
-            <a href="{{route('laporan-data-proyek.print', ['nama_proyek' => $selected->id, 'nama_customer' => $selected->customer->id])}}" class="btn btn-icon btn-warning"><i class="fas fa-file-download" style="font-size: 18px"></i></a>
+            <a href="{{route('laporan-data-proyek.print', ['nama_proyek' => $selected->id, 'nama_customer' => $selected->customer->id])}}"
+              class="btn btn-icon btn-warning"><i class="fas fa-file-download" style="font-size: 18px"></i></a>
           </div>
         </div>
         <div class="card-body">
@@ -76,7 +77,7 @@
                 </tr>
                 <tr>
                   <th>Tanggal Mulai</th>
-                  <td>{{$selected->tanggal_mulai}}</td>
+                  <td>{{ date( 'd-m-Y', strtotime($selected->tanggal_mulai)) }}</td>
                 </tr>
               </table>
             </div>
@@ -96,7 +97,7 @@
                 </tr>
                 <tr>
                   <th>Tanggal Selesai</th>
-                  <td>{{$selected->tanggal_selesai}}</td>
+                  <td>{{ date( 'd-m-Y', strtotime($selected->tanggal_selesai)) }}</td>
                 </tr>
               </table>
             </div>
@@ -119,21 +120,21 @@
                     <td>{{$loop->iteration}}</td>
                     <td>{{$b->kategori->nama_kategori}}</td>
                     <td>{{$b->jumlah}}</td>
-                    <td>{{$b->kategori->harga_satuan}}</td>
-                    <td>{{$b->total}}</td>
+                    <td>{{number_format($b->kategori->harga_satuan, 0, ',', '.')}}</td>
+                    <td>{{number_format($b->total, 0, ',', '.')}}</td>
                   </tr>
                   @endforeach
                   <tr>
                     <th colspan="4" class="text-right">Total</th>
-                    <td>{{$selected->harga_total_bahan}}</td>
+                    <td>{{number_format($selected->harga_total_bahan, 0, ',', '.')}}</td>
                   </tr>
                   <tr>
                     <th colspan="4" class="text-right">Jasa</th>
-                    <td>{{$selected->harga_jasa}}</td>
+                    <td>{{number_format($selected->harga_jasa, 0, ',', '.')}}</td>
                   </tr>
                   <tr>
                     <th colspan="4" class="text-right">Total bayar</th>
-                    <td>{{$selected->total_bayar}}</td>
+                    <td>{{number_format($selected->total_bayar, 0, ',', '.')}}</td>
                   </tr>
                 </tbody>
               </table>

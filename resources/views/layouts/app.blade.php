@@ -159,7 +159,6 @@
                         </li>
                         @endif
                         {{-- end condition --}}
-                        @if (auth()->user()->jabatan == 'owner')
                         <li class="{{ Request::route()->getName() == 'data-user.index' ? ' active' : '' }}">
                             <a class="nav-link" href="{{ route('data-user.index') }}">
                                 <i class="fas fa-user-plus"></i>
@@ -172,7 +171,6 @@
                                 <span>Laporan</span>
                             </a>
                         </li>
-                        @endif
                     </ul>
                 </aside>
             </div>

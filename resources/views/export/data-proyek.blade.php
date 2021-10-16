@@ -46,7 +46,7 @@
           </tr>
           <tr>
             <th align="left">Tanggal pembayaran</th>
-            <td>{{$project->tanggal_bayar}}</td>
+            <td>{{ date( 'd-m-Y', strtotime($project->tanggal_bayar)) }}</td>
           </tr>
         </table>
       </div>
@@ -71,8 +71,8 @@
             <td>{{$loop->iteration}}</td>
             <td>{{$b->kategori->nama_kategori}}</td>
             <td>{{$b->jumlah}}</td>
-            <td>{{$b->kategori->harga_satuan}}</td>
-            <td>{{$b->total}}</td>
+            <td>{{number_format($b->kategori->harga_satuan, 0, ',', '.')}}</td>
+            <td>{{number_format($b->total, 0, ',', '.')}}</td>
           </tr>
           @endforeach
           <tr>
@@ -80,19 +80,19 @@
             <td>Jasa</td>
             <td>-</td>
             <td>-</td>
-            <td>{{$project->harga_jasa}}</td>
+            <td>{{number_format($project->harga_jasa, 0, ',', '.')}}</td>
           </tr>
           <tr>
             <th colspan="4">Total bayar</th>
-            <td>{{$project->total_bayar}}</td>
+            <td>{{number_format($project->total_bayar, 0, ',', '.')}}</td>
           </tr>
           <tr>
             <th colspan="4">Bayar</th>
-            <td>{{$project->bayar}}</td>
+            <td>{{number_format($project->bayar, 0, ',', '.')}}</td>
           </tr>
           <tr>
             <th colspan="4">Sisa bayar</th>
-            <td>{{$project->sisa_bayar}}</td>
+            <td>{{number_format($project->sisa_bayar, 0, ',', '.')}}</td>
           </tr>
         </tbody>
       </table>

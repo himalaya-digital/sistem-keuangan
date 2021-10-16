@@ -45,7 +45,7 @@
                             <span style="margin-left: 24px; display: inline-block;">Kas</span>
                         </td>
                         <td></td>
-                        <td align="right">{{$kas}}</td>
+                        <td align="right">{{ number_format($kas, 0, ',', '.')}}</td>
                     </tr>
                     @foreach ($assets as $a)
                     <tr>
@@ -53,13 +53,13 @@
                             <span style="margin-left: 24px; display: inline-block;">{{$a->nama_aset}}</span>
                         </td>
                         <td></td>
-                        <td align="right">{{$a->biaya_akuisisi}}</td>
+                        <td align="right">{{number_format($a->biaya_akuisisi, 0, ',', '.')}}</td>
                     </tr>
                     @endforeach
                     <tr>
                         <td>Total aktiva</td>
                         <td></td>
-                        <td align="right">{{$aktiva}}</td>
+                        <td align="right">{{number_format($aktiva, 0, ',', '.')}}</td>
                     </tr>
                     <tr style="border-top: 1px solid grey;">
                         <th>
@@ -71,7 +71,7 @@
                             <span style="margin-left: 24px; display: inline-block;">Kewajiban</span>
                         </td>
                         <td></td>
-                        <td align="right">{{$beban}}</td>
+                        <td align="right">{{number_format($beban, 0, ',', '.')}}</td>
                     </tr>
                     <tr>
                         <th>
@@ -83,12 +83,12 @@
                             <span style="margin-left: 24px; display: inline-block;">Modal</span>
                         </td>
                         <td></td>
-                        <td align="right">{{$modal}}</td>
+                        <td align="right">{{number_format($modal, 0, ',', '.')}}</td>
                     </tr>
                     <tr>
                         <td>Total pasiva</td>
                         <td></td>
-                        <td align="right">{{$pasiva}}</td>
+                        <td align="right">{{number_format($pasiva, 0, ',', '.')}}</td>
                     </tr>
                 </tbody>
             </table>

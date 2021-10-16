@@ -46,7 +46,8 @@
                             <input hidden type="date" name="dari" value="{{$dari}}">
                             <input hidden type="date" name="sampai" value="{{$sampai}}">
 
-                            <button type="submit" class="btn btn-icon btn-warning"><i class="fas fa-file-download" style="font-size: 18px"></i></button>
+                            <button type="submit" class="btn btn-icon btn-warning"><i class="fas fa-file-download"
+                                    style="font-size: 18px"></i></button>
                         </form>
                     </div>
                 </div>
@@ -66,7 +67,7 @@
                                                 <span class="d-inline-block ml-5">Kas</span>
                                             </td>
                                             <td></td>
-                                            <td align="right">{{$kas}}</td>
+                                            <td align="right">{{ number_format($kas, 0, ',', '.')}}</td>
                                         </tr>
                                         @foreach ($assets as $a)
                                         <tr>
@@ -74,13 +75,13 @@
                                                 <span class="d-inline-block ml-5">{{$a->nama_aset}}</span>
                                             </td>
                                             <td></td>
-                                            <td align="right">{{$a->biaya_akuisisi}}</td>
+                                            <td align="right">{{number_format($a->biaya_akuisisi, 0, ',', '.')}}</td>
                                         </tr>
                                         @endforeach
                                         <tr>
                                             <td>Total aktiva</td>
                                             <td></td>
-                                            <td align="right">{{$aktiva}}</td>
+                                            <td align="right">{{number_format($aktiva, 0, ',', '.')}}</td>
                                         </tr>
                                         <tr style="border-top: 1px solid grey;">
                                             <th>
@@ -92,7 +93,7 @@
                                                 <span class="d-inline-block ml-5">Kewajiban</span>
                                             </td>
                                             <td></td>
-                                            <td align="right">{{$beban}}</td>
+                                            <td align="right">{{number_format($beban, 0, ',', '.')}}</td>
                                         </tr>
                                         <tr>
                                             <th>
@@ -104,12 +105,12 @@
                                                 <span class="d-inline-block ml-5">Modal</span>
                                             </td>
                                             <td></td>
-                                            <td align="right">{{$modal}}</td>
+                                            <td align="right">{{number_format($modal, 0, ',', '.')}}</td>
                                         </tr>
                                         <tr>
                                             <td>Total pasiva</td>
                                             <td></td>
-                                            <td align="right">{{$pasiva}}</td>
+                                            <td align="right">{{number_format($pasiva, 0, ',', '.')}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
