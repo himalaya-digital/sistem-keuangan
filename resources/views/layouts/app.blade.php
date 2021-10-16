@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ Session::token() }}">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>P.T Saputra Tirtha Amertha &mdash; Dashboard</title>
     <link rel="icon" href="{{ asset('img/icon.png') }}">
@@ -13,9 +14,9 @@
 
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{asset('stisla/modules/datatables/datatables.min.css')}}">
-    <link rel="stylesheet"
-        href="{{asset('stisla/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('stisla/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('stisla/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css')}}">
+    @yield('css-libraries')
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('stisla/css/style.css')}}">
@@ -36,21 +37,16 @@
             <nav class="navbar navbar-expand-lg main-navbar">
                 <form class="form-inline mr-auto">
                     <ul class="navbar-nav mr-3">
-                        <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i
-                                    class="fas fa-bars"></i></a></li>
+                        <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
                     </ul>
                 </form>
                 <ul class="navbar-nav navbar-right">
-                    <li class="dropdown"><a href="#" data-toggle="dropdown"
-                            class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img alt="image" src="{{ asset('stisla/img/avatar/avatar-1.png')}}"
-                                class="rounded-circle mr-1">
+                    <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                            <img alt="image" src="{{ asset('stisla/img/avatar/avatar-1.png')}}" class="rounded-circle mr-1">
                             <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user()->name }}</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                class="dropdown-item has-icon text-danger">
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item has-icon text-danger">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </a>
                             <form action="{{ route('logout') }}" method="POST" id="logout-form" style="display:none;">
@@ -63,11 +59,13 @@
             <div class="main-sidebar sidebar-style-2">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="/">Saputra</a>
+                        <a href="/">
+                            <img src="{{ asset('img/logo.png') }}" alt="logo" width="140">
+                        </a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
                         <a href="/">
-                            <img src="{{ asset('img/icon.png') }}" alt="primakara-logo" title="sibook">
+                            <img src="{{ asset('img/logo.png') }}" alt="primakara-logo" title="sibook" width="40">
                         </a>
                     </div>
                     <ul class="sidebar-menu">
@@ -82,12 +80,29 @@
 
                         <li class="dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                                <i class="fas fa-wallet"></i>
+                                <span>Modal</span>
+                            </a>
+                            <ul class="dropdown-menu" style="display: block;">
+                                <li class="{{ Request::route()->getName() == 'modal-awal.index' ? ' active' : '' }}">
+                                    <a class="nav-link" href="{{ route('modal-awal.index') }}">Modal Awal</a>
+                                </li>
+                                <li class="{{ Request::route()->getName() == 'tambah-modal.index' ? ' active' : '' }}">
+                                    <a class=" nav-link" href="{{ route('tambah-modal.index') }}">Penambahan Modal</a>
+                                </li>
+                                <li class="{{ Request::route()->getName() == 'prive.index' ? ' active' : '' }}">
+                                    <a class="nav-link" href="{{ route('prive.index') }}">Prive</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                                 <i class="fas fa-folder-open"></i>
                                 <span>Master Data</span>
                             </a>
                             <ul class="dropdown-menu" style="display: block;">
-                                <li class="{{ Request::route()->getName() == 'data-akun.index' ? ' active' : '' }}"><a
-                                        class="nav-link" href="{{ route('data-akun.index') }}">Data Akun</a></li>
+                                <li class="{{ Request::route()->getName() == 'data-akun.index' ? ' active' : '' }}"><a class="nav-link" href="{{ route('data-akun.index') }}">Data Akun</a></li>
                                 <li class="{{ Request::route()->getName() == 'data-customer.index' ? ' active' : '' }}">
                                     <a class="nav-link" href="{{ route('data-customer.index') }}">Data Customer</a>
                                 </li>
@@ -97,22 +112,22 @@
                             </ul>
                         </li>
 
-                        <li>
-                            <a class="nav-link" href="#">
+                        <li class="{{ Request::route()->getName() == 'data-proyek.index' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('data-proyek.index') }}">
                                 <i class="far fa-building"></i>
                                 <span>Data Proyek</span>
                             </a>
                         </li>
 
-                        <li>
-                            <a class="nav-link" href="#">
+                        <li class="{{ Request::route()->getName() == 'pemasukan-kas.index' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('pemasukan-kas.index') }}">
                                 <i class="fas fa-plus"></i>
                                 <span>Pemasukan Kas</span>
                             </a>
                         </li>
 
-                        <li>
-                            <a class="nav-link" href="#">
+                        <li class="{{ Request::route()->getName() == 'pengeluaran-kas.index' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('pengeluaran-kas.index') }}">
                                 <i class="fas fa-minus"></i>
                                 <span>Pengeluaran Kas</span>
                             </a>
@@ -124,32 +139,38 @@
                                 <span>Aset</span>
                             </a>
                             <ul class="dropdown-menu" style="display: block;">
-                                <li><a class="nav-link" href="#">Aset Aktif</a></li>
-                                <li><a class="nav-link" href="#">Penyusutan</a></li>
+                                <li class="{{ Request::route()->getName() == 'aset-aktif.index' ? ' active' : '' }}"><a class="nav-link" href="{{ route('aset-aktif.index') }}">Aset Aktif</a></li>
+                                <li class="{{ Request::route()->getName() == 'penyusutan.index' ? ' active' : '' }}"><a class="nav-link" href="{{ route('penyusutan.index') }}">Penyusutan</a></li>
                             </ul>
                         </li>
 
-                        <li>
-                            <a class="nav-link" href="#">
+                        <li class="{{ Request::route()->getName() == 'data-jurnal.index' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('data-jurnal.index') }}">
                                 <i class="fas fa-paste"></i>
                                 <span>Data Jurnal Umum</span>
                             </a>
                         </li>
 
-                        <li>
-                            <a class="nav-link" href="#">
+                        <li class="{{ Request::route()->getName() == 'tutup-buku.index' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route(('tutup-buku.index')) }}">
                                 <i class="fas fa-book"></i>
                                 <span>Tutup Buku</span>
                             </a>
                         </li>
                         @endif
-
-                        {{-- <li>
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-file-contract"></i>
-                                <span>List Peminjaman</span>
+                        {{-- end condition --}}
+                        <li class="{{ Request::route()->getName() == 'data-user.index' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('data-user.index') }}">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Data User</span>
                             </a>
-                        </li> --}}
+                        </li>
+                        <li class="{{ Request::route()->getName() == 'laporan.index' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('laporan.index') }}">
+                                <i class="far fa-file-alt"></i>
+                                <span>Laporan</span>
+                            </a>
+                        </li>
                     </ul>
                 </aside>
             </div>
@@ -189,11 +210,15 @@
     <script src="{{asset('stisla/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('stisla/modules/datatables/Select-1.2.4/js/dataTables.select.min.js')}}"></script>
     <script src="{{asset('stisla/modules/jquery-ui/jquery-ui.min.js')}}"></script>
+    @yield('js-libraries')
+
     <!-- Page Specific JS File -->
     <script src="{{asset('stisla/js/page/modules-datatables.js')}}"></script>
+
     <!-- Template JS File -->
     <script src="{{ asset('stisla/js/scripts.js')}}"></script>
     <script src="{{ asset('stisla/js/custom.js')}}"></script>
+    @yield('custom-js')
 </body>
 
 </html>

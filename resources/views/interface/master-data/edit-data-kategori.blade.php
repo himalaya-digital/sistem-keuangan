@@ -31,6 +31,16 @@
           </span>
           @enderror
         </div>
+        <div class="form-group">
+          <label>Harga Satuan</label>
+          <input type="number" class="form-control @error('harga_satuan') is-invalid @enderror"
+            value="{{ $datas->harga_satuan }}" name="harga_satuan" required>
+          @error('harga_satuan')
+          <span class="invalid-feedback" role="alert">
+            <strong>{{$message}}</strong>
+          </span>
+          @enderror
+        </div>
       </div>
       <div class="card-footer text-right">
         <button type="submit" class="btn btn-primary">Update</button>

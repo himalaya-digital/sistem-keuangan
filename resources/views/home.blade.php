@@ -11,9 +11,7 @@
             <div class="hero bg-white text-dark text-center">
                 <div class="hero-inner">
                     <h2 class="mb-3">Selamat Datang, {{ Auth::user()->name }}!</h2>
-                    <p>
-                        Logo Here
-                    </p>
+                    <img src="{{ asset('img/logo.png') }}" alt="logo" width="250">
                     <h2 class="mt-3">P.T Saputra Tirtha Amertha</h2>
                 </div>
             </div>

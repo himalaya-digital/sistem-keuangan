@@ -17,6 +17,7 @@ class CreateDataKategorisTable extends Migration
             $table->id();
             $table->string('id_kategori', 10)->unique();
             $table->string('nama_kategori', 15);
+            $table->integer('harga_satuan')->nullable()->default(null);
             $table->timestamps();
         });
     }

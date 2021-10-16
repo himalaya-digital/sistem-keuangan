@@ -16,4 +16,9 @@ class DataCustomer extends Model
         'no_telpon',
         'alamat',
     ];
+
+    public function projects()
+    {
+        return $this->hasMany(DataProyek::class);
+    }
 }

@@ -13,5 +13,16 @@ class DataKategori extends Model
     protected $fillable = [
         'id_kategori',
         'nama_kategori',
+        'harga_satuan',
     ];
+
+    public function dataproyek()
+    {
+        return $this->hasMany(DataProyek::class);
+    }
+
+    public function pengeluarankas()
+    {
+        return $this->hasMany(PengeluaranKas::class);
+    }
 }
