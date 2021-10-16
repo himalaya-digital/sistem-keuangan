@@ -76,7 +76,7 @@
       </a>
     </div>
     <div class="col-12 col-md-6 col-lg-3 sip">
-      <a href="#" class="kartu">
+      <a href="{{ route('laporan-perubahan-modal.index') }}" class="kartu">
         <div class="card align-center">
           <div class="card-header justify-content-center">
             <i class="fas fa-sync-alt" style="font-size: 48px"></i>
