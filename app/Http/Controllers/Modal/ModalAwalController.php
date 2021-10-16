@@ -38,8 +38,7 @@ class ModalAwalController extends Controller
     public function store(Request $request)
     {
         $fields = [
-            'jumlah'         => $request->jumlah,
-            'tanggal' => $request->tanggal
+            'jumlah' => $request->jumlah,
         ];
 
         ModalAwal::create($fields);
@@ -65,7 +64,8 @@ class ModalAwalController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = ModalAwal::find($id);
+        return view('interface.modal.modal-awal.edit', compact('data'));
     }
 
     /**
@@ -77,7 +77,13 @@ class ModalAwalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = ModalAwal::find($id);
+        $fields = [
+            'jumlah' => $request->jumlah,
+        ];
+        $data->update($fields);
+
+        return redirect()->route('modal-awal.index')->with('success', 'Modal awal berhasil diupdate');
     }
 
     /**

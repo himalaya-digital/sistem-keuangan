@@ -33,7 +33,6 @@
                             </thead>
                             <tbody>
                                 @foreach ($initial_capital as $i)
-
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ date( 'd/m/Y', strtotime($i->created_at)) }}</td>
