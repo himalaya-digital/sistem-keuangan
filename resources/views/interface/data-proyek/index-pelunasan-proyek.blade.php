@@ -28,15 +28,16 @@
               <tbody>
                 <tr>
                   <td>1</td>
-                  <td>{{$project->tanggal_bayar}}</td>
+                  <td>{{ date( 'd/m/Y', strtotime($project->tanggal_bayar)) }}</td>
                   <td>{{$project->id_proyek}}</td>
                   <td>{{$project->customer->nama_customer}}</td>
                   <td>{{$project->nama_proyek}}</td>
-                  <td>{{$project->total_bayar}}</td>
-                  <td>{{$project->bayar}}</td>
-                  <td>{{$project->sisa_bayar}}</td>
+                  <td>{{number_format($project->total_bayar, 0, ',', '.')}}</td>
+                  <td>{{number_format($project->bayar, 0, ',', '.')}}</td>
+                  <td>{{number_format($project->sisa_bayar, 0, ',', '.')}}</td>
                   <td>
-                    <a href="{{route('pelunasan-proyek.print', ['id_proyek'=>$project->id])}}" class="btn btn-link btn-sm" title="print"><i class="fas fa-print"></i></a>
+                    <a href="{{route('pelunasan-proyek.print', ['id_proyek'=>$project->id])}}"
+                      class="btn btn-link btn-sm" title="print"><i class="fas fa-print"></i></a>
                   </td>
                 </tr>
               </tbody>

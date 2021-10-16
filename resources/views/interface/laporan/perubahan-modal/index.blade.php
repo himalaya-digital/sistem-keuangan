@@ -48,7 +48,7 @@
           <div class="col-12 text-center">
             <div class="header-menus">
               <h4>PT. SAPUTRA TIRTHA AMERTHA</h4>
-              <form action="#" method="POST">
+              <form action="{{ route('laporan-perubahan-modal.pdf') }}" method="POST">
                 @csrf
                 <input hidden type="date" name="dari" value="{{$dari}}">
                 <input hidden type="date" name="sampai" value="{{$sampai}}">
@@ -65,7 +65,7 @@
             <tbody>
               <tr>
                 <td>Modal Awal</td>
-                <td>10.000</td>
+                <td>{{ number_format($modalawal, 0, ',', '.') }}</td>
               </tr>
               <tr>
                 <td>Laba Bersih</td>
@@ -81,7 +81,12 @@
               </tr>
               <tr>
                 <th>Modal Akhir</th>
-                <th>40.000</th>
+                <th>
+                  @php
+                  $laba = $totalpemasukan - $total;
+                  @endphp
+                  {{ number_format($modalawal + $laba + $tambahanmodal - $prive, 0, ',', '.') }}
+                </th>
               </tr>
             </tbody>
           </table>

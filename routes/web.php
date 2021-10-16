@@ -11,11 +11,13 @@ use App\Http\Controllers\Laporan\IndexController;
 use App\Http\Controllers\Laporan\LabaRugiController;
 use App\Http\Controllers\Laporan\PemasukanController;
 use App\Http\Controllers\Laporan\LaporanDataProyekController;
+use App\Http\Controllers\Laporan\LaporanNeracaController;
 use App\Http\Controllers\Laporan\PengeluaranController;
 use App\Http\Controllers\Laporan\PerubahanModalController;
 use App\Http\Controllers\MasterData\DataAkunController;
 use App\Http\Controllers\MasterData\DataCustomerController;
 use App\Http\Controllers\MasterData\DataKategoriController;
+use App\Http\Controllers\Modal\ModalAwalController;
 use App\Http\Controllers\Modal\PriveController;
 use App\Http\Controllers\Modal\TambahModalController;
 use App\Http\Controllers\OutIn\PemasukanKasController;
@@ -56,6 +58,7 @@ Route::prefix('master-data')->group(function () {
     Route::resource('/data-kategori', DataKategoriController::class);
 });
 
+Route::resource('/modal-awal', ModalAwalController::class);
 Route::resource('/tambah-modal', TambahModalController::class);
 Route::resource('/prive', PriveController::class);
 
@@ -101,6 +104,12 @@ Route::post('laporan-arus-kas-export', [ArusKasController::class, 'pdf'])->name(
 
 Route::get('laporan-perubahan-modal', [PerubahanModalController::class, 'index'])->name('laporan-perubahan-modal.index');
 Route::get('laporan-perubahan-modal-results', [PerubahanModalController::class, 'result'])->name('laporan-perubahan-modal.result');
+Route::post('laporan-perubahan-modal-export', [PerubahanModalController::class, 'pdf'])->name('laporan-perubahan-modal.pdf');
+
+Route::get('laporan-neraca', [LaporanNeracaController::class, 'index'])->name('laporan-neraca.index');
+Route::get('laporan-neraca/results', [LaporanNeracaController::class, 'results'])->name('laporan-neraca.results');
+Route::post('laporan-neraca/export', [LaporanNeracaController::class, 'export'])->name('laporan-neraca.export');
+
 
 Route::prefix('laporan')->group(function () {
     Route::get('data-proyek', [LaporanDataProyekController::class, 'index'])->name('laporan-data-proyek.index');

@@ -30,7 +30,8 @@
       @endif
       <div class="card">
         <div class="card-body">
-          <a href="{{route('data-proyek.create')}}" type="button" class="btn btn-primary float-right mb-3" title="add">Tambah Data</a>
+          <a href="{{route('data-proyek.create')}}" type="button" class="btn btn-primary float-right mb-3"
+            title="add">Tambah Data</a>
           <div class="table-responsive">
             <table class="table table-striped" id="table-1">
               <thead>
@@ -53,18 +54,21 @@
                   <td>{{$project->id_proyek}}</td>
                   <td>{{$project->customer == null ? '' : $project->customer->nama_customer}}</td>
                   <td>{{$project->nama_proyek}}</td>
-                  <td>{{$project->total_bayar}}</td>
-                  <td>{{$project->bayar}}</td>
-                  <td>{{$project->sisa_bayar}}</td>
+                  <td>{{number_format($project->total_bayar, 0, ',', '.')}}</td>
+                  <td>{{number_format($project->bayar, 0, ',', '.')}}</td>
+                  <td>{{number_format($project->sisa_bayar, 0, ',', '.')}}</td>
                   <td>
                     <a href="{{route('pelunasan-proyek.show', ['id_proyek' => $project->id])}}">
                       {{$project->status}}
                     </a>
                   </td>
                   <td>
-                    <a href="{{route('data-proyek.edit', $project->id)}}" class="btn btn-link btn-sm" title="edit"><i class="far fa-edit"></i></a>
-                    <a href="{{route('data-proyek.show', $project->id)}}" class="btn btn-link btn-sm" title="edit"><i class="far fa-eye"></i></a>
-                    <a href="{{route('pelunasan-proyek.create', ['id_proyek' => $project->id])}}" class="btn btn-link btn-sm" title="edit"><i class="far fa-money-bill-alt"></i></a>
+                    <a href="{{route('data-proyek.edit', $project->id)}}" class="btn btn-link btn-sm" title="edit"><i
+                        class="far fa-edit"></i></a>
+                    <a href="{{route('data-proyek.show', $project->id)}}" class="btn btn-link btn-sm" title="edit"><i
+                        class="far fa-eye"></i></a>
+                    <a href="{{route('pelunasan-proyek.create', ['id_proyek' => $project->id])}}"
+                      class="btn btn-link btn-sm" title="edit"><i class="far fa-money-bill-alt"></i></a>
                   </td>
                 </tr>
                 @endforeach
