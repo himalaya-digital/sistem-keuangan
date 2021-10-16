@@ -15,6 +15,7 @@ use App\Http\Controllers\Laporan\PengeluaranController;
 use App\Http\Controllers\MasterData\DataAkunController;
 use App\Http\Controllers\MasterData\DataCustomerController;
 use App\Http\Controllers\MasterData\DataKategoriController;
+use App\Http\Controllers\Modal\ModalAwalController;
 use App\Http\Controllers\Modal\PriveController;
 use App\Http\Controllers\Modal\TambahModalController;
 use App\Http\Controllers\OutIn\PemasukanKasController;
@@ -55,6 +56,7 @@ Route::prefix('master-data')->group(function () {
     Route::resource('/data-kategori', DataKategoriController::class);
 });
 
+Route::resource('/modal-awal', ModalAwalController::class);
 Route::resource('/tambah-modal', TambahModalController::class);
 Route::resource('/prive', PriveController::class);
 
