@@ -30,13 +30,18 @@ class LabaRugiController extends Controller
 
         $getAkun = DataAkun::where('tipe_akun', 'beban')->get();
 
+        $pengeluarans = PengeluaranKas::whereBetween('tanggal_pengeluaran', [$dari, $sampai])->get();
+
         foreach ($getAkun as $key) {
-            $pengeluarans = PengeluaranKas::whereBetween('tanggal_pengeluaran', [$dari, $sampai])->where('id_akun', $key->id)->get();
-            $total = PengeluaranKas::whereBetween('tanggal_pengeluaran', [$dari, $sampai])->where('id_akun', $key->id)->sum('total_pengeluaran');
+            $key;
+            foreach ($pengeluarans as $pengeluaran) {
+                $pengeluaran->where('id_akun', $key->id)->get();
+                $pengeluaran->where('id_akun', $key->id)->sum('total_pengeluaran');
+            }
         }
 
 
-        return view('interface.laporan.laba-rugi.index', compact('totalpemasukan', 'dari', 'sampai', 'pengeluarans', 'total'));
+        return view('interface.laporan.laba-rugi.index', compact('totalpemasukan', 'dari', 'sampai', 'pengeluarans'));
     }
 
     public function pdf(Request $request)
@@ -48,12 +53,17 @@ class LabaRugiController extends Controller
 
         $getAkun = DataAkun::where('tipe_akun', 'beban')->get();
 
+        $pengeluarans = PengeluaranKas::whereBetween('tanggal_pengeluaran', [$dari, $sampai])->get();
+
         foreach ($getAkun as $key) {
-            $pengeluarans = PengeluaranKas::whereBetween('tanggal_pengeluaran', [$dari, $sampai])->where('id_akun', $key->id)->get();
-            $total = PengeluaranKas::whereBetween('tanggal_pengeluaran', [$dari, $sampai])->where('id_akun', $key->id)->sum('total_pengeluaran');
+            $key;
+            foreach ($pengeluarans as $pengeluaran) {
+                $pengeluaran->where('id_akun', $key->id)->get();
+                $pengeluaran->where('id_akun', $key->id)->sum('total_pengeluaran');
+            }
         }
 
-        $pdf = PDF::loadView('export.laba-rugi', compact('totalpemasukan', 'dari', 'sampai', 'pengeluarans', 'total'))->setPaper('a4', 'potrait')->setWarnings(false);
+        $pdf = PDF::loadView('export.laba-rugi', compact('totalpemasukan', 'dari', 'sampai', 'pengeluarans'))->setPaper('a4', 'potrait')->setWarnings(false);
         return $pdf->stream('Laporan-Laba-Rugi' . '.pdf');
     }
 }
