@@ -93,7 +93,7 @@
               @endforeach
               <tr>
                 <th>Total</th>
-                <td>{{ number_format($total, 0, ',', '.') }}</td>
+                <td>{{ number_format($pengeluarans->sum('total_pengeluaran'), 0, ',', '.') }}</td>
               </tr>
             </tbody>
           </table>
@@ -102,7 +102,8 @@
             <thead>
               <tr>
                 <th scope="col">Laba</th>
-                <th scope="col">{{ number_format($totalpemasukan - $total, 0, ',', '.') }}</th>
+                <th scope="col">{{ number_format($totalpemasukan - $pengeluaran->sum('total_pengeluaran'), 0, ',',
+                  '.')}}</th>
               </tr>
             </thead>
           </table>

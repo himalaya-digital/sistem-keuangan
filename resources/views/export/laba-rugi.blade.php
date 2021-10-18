@@ -61,11 +61,12 @@
           @endforeach
           <tr>
             <th style="text-align: left;">Total</th>
-            <td>{{ number_format($total, 0, ',', '.') }}</td>
+            <td>{{ number_format($pengeluarans->sum('total_pengeluaran'), 0, ',', '.') }}</td>
           </tr>
           <tr>
             <th style="text-align: left;">Laba</th>
-            <td>{{ number_format($totalpemasukan - $total, 0, ',', '.') }}</td>
+            <td>{{ number_format($totalpemasukan - $pengeluaran->sum('total_pengeluaran'), 0, ',',
+              '.')}}</td>
           </tr>
         </tbody>
       </table>
