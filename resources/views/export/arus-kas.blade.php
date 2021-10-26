@@ -50,12 +50,8 @@
             <td>{{ number_format($pengeluaran, 0, ',', '.') }}</td>
           </tr>
           <tr>
-            <td>Beban Proyek</td>
-            <td>{{ number_format($beban, 0, ',', '.') }}</td>
-          </tr>
-          <tr>
             <th style="text-align: left;">Total</th>
-            <th style="text-align: left;">{{ number_format($pemasukan - $pengeluaran - $beban, 0, ',', '.') }}</th>
+            <th style="text-align: left;">{{ number_format($pemasukan - $pengeluaran, 0, ',', '.') }}</th>
           </tr>
         </tbody>
 
@@ -65,11 +61,11 @@
           </tr>
         </thead>
         <tbody>
-          @if (isset($investasis))
-          @foreach ($investasis as $investasi)
+          @if (isset($getinvestasi))
+          @foreach ($getinvestasi as $investasi)
           <tr>
-            <td>{{ $investasi->dataakun->nama_akun }}</td>
-            <td>{{ number_format($investasi->total_pengeluaran, 0, ',', '.') }}</td>
+            <td>{{ $investasi->nama_akun }}</td>
+            <td>{{ number_format($investasi->saldo_awal, 0, ',', '.') }}</td>
           </tr>
           @endforeach
           @else
@@ -77,8 +73,8 @@
           @endif
           <tr>
             <th style="text-align: left;">Total</th>
-            @if (isset($investasitotal))
-            <th style="text-align: left;">{{ number_format($investasitotal, 0, ',', '.') }}</th>
+            @if (isset($totalinves))
+            <th style="text-align: left;">{{ number_format($totalinves, 0, ',', '.') }}</th>
             @endif
           </tr>
         </tbody>
@@ -110,23 +106,23 @@
           <tr>
             <td>Penambahan Modal</td>
             <td>
-              @if (isset($tambahanmodal))
-              {{ number_format($tambahanmodal, 0, ',', '.') }}
+              @if (isset($tambahmodal))
+              {{ number_format($tambahmodal, 0, ',', '.') }}
               @endif
             </td>
           </tr>
           <tr>
-            <th style="text-align: left;">Saldo Akhir Periode</th>
+            <td style="text-align: left;">Saldo Akhir Periode</td>
             @php
-            $operasional = $pemasukan - $pengeluaran - $beban;
-            $investasi = $investasitotal;
+            $operasional = $pemasukan - $pengeluaran;
+            $investasi = $totalinves;
             $pendanaan = $prive;
             $penurunanKas = $operasional - $investasi - $pendanaan;
             $saldoAwal = $kas;
             if ($saldoAwal != 0) {
-            $result = $saldoAwal - $penurunanKas + $tambahanmodal;
+            $result = $saldoAwal - $penurunanKas + $tambahmodal;
             }
-            $result = $penurunanKas + $tambahanmodal;
+            $result = $penurunanKas + $tambahmodal;
             @endphp
             <th style="text-align: left;">{{ number_format($result, 0, ',', '.') }}</th>
           </tr>
