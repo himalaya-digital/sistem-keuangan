@@ -13,6 +13,7 @@ class PengeluaranKas extends Model
     protected $fillable = [
         'id_user',
         'id_kategori',
+        'id_tipe_akun',
         'id_akun',
         'jumlah',
         'keterangan_pengeluaran',
@@ -24,6 +25,11 @@ class PengeluaranKas extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function tipeakun()
+    {
+        return $this->belongsTo(TipeAkun::class, 'id_tipe_akun');
     }
 
     public function kategori()

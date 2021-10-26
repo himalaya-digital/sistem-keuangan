@@ -19,6 +19,7 @@ class CreatePengeluaranKasTable extends Migration
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedInteger('id_kategori')->nullable();
             $table->unsignedInteger('id_akun');
+            $table->unsignedInteger('id_tipe_akun');
             $table->integer('jumlah')->nullable();
             $table->string('keterangan_pengeluaran', 30);
             $table->date('tanggal_pengeluaran');

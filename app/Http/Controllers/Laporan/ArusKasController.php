@@ -11,6 +11,7 @@ use App\Models\PengeluaranKas;
 use App\Models\Prive;
 use PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ArusKasController extends Controller
 {
@@ -36,22 +37,43 @@ class ArusKasController extends Controller
         $sampaiPast = date('m', strtotime($request->sampai)) - 1;
         $kas        = AsetAktif::whereBetween('tanggal_akuisisi', [$dariPast, $sampaiPast])->sum('penyusutan');
 
-        $tambahanmodal = PenambahanModal::whereBetween('tanggal_penambahan', [$dari, $sampai])->sum('penambahan');
-        $prive = Prive::whereBetween('tanggal_prive', [$dari, $sampai])->sum('jumlah');
+        // $tambahanmodal = PenambahanModal::whereBetween('tanggal_penambahan', [$dari, $sampai])->sum('penambahan');
+        $prive = DB::table('data_akuns')
+            ->whereBetween('tanggal', [$dari, $sampai])
+            ->where('id_tipe_akun', '=', 7)
+            ->SUM('saldo_awal');
 
-        $getAkun  = DataAkun::where('tipe_akun', 'beban')->get();
-        $getInves = DataAkun::where('tipe_akun', 'investasi')->get();
-        foreach ($getAkun as $key) {
-            $beban = PengeluaranKas::whereBetween('tanggal_pengeluaran', [$dari, $sampai])->where('id_akun', $key->id)->sum('total_pengeluaran');
-        }
-        foreach ($getInves as $inves) {
-            $investasis     = PengeluaranKas::whereBetween('tanggal_pengeluaran', [$dari, $sampai])->where('id_akun', $inves->id)->get();
-            $investasitotal = PengeluaranKas::whereBetween('tanggal_pengeluaran', [$dari, $sampai])->where('id_akun', $inves->id)->sum('total_pengeluaran');
-        }
+        $tambahmodal = DB::table('data_akuns')
+            ->whereBetween('tanggal', [$dari, $sampai])
+            ->where('id_tipe_akun', '=', 4)
+            ->where('nama_akun', '=', "tambahan modal")
+            ->SUM('saldo_awal');
+
+        $getinvestasi = DB::table('data_akuns')
+            ->whereBetween('tanggal', [$dari, $sampai])
+            ->whereBetween('id_tipe_akun', [1, 2])
+            ->get();
+
+        // return $getinvestasi;
+
+        $investasi = DB::table('data_akuns')
+            ->whereBetween('tanggal', [$dari, $sampai])
+            ->whereBetween('id_tipe_akun', [1, 2])
+            ->SUM('saldo_awal');
+
+        // $getAkun  = DataAkun::where('tipe_akun', 'beban')->get();
+        // $getInves = DataAkun::where('tipe_akun', 'investasi')->get();
+        // foreach ($getAkun as $key) {
+        //     $beban = PengeluaranKas::whereBetween('tanggal_pengeluaran', [$dari, $sampai])->where('id_akun', $key->id)->sum('total_pengeluaran');
+        // }
+        // foreach ($getInves as $inves) {
+        //     $investasis     = PengeluaranKas::whereBetween('tanggal_pengeluaran', [$dari, $sampai])->where('id_akun', $inves->id)->get();
+        //     $investasitotal = PengeluaranKas::whereBetween('tanggal_pengeluaran', [$dari, $sampai])->where('id_akun', $inves->id)->sum('total_pengeluaran');
+        // }
 
 
 
-        return view('interface.laporan.arus-kas.index', compact('dari', 'sampai', 'pemasukan', 'pengeluaran', 'beban', 'investasis', 'investasitotal', 'kas', 'tambahanmodal', 'prive'));
+        return view('interface.laporan.arus-kas.index', compact('dari', 'sampai', 'pemasukan', 'pengeluaran',  'kas', 'prive', 'tambahmodal', 'getinvestasi', 'investasi'));
     }
 
     public function pdf(Request $request)

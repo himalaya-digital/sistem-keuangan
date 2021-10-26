@@ -5,22 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DataKategori extends Model
+class TipeAkun extends Model
 {
     use HasFactory;
 
-    protected $table = 'data_kategoris';
+    protected $table = 'tipe_akuns';
     protected $fillable = [
-        'id_kategori',
-        'nama_kategori',
+        'tipe_akun'
     ];
 
-    public function dataproyek()
+    public function dataakun()
     {
-        return $this->hasMany(DataProyek::class);
+        return $this->hasMany(DataAkun::class);
     }
 
-    public function pengeluarankas()
+    public function pengeluaran()
     {
         return $this->hasMany(PengeluaranKas::class);
     }
