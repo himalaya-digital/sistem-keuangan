@@ -40,11 +40,11 @@ $(window).on("load", function () {
         total.val(intHargaSatuan * intThis);
     });
 
-    // hargaSatuan.on("keyup change", function () {
-    //     let intJumlah = parseInt(jumlah.val());
-    //     let intThis = parseInt($(this).val());
-    //     total.val(intJumlah * intThis);
-    // });
+    hargaSatuan.on("keyup change", function () {
+        let intJumlah = parseInt(jumlah.val());
+        let intThis = parseInt($(this).val());
+        total.val(intJumlah * intThis);
+    });
 
     hargaJasa.on("keyup change", function () {
         let intTotalHargaBahan = parseInt(totalHargaBahan.val());
@@ -97,6 +97,7 @@ $(window).on("load", function () {
 
         jumlah.val("");
         total.val("0");
+        hargaSatuan.val("");
     });
 
     tBodyKategori.on("click", function (event) {

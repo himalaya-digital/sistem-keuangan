@@ -50,6 +50,12 @@ $(window).on("load", function () {
         totalBayar.val(intTotalHargaBahan + intHargaJasa);
     });
 
+    hargaSatuan.on("keyup change", function () {
+        let intJumlah = parseInt(jumlah.val());
+        let intThis = parseInt($(this).val());
+        total.val(intJumlah * intThis);
+    });
+
     bayar.on("keyup change", function () {
         let intTotalBayar = parseInt(totalBayar.val());
         let intBayar = parseInt($(this).val());
