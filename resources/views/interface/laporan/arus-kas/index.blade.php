@@ -103,9 +103,7 @@
               @endif
               <tr>
                 <th>Total</th>
-                @if (isset($investasi))
-                {{-- <th>{{ number_format($investasi, 0, ',', '.') }}</th> --}}
-                @endif
+                <th>{{ number_format($totalinves, 0, ',', '.') }}</th>
               </tr>
             </tbody>
           </table>
@@ -145,18 +143,18 @@
               </tr>
               <tr>
                 <td>Saldo Akhir Periode</td>
-                {{-- @php
+                @php
                 $operasional = $pemasukan - $pengeluaran;
-                $investasi = $investasitotal;
+                $investasi = $totalinves;
                 $pendanaan = $prive;
                 $penurunanKas = $operasional - $investasi - $pendanaan;
                 $saldoAwal = $kas;
                 if ($saldoAwal != 0) {
-                $result = $saldoAwal - $penurunanKas + $tambahanmodal;
+                $result = $saldoAwal - $penurunanKas + $tambahmodal;
                 }
-                $result = $penurunanKas + $tambahanmodal;
+                $result = $penurunanKas + $tambahmodal;
                 @endphp
-                <td>{{ number_format($result, 0, ',', '.') }}</td> --}}
+                <td>{{ number_format($result, 0, ',', '.') }}</td>
               </tr>
             </tbody>
           </table>

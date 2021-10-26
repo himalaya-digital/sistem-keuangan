@@ -10,6 +10,7 @@ use App\Models\PenambahanModal;
 use App\Models\PengeluaranKas;
 use App\Models\Prive;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use PDF;
 
 class PerubahanModalController extends Controller
@@ -29,17 +30,34 @@ class PerubahanModalController extends Controller
         $dari   = date('Y-m-d', strtotime($request->dari));
         $sampai = date('Y-m-d', strtotime($request->sampai));
 
-        $modalawal = ModalAwal::sum('jumlah');
+        $modalawal = DB::table('data_akuns')
+            ->whereBetween('tanggal', [$dari, $sampai])
+            ->where('id_tipe_akun', '=', 4)
+            ->SUM('saldo_awal');
 
         $totalpemasukan = DataProyek::whereBetween('tanggal_bayar', [$dari, $sampai])->sum('total_bayar');
-        $getAkun = DataAkun::where('tipe_akun', 'beban')->get();
 
-        $prive = Prive::whereBetween('tanggal_prive', [$dari, $sampai])->sum('jumlah');
-        $tambahanmodal = PenambahanModal::whereBetween('tanggal_penambahan', [$dari, $sampai])->sum('penambahan');
 
-        foreach ($getAkun as $key) {
-            $total = PengeluaranKas::whereBetween('tanggal_pengeluaran', [$dari, $sampai])->where('id_akun', $key->id)->sum('total_pengeluaran');
-        }
+        $getAkun = DB::table('data_akuns')
+            ->whereBetween('tanggal', [$dari, $sampai])
+            ->where('id_tipe_akun', '=', 3)
+            ->get();
+
+        $total = DB::table('data_akuns')
+            ->whereBetween('tanggal', [$dari, $sampai])
+            ->where('id_tipe_akun', '=', 3)
+            ->SUM('saldo_awal');
+
+        $prive = DB::table('data_akuns')
+            ->whereBetween('tanggal', [$dari, $sampai])
+            ->where('id_tipe_akun', '=', 7)
+            ->SUM('saldo_awal');
+
+        $tambahanmodal = DB::table('data_akuns')
+            ->whereBetween('tanggal', [$dari, $sampai])
+            ->where('id_tipe_akun', '=', 4)
+            ->where('nama_akun', '=', "tambahan modal")
+            ->SUM('saldo_awal');
 
         return view('interface.laporan.perubahan-modal.index', compact('dari', 'sampai', 'totalpemasukan', 'total', 'prive', 'tambahanmodal', 'modalawal'));
     }
@@ -49,17 +67,34 @@ class PerubahanModalController extends Controller
         $dari   = date('Y-m-d', strtotime($request->dari));
         $sampai = date('Y-m-d', strtotime($request->sampai));
 
-        $modalawal = ModalAwal::sum('jumlah');
+        $modalawal = DB::table('data_akuns')
+            ->whereBetween('tanggal', [$dari, $sampai])
+            ->where('id_tipe_akun', '=', 4)
+            ->SUM('saldo_awal');
 
         $totalpemasukan = DataProyek::whereBetween('tanggal_bayar', [$dari, $sampai])->sum('total_bayar');
-        $getAkun = DataAkun::where('tipe_akun', 'beban')->get();
 
-        $prive = Prive::whereBetween('tanggal_prive', [$dari, $sampai])->sum('jumlah');
-        $tambahanmodal = PenambahanModal::whereBetween('tanggal_penambahan', [$dari, $sampai])->sum('penambahan');
 
-        foreach ($getAkun as $key) {
-            $total = PengeluaranKas::whereBetween('tanggal_pengeluaran', [$dari, $sampai])->where('id_akun', $key->id)->sum('total_pengeluaran');
-        }
+        $getAkun = DB::table('data_akuns')
+            ->whereBetween('tanggal', [$dari, $sampai])
+            ->where('id_tipe_akun', '=', 3)
+            ->get();
+
+        $total = DB::table('data_akuns')
+            ->whereBetween('tanggal', [$dari, $sampai])
+            ->where('id_tipe_akun', '=', 3)
+            ->SUM('saldo_awal');
+
+        $prive = DB::table('data_akuns')
+            ->whereBetween('tanggal', [$dari, $sampai])
+            ->where('id_tipe_akun', '=', 7)
+            ->SUM('saldo_awal');
+
+        $tambahanmodal = DB::table('data_akuns')
+            ->whereBetween('tanggal', [$dari, $sampai])
+            ->where('id_tipe_akun', '=', 4)
+            ->where('nama_akun', '=', "tambahan modal")
+            ->SUM('saldo_awal');
 
         $pdf = PDF::loadView('export.perubahan', compact('dari', 'sampai', 'totalpemasukan', 'total', 'prive', 'tambahanmodal', 'modalawal'))->setPaper('a4', 'potrait')->setWarnings(false);
         return $pdf->stream('Laporan-Perubahan-Modal' . '.pdf');
