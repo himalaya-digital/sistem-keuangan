@@ -30,6 +30,7 @@
                   <th>Kode Akun</th>
                   <th>Nama Akun</th>
                   <th>Tipe Akun</th>
+                  <th>Saldo</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -39,7 +40,8 @@
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $data->kode_akun }}</td>
                   <td>{{ $data->nama_akun }}</td>
-                  <td>{{ $data->tipe_akun }}</td>
+                  <td>{{ $data->tipeakun->tipe_akun }}</td>
+                  <td>{{ number_format($data->saldo_awal, 0, ',', '.') }}</td>
                   <td>
                     <a href="{{ route('data-akun.edit', $data->id) }}" class="btn btn-warning" title="edit"><i
                         class="far fa-edit"></i></a>

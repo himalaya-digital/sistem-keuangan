@@ -7,6 +7,7 @@ use App\Models\DataAkun;
 use App\Models\DataKategori;
 use App\Models\DataProyek;
 use App\Models\PengeluaranKas;
+use App\Models\TipeAkun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,7 +39,6 @@ class PengeluaranKasController extends Controller
     {
         $akuns      = DataAkun::all();
         $kategories = DataKategori::all();
-
         return view('interface.out-in.add-pengeluaran-kas', compact('akuns', 'kategories'));
     }
 
@@ -59,8 +59,10 @@ class PengeluaranKasController extends Controller
             'jumlah'                 => $request->jumlah,
         ];
 
-        $getKategori = DataKategori::find($request->id_kategori);
-        $getHarga    = $getKategori->harga_satuan;
+        $getAkun   = DataAkun::find($request->id_akun);
+        $getHarga  = $getAkun->saldo_awal;
+        $getIdType = $getAkun->id_tipe_akun;
+        $fields['id_tipe_akun'] = $getIdType;
         $fields['total_pengeluaran'] = $getHarga * $request->jumlah;
 
         PengeluaranKas::create($fields);
@@ -114,8 +116,10 @@ class PengeluaranKasController extends Controller
             'jumlah'                 => $request->jumlah,
         ];
 
-        $getKategori = DataKategori::find($request->id_kategori);
-        $getHarga    = $getKategori->harga_satuan;
+        $getAkun   = DataAkun::find($request->id_akun);
+        $getHarga  = $getAkun->saldo_awal;
+        $getIdType = $getAkun->id_tipe_akun;
+        $fields['id_tipe_akun'] = $getIdType;
         $fields['total_pengeluaran'] = $getHarga * $request->jumlah;
 
         $pengeluarans->update($fields);

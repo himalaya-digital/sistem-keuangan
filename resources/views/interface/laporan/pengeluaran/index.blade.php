@@ -78,7 +78,7 @@
                 <th scope="row">{{ date( 'd/m/Y', strtotime($pengeluaran->tanggal_pengeluaran)) }}</th>
                 <td>{{ $pengeluaran->kategori->nama_kategori }}</td>
                 <td>{{ $pengeluaran->jumlah }}</td>
-                <td>{{ number_format($pengeluaran->kategori->harga_satuan, 0, ',', '.') }}</td>
+                <td>{{ number_format($pengeluaran->dataakun->saldo_awal, 0, ',', '.') }}</td>
                 <td>{{ number_format($pengeluaran->total_pengeluaran, 0, ',', '.') }}</td>
               </tr>
               @endforeach
