@@ -40,55 +40,70 @@
                             <h5 style="text-align: left;">Aktiva</h5>
                         </th>
                     </tr>
+                    @foreach ($aktiva_lancar as $al)
                     <tr>
                         <td>
-                            <span style="margin-left: 24px; display: inline-block;">Kas</span>
+                            <span style="margin-left: 24px; display: inline-block;">{{$al->nama_akun}}</span>
                         </td>
                         <td></td>
-                        <td align="right">{{ number_format($kas, 0, ',', '.')}}</td>
+                        <td align="right">{{number_format($al->saldo_awal, 0, ',', '.')}}</td>
                     </tr>
-                    @foreach ($assets as $a)
+                    @endforeach
+                    @foreach ($aktiva_tetap as $at)
                     <tr>
                         <td>
-                            <span style="margin-left: 24px; display: inline-block;">{{$a->nama_aset}}</span>
+                            <span style="margin-left: 24px; display: inline-block;">{{$at->nama_akun}}</span>
                         </td>
                         <td></td>
-                        <td align="right">{{number_format($a->biaya_akuisisi, 0, ',', '.')}}</td>
+                        <td align="right">{{number_format($at->saldo_awal, 0, ',', '.')}}</td>
                     </tr>
                     @endforeach
                     <tr>
                         <td>Total aktiva</td>
                         <td></td>
-                        <td align="right">{{number_format($aktiva, 0, ',', '.')}}</td>
+                        <td align="right">{{number_format($total_aktiva, 0, ',', '.')}}</td>
                     </tr>
                     <tr style="border-top: 1px solid grey;">
                         <th>
                             <h5 style="text-align: left;">Pasiva</h5>
                         </th>
                     </tr>
+                    @foreach ($utang as $u)
                     <tr>
                         <td>
-                            <span style="margin-left: 24px; display: inline-block;">Kewajiban</span>
+                            <span style="margin-left: 24px; display: inline-block;">{{$u->nama_akun}}</span>
                         </td>
                         <td></td>
-                        <td align="right">{{number_format($beban, 0, ',', '.')}}</td>
+                        <td align="right">{{number_format($u->saldo_awal, 0, ',', '.')}}</td>
                     </tr>
+                    @endforeach
+                    @foreach ($utang_lancar as $ul)
+                    <tr>
+                        <td>
+                            <span style="margin-left: 24px; display: inline-block;">{{$ul->nama_akun}}</span>
+                        </td>
+                        <td></td>
+                        <td align="right">{{number_format($ul->saldo_awal, 0, ',', '.')}}</td>
+                    </tr>
+                    @endforeach
                     <tr>
                         <th>
-                            <h5 style="text-align:left;">Ekuitas</h5>
+                            <h5 style="text-align: left;">Ekuitas</h5>
                         </th>
                     </tr>
+                    @foreach ($modal as $m)
                     <tr>
                         <td>
-                            <span style="margin-left: 24px; display: inline-block;">Modal</span>
+                            <span style="margin-left: 24px; display: inline-block;">{{$m->nama_akun}}</span>
                         </td>
                         <td></td>
-                        <td align="right">{{number_format($modal, 0, ',', '.')}}</td>
+                        <td align="right">{{number_format($m->saldo_awal, 0, ',', '.')}}</td>
                     </tr>
+                    @endforeach
                     <tr>
                         <td>Total pasiva</td>
                         <td></td>
-                        <td align="right">{{number_format($pasiva, 0, ',', '.')}}</td>
+                        <td align="right">{{number_format($total_pasiva, 0, ',', '.')}}</td>
                     </tr>
                 </tbody>
             </table>
