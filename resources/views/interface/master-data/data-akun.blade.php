@@ -29,7 +29,7 @@
                   <th class="text-center">No</th>
                   <th>Kode Akun</th>
                   <th>Nama Akun</th>
-                  <th>Tipe Akun</th>
+                  <th>Klasifikasi Akun</th>
                   <th>Saldo</th>
                   <th>Aksi</th>
                 </tr>

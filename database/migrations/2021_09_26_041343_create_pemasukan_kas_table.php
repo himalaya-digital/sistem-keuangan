@@ -17,8 +17,9 @@ class CreatePemasukanKasTable extends Migration
             $table->id();
             $table->bigInteger('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedInteger('id_proyek');
+            $table->unsignedInteger('id_proyek')->nullable();
             $table->unsignedInteger('id_akun');
+            $table->integer('jumlah_pemasukan');
             $table->string('keterangan_pemasukan', 30);
             $table->date('tanggal_pemasukan');
             $table->timestamps();

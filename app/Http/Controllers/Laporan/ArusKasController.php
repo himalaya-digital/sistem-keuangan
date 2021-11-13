@@ -43,11 +43,10 @@ class ArusKasController extends Controller
             ->where('id_tipe_akun', '=', 7)
             ->SUM('saldo_awal');
 
-        $tambahmodal = DB::table('data_akuns')
-            ->whereBetween('tanggal', [$dari, $sampai])
-            ->where('id_tipe_akun', '=', 4)
-            ->where('nama_akun', '=', "tambahan modal")
-            ->SUM('saldo_awal');
+        $tambahmodal = DB::table('pemasukan_kas')
+            ->whereBetween('tanggal_pemasukan', [$dari, $sampai])
+            ->where('id_akun', '=', 1)
+            ->SUM('jumlah_pemasukan');
 
         $getinvestasi = DB::table('data_akuns')
             ->whereBetween('tanggal', [$dari, $sampai])
@@ -80,11 +79,10 @@ class ArusKasController extends Controller
             ->where('id_tipe_akun', '=', 7)
             ->SUM('saldo_awal');
 
-        $tambahmodal = DB::table('data_akuns')
-            ->whereBetween('tanggal', [$dari, $sampai])
-            ->where('id_tipe_akun', '=', 4)
-            ->where('nama_akun', '=', "tambahan modal")
-            ->SUM('saldo_awal');
+        $tambahmodal = DB::table('pemasukan_kas')
+            ->whereBetween('tanggal_pemasukan', [$dari, $sampai])
+            ->where('id_akun', '=', 1)
+            ->SUM('jumlah_pemasukan');
 
         $getinvestasi = DB::table('data_akuns')
             ->whereBetween('tanggal', [$dari, $sampai])
