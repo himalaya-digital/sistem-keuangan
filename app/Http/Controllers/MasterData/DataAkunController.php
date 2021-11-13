@@ -4,6 +4,7 @@ namespace App\Http\Controllers\MasterData;
 
 use App\Http\Controllers\Controller;
 use App\Models\DataAkun;
+use App\Models\TipeAkun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -33,7 +34,8 @@ class DataAkunController extends Controller
      */
     public function create()
     {
-        return view('interface.master-data.add-data-akun');
+        $types = TipeAkun::all();
+        return view('interface.master-data.add-data-akun', compact('types'));
     }
 
     /**
@@ -47,14 +49,15 @@ class DataAkunController extends Controller
         Validator::make($request->all(), [
             'kode_akun' => 'required|unique:data_akuns',
             'nama_akun' => 'required|max:20',
-            'tipe_akun' => 'required|max:20'
         ])->validate();
 
         $fields = [
-            'id_user'   => Auth::user()->id,
-            'nama_akun' => strtolower($request->nama_akun),
-            'kode_akun' => strtolower($request->kode_akun),
-            'tipe_akun' => strtolower($request->tipe_akun)
+            'id_user'       => Auth::user()->id,
+            'nama_akun'     => strtolower($request->nama_akun),
+            'kode_akun'     => strtolower($request->kode_akun),
+            'id_tipe_akun'  => $request->id_tipe_akun,
+            'saldo_awal'    => $request->saldo_awal,
+            'tanggal'       => date('Y-m-d'),
         ];
 
         DataAkun::create($fields);
@@ -81,7 +84,8 @@ class DataAkunController extends Controller
     public function edit($id)
     {
         $datas = DataAkun::find($id);
-        return view('interface.master-data.edit-data-akun', compact('datas'));
+        $types = TipeAkun::all();
+        return view('interface.master-data.edit-data-akun', compact('datas', 'types'));
     }
 
     /**
@@ -97,14 +101,15 @@ class DataAkunController extends Controller
 
         Validator::make($request->all(), [
             'nama_akun' => 'required|max:20',
-            'tipe_akun' => 'required|max:20'
         ])->validate();
 
         $fields = [
-            'id_user'   => Auth::user()->id,
-            'nama_akun' => strtolower($request->nama_akun),
-            'kode_akun' => $datas->kode_akun,
-            'tipe_akun' => strtolower($request->tipe_akun)
+            'id_user'       => Auth::user()->id,
+            'nama_akun'     => strtolower($request->nama_akun),
+            'kode_akun'     => $datas->kode_akun,
+            'id_tipe_akun'  => $request->id_tipe_akun,
+            'saldo_awal'    => $request->saldo_awal,
+            'tanggal'       => $datas->tanggal,
         ];
 
         $datas->update($fields);

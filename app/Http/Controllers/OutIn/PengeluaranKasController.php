@@ -7,6 +7,7 @@ use App\Models\DataAkun;
 use App\Models\DataKategori;
 use App\Models\DataProyek;
 use App\Models\PengeluaranKas;
+use App\Models\TipeAkun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,7 +39,6 @@ class PengeluaranKasController extends Controller
     {
         $akuns      = DataAkun::all();
         $kategories = DataKategori::all();
-
         return view('interface.out-in.add-pengeluaran-kas', compact('akuns', 'kategories'));
     }
 
@@ -59,11 +59,15 @@ class PengeluaranKasController extends Controller
             'jumlah'                 => $request->jumlah,
         ];
 
-        $getKategori = DataKategori::find($request->id_kategori);
-        $getHarga    = $getKategori->harga_satuan;
-        $fields['total_pengeluaran'] = $getHarga * $request->jumlah;
+        $getAkun   = DataAkun::find($request->id_akun);
+        $getIdType = $getAkun->id_tipe_akun;
+        $fields['id_tipe_akun'] = $getIdType;
+        $fields['total_pengeluaran'] = $request->jumlah;
 
-        PengeluaranKas::create($fields);
+        $store = PengeluaranKas::create($fields);
+
+        $saldo = ['saldo_awal' => $getAkun->saldo_awal - $store->total_pengeluaran];
+        $getAkun->update($saldo);
 
         return redirect()->route('pengeluaran-kas.index')->with('success', 'Data Pengeluaran ditambahkan');
     }
@@ -114,11 +118,15 @@ class PengeluaranKasController extends Controller
             'jumlah'                 => $request->jumlah,
         ];
 
-        $getKategori = DataKategori::find($request->id_kategori);
-        $getHarga    = $getKategori->harga_satuan;
-        $fields['total_pengeluaran'] = $getHarga * $request->jumlah;
+        $getAkun   = DataAkun::find($request->id_akun);
+        $getIdType = $getAkun->id_tipe_akun;
+        $fields['id_tipe_akun'] = $getIdType;
+        $fields['total_pengeluaran'] = $request->jumlah;
 
         $pengeluarans->update($fields);
+
+        $saldo = $getAkun->saldo_awal - $pengeluarans->total_pengeluaran;
+        $getAkun->update($saldo);
         return redirect()->route('pengeluaran-kas.index')->with('success', 'Data Pengeluaran berhasil diubah');
     }
 

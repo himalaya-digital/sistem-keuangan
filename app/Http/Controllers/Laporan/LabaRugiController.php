@@ -8,6 +8,7 @@ use App\Models\DataProyek;
 use App\Models\PengeluaranKas;
 use PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LabaRugiController extends Controller
 {
@@ -28,20 +29,17 @@ class LabaRugiController extends Controller
 
         $totalpemasukan = DataProyek::whereBetween('tanggal_bayar', [$dari, $sampai])->sum('total_bayar');
 
-        $getAkun = DataAkun::where('tipe_akun', 'beban')->get();
+        $pengeluarans = PengeluaranKas::whereBetween('tanggal_pengeluaran', [$dari, $sampai])
+            ->where('id_tipe_akun', '=', 3)
+            ->get();
 
-        $pengeluarans = PengeluaranKas::whereBetween('tanggal_pengeluaran', [$dari, $sampai])->get();
-
-        foreach ($getAkun as $key) {
-            $key;
-            foreach ($pengeluarans as $pengeluaran) {
-                $pengeluaran->where('id_akun', $key->id)->get();
-                $pengeluaran->where('id_akun', $key->id)->sum('total_pengeluaran');
-            }
-        }
+        $totalpengeluaran = DB::table('pengeluaran_kas')
+            ->whereBetween('tanggal_pengeluaran', [$dari, $sampai])
+            ->where('id_tipe_akun', '=', 3)
+            ->SUM('total_pengeluaran');
 
 
-        return view('interface.laporan.laba-rugi.index', compact('totalpemasukan', 'dari', 'sampai', 'pengeluarans'));
+        return view('interface.laporan.laba-rugi.index', compact('totalpemasukan', 'dari', 'sampai', 'pengeluarans', 'totalpengeluaran'));
     }
 
     public function pdf(Request $request)
@@ -51,19 +49,16 @@ class LabaRugiController extends Controller
 
         $totalpemasukan = DataProyek::whereBetween('tanggal_bayar', [$dari, $sampai])->sum('total_bayar');
 
-        $getAkun = DataAkun::where('tipe_akun', 'beban')->get();
+        $pengeluarans = PengeluaranKas::whereBetween('tanggal_pengeluaran', [$dari, $sampai])
+            ->where('id_tipe_akun', '=', 3)
+            ->get();
 
-        $pengeluarans = PengeluaranKas::whereBetween('tanggal_pengeluaran', [$dari, $sampai])->get();
+        $totalpengeluaran = DB::table('pengeluaran_kas')
+            ->whereBetween('tanggal_pengeluaran', [$dari, $sampai])
+            ->where('id_tipe_akun', '=', 3)
+            ->SUM('total_pengeluaran');
 
-        foreach ($getAkun as $key) {
-            $key;
-            foreach ($pengeluarans as $pengeluaran) {
-                $pengeluaran->where('id_akun', $key->id)->get();
-                $pengeluaran->where('id_akun', $key->id)->sum('total_pengeluaran');
-            }
-        }
-
-        $pdf = PDF::loadView('export.laba-rugi', compact('totalpemasukan', 'dari', 'sampai', 'pengeluarans'))->setPaper('a4', 'potrait')->setWarnings(false);
+        $pdf = PDF::loadView('export.laba-rugi', compact('totalpemasukan', 'dari', 'sampai', 'pengeluarans', 'totalpengeluaran'))->setPaper('a4', 'potrait')->setWarnings(false);
         return $pdf->stream('Laporan-Laba-Rugi' . '.pdf');
     }
 }

@@ -29,10 +29,9 @@
                   <th class="text-center">No</th>
                   <th>Id Pengeluaran</th>
                   <th>Nama Akun</th>
-                  <th>Kategori</th>
-                  <th>Jumlah</th>
-                  <th>Harga Satuan</th>
+                  <th>Tanggal</th>
                   <th>Total Pengeluaran</th>
+                  <th>Keterangan</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -42,15 +41,11 @@
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $pengeluaran->id }}</td>
                   <td>{{ $pengeluaran->dataakun->nama_akun }}</td>
-                  <td>{{ $pengeluaran->kategori->nama_kategori}}
-                  </td>
-                  <td>{{ $pengeluaran->jumlah}}</td>
-                  <td>
-                    {{ number_format($pengeluaran->kategori->harga_satuan, 0, ',', '.') }}
-                  </td>
+                  <td>{{ date( 'd/m/Y', strtotime($pengeluaran->tanggal_pengeluaran)) }}</td>
                   <td>
                     {{ number_format($pengeluaran->total_pengeluaran, 0, ',','.')}}
                   </td>
+                  <td>{{ $pengeluaran->keterangan_pengeluaran }}</td>
                   <td>
                     <a href="{{ route('pengeluaran-kas.edit', $pengeluaran->id) }}" class="btn btn-sm btn-warning"
                       title="edit"><i class="far fa-edit"></i></a>

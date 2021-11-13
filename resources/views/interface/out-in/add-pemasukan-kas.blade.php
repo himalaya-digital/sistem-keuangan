@@ -19,7 +19,7 @@
             @endforeach
           </select>
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
           <label>Nama Customer</label>
           <select name="id_proyek" id="id_proyek" class="custom-select">
             <option value="none" disabled selected>- Nama Customer -</option>
@@ -27,10 +27,14 @@
             <option value="{{ $proyek->id_customer }}">{{$proyek->customer->nama_customer}}</option>
             @endforeach
           </select>
-        </div>
+        </div> --}}
         <div class="form-group">
           <label>Tanggal</label>
           <input type="date" class="form-control" name="tanggal_pemasukan" required>
+        </div>
+        <div class="form-group">
+          <label>Jumlah</label>
+          <input type="number" class="form-control" name="jumlah_pemasukan" required>
         </div>
         <div class="form-group">
           <label>Keterangan Pemasukan</label>

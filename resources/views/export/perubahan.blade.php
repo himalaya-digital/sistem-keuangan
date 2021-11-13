@@ -37,7 +37,7 @@
         <tbody>
           <tr>
             <td>Modal Awal</td>
-            <td>{{ number_format($modalawal, 0, ',', '.') }}</td>
+            <td>{{ number_format($modalawal - $tambahanmodal, 0, ',', '.') }}</td>
           </tr>
           <tr>
             <td>Laba Bersih</td>

@@ -59,13 +59,19 @@ class PemasukanKasController extends Controller
             'id_akun'              => $request->id_akun,
             'keterangan_pemasukan' => $request->keterangan_pemasukan,
             'tanggal_pemasukan'    => $request->tanggal_pemasukan,
+            'jumlah_pemasukan'     => $request->jumlah_pemasukan,
         ];
 
 
-        $getTotalBayar             = DataProyek::where('id_customer', $request->id_proyek)->first();
-        $fields['id_proyek']       = $getTotalBayar->id;
+        // $getTotalBayar             = DataProyek::where('id_customer', $request->id_proyek)->first();
+        // $fields['id_proyek']       = $getTotalBayar->id;
 
-        PemasukanKas::create($fields);
+        $store = PemasukanKas::create($fields);
+
+        $updates = DataAkun::find($request->id_akun);
+        $updateData = ['saldo_awal' => $updates->saldo_awal + $store->jumlah_pemasukan];
+
+        $updates->update($updateData);
 
         return redirect()->route('pemasukan-kas.index')->with('success', 'Data Pemasukan ditambahkan');
     }
@@ -116,12 +122,18 @@ class PemasukanKasController extends Controller
             'id_akun'              => $request->id_akun,
             'keterangan_pemasukan' => $request->keterangan_pemasukan,
             'tanggal_pemasukan'    => $request->tanggal_pemasukan,
+            'jumlah_pemasukan'     => $request->jumlah_pemasukan,
         ];
 
-        $getTotalBayar             = DataProyek::where('id_customer', $request->id_proyek)->first();
-        $fields['id_proyek']       = $getTotalBayar->id;
+        // $getTotalBayar             = DataProyek::where('id_customer', $request->id_proyek)->first();
+        // $fields['id_proyek']       = $getTotalBayar->id;
 
         $datas->update($fields);
+
+        $updates = DataAkun::find($request->id_akun);
+        $updateData = ['saldo_awal' => $updates->saldo_awal + $datas->jumlah_pemasukan];
+
+        $updates->update($updateData);
         return redirect()->route('pemasukan-kas.index')->with('success', 'Data Pemasukan berhasil diubah');
     }
 

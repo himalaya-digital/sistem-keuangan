@@ -37,9 +37,9 @@
         <thead>
           <tr>
             <th>Tanggal</th>
-            <th>Kategori</th>
+            <th>Nama Akun</th>
             <th>Jumlah</th>
-            <th>Harga Satuan</th>
+            <th>Keterangan</th>
             <th>Total</th>
           </tr>
         </thead>
@@ -48,9 +48,9 @@
           @foreach ($pengeluarans as $pengeluaran)
           <tr>
             <th>{{ date( 'd/m/Y', strtotime($pengeluaran->tanggal_pengeluaran)) }}</th>
-            <td>{{ $pengeluaran->kategori->nama_kategori }}</td>
+            <td>{{ $pengeluaran->dataakun->nama_akun }}</td>
             <td>{{ $pengeluaran->jumlah }}</td>
-            <td>{{ number_format($pengeluaran->kategori->harga_satuan, 0, ',', '.') }}</td>
+            <td>{{ $pengeluaran->keterangan_pengeluaran }}</td>
             <td>{{ number_format($pengeluaran->total_pengeluaran, 0, ',', '.') }}</td>
           </tr>
           @endforeach

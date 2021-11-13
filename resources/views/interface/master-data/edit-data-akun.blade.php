@@ -33,13 +33,17 @@
         </div>
         <div class="form-group">
           <label>Tipe Akun</label>
-          <input type="text" class="form-control @error('tipe_akun') is-invalid @enderror"
-            value="{{ $datas->tipe_akun }}" name="tipe_akun" required>
-          @error('tipe_akun')
-          <span class="invalid-feedback" role="alert">
-            <strong>{{$message}}</strong>
-          </span>
-          @enderror
+          <select name="tipe_akun" id="tipe_akun" class="custom-select">
+            <option value="none" disabled selected>- Pilih Klasifikasi Akun -</option>
+            @foreach ($types as $tipe)
+            <option value="{{$tipe->id}}" @if($datas->id_tipe_akun == $tipe->id) selected @endif>{{$tipe->tipe_akun}}
+            </option>
+            @endforeach
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Saldo Awal</label>
+          <input type="number" class="form-control" name="saldo_awal" value="{{ $datas->saldo_awal }}">
         </div>
       </div>
       <div class="card-footer text-right">

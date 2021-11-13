@@ -31,14 +31,17 @@
           @enderror
         </div>
         <div class="form-group">
-          <label>Tipe Akun</label>
-          <input type="text" class="form-control @error('tipe_akun') is-invalid @enderror" name="tipe_akun"
-            value="{{ old('tipe_akun') }}" required>
-          @error('tipe_akun')
-          <span class="invalid-feedback" role="alert">
-            <strong>{{$message}}</strong>
-          </span>
-          @enderror
+          <label>Klasifikasi Akun</label>
+          <select name="id_tipe_akun" id="id_tipe_akun" class="custom-select" required>
+            <option value="none" disabled selected>- Pilih Klasifikasi Akun -</option>
+            @foreach ($types as $tipe)
+            <option value="{{ $tipe->id }}">{{ $tipe->tipe_akun }}</option>
+            @endforeach
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Saldo Awal</label>
+          <input type="number" class="form-control" name="saldo_awal" value="{{ old('saldo_awal') }}">
         </div>
       </div>
       <div class="card-footer text-right">

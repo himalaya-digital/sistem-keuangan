@@ -46,8 +46,7 @@
                             <input hidden type="date" name="dari" value="{{$dari}}">
                             <input hidden type="date" name="sampai" value="{{$sampai}}">
 
-                            <button type="submit" class="btn btn-icon btn-warning"><i class="fas fa-file-download"
-                                    style="font-size: 18px"></i></button>
+                            <button type="submit" class="btn btn-icon btn-warning"><i class="fas fa-file-download" style="font-size: 18px"></i></button>
                         </form>
                     </div>
                 </div>
@@ -62,55 +61,70 @@
                                                 <h5>Aktiva</h5>
                                             </th>
                                         </tr>
+                                        @foreach ($aktiva_lancar as $al)
                                         <tr>
                                             <td>
-                                                <span class="d-inline-block ml-5">Kas</span>
+                                                <span class="d-inline-block ml-5">{{$al->nama_akun}}</span>
                                             </td>
                                             <td></td>
-                                            <td align="right">{{ number_format($kas, 0, ',', '.')}}</td>
+                                            <td align="right">{{number_format($al->saldo_awal, 0, ',', '.')}}</td>
                                         </tr>
-                                        @foreach ($assets as $a)
+                                        @endforeach
+                                        @foreach ($aktiva_tetap as $at)
                                         <tr>
                                             <td>
-                                                <span class="d-inline-block ml-5">{{$a->nama_aset}}</span>
+                                                <span class="d-inline-block ml-5">{{$at->nama_akun}}</span>
                                             </td>
                                             <td></td>
-                                            <td align="right">{{number_format($a->biaya_akuisisi, 0, ',', '.')}}</td>
+                                            <td align="right">{{number_format($at->saldo_awal, 0, ',', '.')}}</td>
                                         </tr>
                                         @endforeach
                                         <tr>
                                             <td>Total aktiva</td>
                                             <td></td>
-                                            <td align="right">{{number_format($aktiva, 0, ',', '.')}}</td>
+                                            <td align="right">{{number_format($total_aktiva, 0, ',', '.')}}</td>
                                         </tr>
                                         <tr style="border-top: 1px solid grey;">
                                             <th>
                                                 <h5>Pasiva</h5>
                                             </th>
                                         </tr>
+                                        @foreach ($utang as $u)
                                         <tr>
                                             <td>
-                                                <span class="d-inline-block ml-5">Kewajiban</span>
+                                                <span class="d-inline-block ml-5">{{$u->nama_akun}}</span>
                                             </td>
                                             <td></td>
-                                            <td align="right">{{number_format($beban, 0, ',', '.')}}</td>
+                                            <td align="right">{{number_format($u->saldo_awal, 0, ',', '.')}}</td>
                                         </tr>
+                                        @endforeach
+                                        @foreach ($utang_lancar as $ul)
+                                        <tr>
+                                            <td>
+                                                <span class="d-inline-block ml-5">{{$ul->nama_akun}}</span>
+                                            </td>
+                                            <td></td>
+                                            <td align="right">{{number_format($ul->saldo_awal, 0, ',', '.')}}</td>
+                                        </tr>
+                                        @endforeach
                                         <tr>
                                             <th>
                                                 <h5>Ekuitas</h5>
                                             </th>
                                         </tr>
+                                        @foreach ($modal as $m)
                                         <tr>
                                             <td>
-                                                <span class="d-inline-block ml-5">Modal</span>
+                                                <span class="d-inline-block ml-5">{{$m->nama_akun}}</span>
                                             </td>
                                             <td></td>
-                                            <td align="right">{{number_format($modal, 0, ',', '.')}}</td>
+                                            <td align="right">{{number_format($m->saldo_awal, 0, ',', '.')}}</td>
                                         </tr>
+                                        @endforeach
                                         <tr>
                                             <td>Total pasiva</td>
                                             <td></td>
-                                            <td align="right">{{number_format($pasiva, 0, ',', '.')}}</td>
+                                            <td align="right">{{number_format($total_pasiva, 0, ',', '.')}}</td>
                                         </tr>
                                     </tbody>
                                 </table>

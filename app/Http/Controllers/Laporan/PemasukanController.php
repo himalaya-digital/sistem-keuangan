@@ -26,7 +26,7 @@ class PemasukanController extends Controller
         $sampai = date('Y-m-d', strtotime($request->sampai));
 
         $pemasukans = PemasukanKas::whereBetween('tanggal_pemasukan', [$dari, $sampai])->get();
-        $total = DataProyek::whereBetween('tanggal_bayar', [$dari, $sampai])->sum('total_bayar');
+        $total = PemasukanKas::whereBetween('tanggal_pemasukan', [$dari, $sampai])->sum('jumlah_pemasukan');
 
         return view('interface.laporan.laporan-pemasukan', compact('pemasukans', 'total', 'dari', 'sampai'));
     }
@@ -39,7 +39,7 @@ class PemasukanController extends Controller
         $pemasukans = PemasukanKas::whereBetween('tanggal_pemasukan', [$dari, $sampai])->get();
 
 
-        $total = DataProyek::whereBetween('tanggal_bayar', [$dari, $sampai])->sum('total_bayar');
+        $total = PemasukanKas::whereBetween('tanggal_pemasukan', [$dari, $sampai])->sum('jumlah_pemasukan');
 
         $pdf = PDF::loadView('export.pemasukan', compact('pemasukans', 'total', 'dari', 'sampai'))->setPaper('a4', 'potrait')->setWarnings(false);
         return $pdf->stream('Laporan-Pemasukan-Kas' . '.pdf');

@@ -37,7 +37,6 @@
         <thead>
           <tr>
             <th>Tanggal</th>
-            <th>Nama Customer</th>
             <th>Keterangan</th>
             <th>Total</th>
           </tr>
@@ -47,13 +46,12 @@
           @foreach ($pemasukans as $pemasukan)
           <tr>
             <td>{{ date( 'd/m/Y', strtotime($pemasukan->tanggal_pemasukan)) }}</td>
-            <td>{{ $pemasukan->dataproyek->customer->nama_customer }}</td>
             <td>{{ $pemasukan->keterangan_pemasukan }}</td>
-            <td>{{ number_format($pemasukan->dataproyek->total_bayar, 0, ',', '.') }}</td>
+            <td>{{ number_format($pemasukan->jumlah_pemasukan, 0, ',', '.') }}</td>
           </tr>
           @endforeach
           <tr>
-            <th colspan="3">Total</th>
+            <th colspan="2">Total</th>
             <td>{{ number_format($total, 0, ',', '.') }}</td>
           </tr>
         </tbody>
