@@ -14,6 +14,7 @@ class PemasukanKas extends Model
         'id_user',
         'id_proyek',
         'id_akun',
+        'jumlah_pemasukan',
         'keterangan_pemasukan',
         'tanggal_pemasukan'
     ];

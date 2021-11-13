@@ -60,12 +60,14 @@ class PengeluaranKasController extends Controller
         ];
 
         $getAkun   = DataAkun::find($request->id_akun);
-        $getHarga  = $getAkun->saldo_awal;
         $getIdType = $getAkun->id_tipe_akun;
         $fields['id_tipe_akun'] = $getIdType;
-        $fields['total_pengeluaran'] = $getHarga * $request->jumlah;
+        $fields['total_pengeluaran'] = $request->jumlah;
 
-        PengeluaranKas::create($fields);
+        $store = PengeluaranKas::create($fields);
+
+        $saldo = ['saldo_awal' => $getAkun->saldo_awal - $store->total_pengeluaran];
+        $getAkun->update($saldo);
 
         return redirect()->route('pengeluaran-kas.index')->with('success', 'Data Pengeluaran ditambahkan');
     }
@@ -117,12 +119,14 @@ class PengeluaranKasController extends Controller
         ];
 
         $getAkun   = DataAkun::find($request->id_akun);
-        $getHarga  = $getAkun->saldo_awal;
         $getIdType = $getAkun->id_tipe_akun;
         $fields['id_tipe_akun'] = $getIdType;
-        $fields['total_pengeluaran'] = $getHarga * $request->jumlah;
+        $fields['total_pengeluaran'] = $request->jumlah;
 
         $pengeluarans->update($fields);
+
+        $saldo = $getAkun->saldo_awal - $pengeluarans->total_pengeluaran;
+        $getAkun->update($saldo);
         return redirect()->route('pengeluaran-kas.index')->with('success', 'Data Pengeluaran berhasil diubah');
     }
 

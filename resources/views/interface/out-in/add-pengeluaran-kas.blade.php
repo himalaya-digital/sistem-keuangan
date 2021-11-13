@@ -20,7 +20,7 @@
           </select>
         </div>
 
-        <div class="form-group">
+        {{-- <div class="form-group">
           <label>Kategori</label>
           <select name="id_kategori" id="id_kategori" class="custom-select">
             <option value="none" disabled selected>- Kategori -</option>
@@ -28,7 +28,7 @@
             <option value="{{ $kategori->id }}">{{$kategori->nama_kategori}}</option>
             @endforeach
           </select>
-        </div>
+        </div> --}}
 
         <div class="form-group">
           <label>Jumlah</label>

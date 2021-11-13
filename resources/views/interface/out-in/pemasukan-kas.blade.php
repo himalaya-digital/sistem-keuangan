@@ -28,10 +28,8 @@
                 <tr>
                   <th class="text-center">No</th>
                   <th>Id Pemasukan</th>
-                  <th>Nama Akun</th>
-                  <th>Nama Customer</th>
                   <th>Tanggal</th>
-                  <th>Keterangan</th>
+                  <th>Deskripsi</th>
                   <th>Total Pemasukan</th>
                   <th>Aksi</th>
                 </tr>
@@ -41,11 +39,9 @@
                 <tr>
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $pemasukan->id }}</td>
-                  <td>{{ $pemasukan->dataakun->nama_akun }}</td>
-                  <td>{{ $pemasukan->dataproyek->customer->nama_customer }}</td>
                   <td>{{ date( 'd/m/Y', strtotime($pemasukan->tanggal_pemasukan)) }}</td>
                   <td>{{ $pemasukan->keterangan_pemasukan }}</td>
-                  <td>{{ number_format($pemasukan->dataproyek->total_bayar, 0, ',', '.') }}</td>
+                  <td>{{ number_format($pemasukan->jumlah_pemasukan, 0, ',', '.') }}</td>
                   <td>
                     <a href="{{ route('pemasukan-kas.edit', $pemasukan->id) }}" class="btn btn-sm btn-warning"
                       title="edit"><i class="far fa-edit"></i></a>

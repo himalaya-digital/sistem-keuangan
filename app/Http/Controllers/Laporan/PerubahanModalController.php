@@ -53,11 +53,10 @@ class PerubahanModalController extends Controller
             ->where('id_tipe_akun', '=', 7)
             ->SUM('saldo_awal');
 
-        $tambahanmodal = DB::table('data_akuns')
-            ->whereBetween('tanggal', [$dari, $sampai])
-            ->where('id_tipe_akun', '=', 4)
-            ->where('nama_akun', '=', "tambahan modal")
-            ->SUM('saldo_awal');
+        $tambahanmodal = DB::table('pemasukan_kas')
+            ->whereBetween('tanggal_pemasukan', [$dari, $sampai])
+            ->where('id_akun', '=', 1)
+            ->SUM('jumlah_pemasukan');
 
         return view('interface.laporan.perubahan-modal.index', compact('dari', 'sampai', 'totalpemasukan', 'total', 'prive', 'tambahanmodal', 'modalawal'));
     }
@@ -90,11 +89,10 @@ class PerubahanModalController extends Controller
             ->where('id_tipe_akun', '=', 7)
             ->SUM('saldo_awal');
 
-        $tambahanmodal = DB::table('data_akuns')
-            ->whereBetween('tanggal', [$dari, $sampai])
-            ->where('id_tipe_akun', '=', 4)
-            ->where('nama_akun', '=', "tambahan modal")
-            ->SUM('saldo_awal');
+        $tambahanmodal = DB::table('pemasukan_kas')
+            ->whereBetween('tanggal_pemasukan', [$dari, $sampai])
+            ->where('id_akun', '=', 1)
+            ->SUM('jumlah_pemasukan');
 
         $pdf = PDF::loadView('export.perubahan', compact('dari', 'sampai', 'totalpemasukan', 'total', 'prive', 'tambahanmodal', 'modalawal'))->setPaper('a4', 'potrait')->setWarnings(false);
         return $pdf->stream('Laporan-Perubahan-Modal' . '.pdf');
